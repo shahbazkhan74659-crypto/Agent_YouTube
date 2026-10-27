@@ -2,306 +2,286 @@
   {
     "word": "In",
     "start": 0.0,
-    "end": 0.1
+    "end": 0.12
   },
   {
-    "word": "391c,",
-    "start": 0.1,
-    "end": 1.46
+    "word": "391",
+    "start": 0.12,
+    "end": 1.2
+  },
+  {
+    "word": "C,",
+    "start": 1.2,
+    "end": 1.5
   },
   {
     "word": "the",
-    "start": 1.84,
-    "end": 2.04
+    "start": 1.98,
+    "end": 2.06
   },
   {
     "word": "Sarah",
-    "start": 2.04,
-    "end": 2.26
+    "start": 2.06,
+    "end": 2.34
   },
   {
-    "word": "P",
-    "start": 2.26,
-    "end": 2.52
+    "word": "P.",
+    "start": 2.34,
+    "end": 2.56
   },
   {
-    "word": ".M.",
-    "start": 2.52,
-    "end": 2.66
+    "word": "M.",
+    "start": 2.6,
+    "end": 2.74
   },
   {
     "word": "Temple",
-    "start": 2.94,
-    "end": 3.02
+    "start": 2.78,
+    "end": 3.06
   },
   {
     "word": "in",
-    "start": 3.02,
-    "end": 3.22
+    "start": 3.06,
+    "end": 3.24
   },
   {
     "word": "Alexandria",
-    "start": 3.22,
-    "end": 3.68
+    "start": 3.24,
+    "end": 3.82
   },
   {
     "word": "was",
-    "start": 3.68,
-    "end": 4.3
+    "start": 3.82,
+    "end": 4.34
   },
   {
     "word": "destroyed",
-    "start": 4.3,
-    "end": 4.7
+    "start": 4.34,
+    "end": 4.86
   },
   {
     "word": "under",
-    "start": 4.7,
-    "end": 5.06
+    "start": 4.86,
+    "end": 5.1
   },
   {
     "word": "Bishop",
-    "start": 5.06,
-    "end": 5.38
+    "start": 5.1,
+    "end": 5.4
   },
   {
-    "word": "Thea",
-    "start": 5.38,
-    "end": 5.7
-  },
-  {
-    "word": "Phyllis.",
-    "start": 5.7,
-    "end": 6.08
+    "word": "Theophilus.",
+    "start": 5.4,
+    "end": 6.2
   },
   {
     "word": "That",
-    "start": 6.64,
-    "end": 6.82
+    "start": 6.56,
+    "end": 6.84
   },
   {
     "word": "part",
-    "start": 6.82,
-    "end": 7.08
+    "start": 6.84,
+    "end": 7.1
   },
   {
     "word": "is",
-    "start": 7.08,
-    "end": 7.46
+    "start": 7.1,
+    "end": 7.48
   },
   {
     "word": "well",
-    "start": 7.46,
-    "end": 7.66
+    "start": 7.48,
+    "end": 7.74
   },
   {
     "word": "documented",
-    "start": 7.66,
-    "end": 8.16
+    "start": 7.74,
+    "end": 8.34
   },
   {
     "word": "by",
-    "start": 8.16,
-    "end": 8.6
+    "start": 8.34,
+    "end": 8.62
   },
   {
     "word": "near",
-    "start": 8.6,
-    "end": 8.84
+    "start": 8.62,
+    "end": 8.88
   },
   {
     "word": "-contemporary",
-    "start": 8.84,
-    "end": 9.38
+    "start": 8.88,
+    "end": 9.6
   },
   {
     "word": "writers.",
-    "start": 9.38,
-    "end": 9.88
+    "start": 9.6,
+    "end": 9.94
   },
   {
     "word": "What's",
-    "start": 10.66,
-    "end": 10.94
+    "start": 10.52,
+    "end": 10.98
   },
   {
     "word": "not",
-    "start": 10.94,
-    "end": 11.08
+    "start": 10.98,
+    "end": 11.12
   },
   {
     "word": "documented?",
-    "start": 11.08,
-    "end": 11.5
+    "start": 11.12,
+    "end": 11.68
   },
   {
     "word": "Any",
-    "start": 12.28,
-    "end": 12.32
+    "start": 12.24,
+    "end": 12.4
   },
   {
     "word": "ancient",
-    "start": 12.32,
-    "end": 12.66
+    "start": 12.4,
+    "end": 12.78
   },
   {
     "word": "source",
-    "start": 12.66,
-    "end": 13.08
+    "start": 12.78,
+    "end": 13.1
   },
   {
     "word": "actually",
-    "start": 13.08,
-    "end": 13.6
+    "start": 13.1,
+    "end": 13.7
   },
   {
     "word": "connecting",
-    "start": 13.6,
-    "end": 14.04
+    "start": 13.7,
+    "end": 14.2
   },
   {
     "word": "that",
-    "start": 14.04,
-    "end": 14.38
+    "start": 14.2,
+    "end": 14.42
   },
   {
     "word": "destruction",
-    "start": 14.38,
-    "end": 14.7
+    "start": 14.42,
+    "end": 14.9
   },
   {
     "word": "to",
-    "start": 14.7,
-    "end": 15.2
+    "start": 14.9,
+    "end": 15.22
   },
   {
     "word": "a",
-    "start": 15.2,
-    "end": 15.32
+    "start": 15.22,
+    "end": 15.36
   },
   {
     "word": "library",
-    "start": 15.32,
-    "end": 15.54
+    "start": 15.36,
+    "end": 15.68
   },
   {
     "word": "collection",
-    "start": 15.54,
-    "end": 16.16
+    "start": 15.68,
+    "end": 16.28
   },
   {
     "word": "still",
-    "start": 16.16,
-    "end": 16.78
+    "start": 16.28,
+    "end": 16.82
   },
   {
     "word": "existing",
-    "start": 16.78,
-    "end": 17.12
+    "start": 16.82,
+    "end": 17.38
   },
   {
     "word": "at",
-    "start": 17.12,
+    "start": 17.38,
     "end": 17.56
   },
   {
     "word": "the",
     "start": 17.56,
-    "end": 17.64
+    "end": 17.68
   },
   {
-    "word": "time?",
-    "start": 17.64,
-    "end": 17.9
+    "word": "time.",
+    "start": 17.68,
+    "end": 17.96
   },
   {
     "word": "The",
-    "start": 18.66,
-    "end": 18.74
+    "start": 18.6,
+    "end": 18.76
   },
   {
     "word": "two",
-    "start": 18.74,
-    "end": 18.9
+    "start": 18.76,
+    "end": 18.96
   },
   {
     "word": "events",
-    "start": 18.9,
-    "end": 19.22
+    "start": 18.96,
+    "end": 19.3
   },
   {
     "word": "get",
-    "start": 19.22,
-    "end": 19.52
+    "start": 19.3,
+    "end": 19.56
   },
   {
     "word": "merged",
-    "start": 19.52,
-    "end": 19.82
+    "start": 19.56,
+    "end": 19.94
   },
   {
     "word": "in",
-    "start": 19.82,
-    "end": 20.2
+    "start": 19.94,
+    "end": 20.22
   },
   {
     "word": "popular",
-    "start": 20.2,
-    "end": 20.58
+    "start": 20.22,
+    "end": 20.64
   },
   {
     "word": "retellings.",
-    "start": 20.58,
-    "end": 21.28
+    "start": 20.64,
+    "end": 21.36
   },
   {
     "word": "The",
-    "start": 21.92,
-    "end": 22.02
+    "start": 21.84,
+    "end": 22.04
   },
   {
     "word": "sources",
-    "start": 22.02,
-    "end": 22.26
+    "start": 22.04,
+    "end": 22.42
   },
   {
     "word": "don't",
-    "start": 22.26,
+    "start": 22.42,
     "end": 22.82
   },
   {
     "word": "support",
     "start": 22.82,
-    "end": 23.06
+    "end": 23.18
   },
   {
     "word": "that",
-    "start": 23.06,
-    "end": 23.4
+    "start": 23.18,
+    "end": 23.44
   },
   {
     "word": "merge.",
-    "start": 23.4,
-    "end": 23.6
-  },
-  {
-    "word": "Thea",
-    "start": 23.6,
-    "end": 23.72
-  },
-  {
-    "word": "Thea",
-    "start": 23.72,
-    "end": 23.76
-  },
-  {
-    "word": "Thea",
-    "start": 23.76,
-    "end": 23.82
-  },
-  {
-    "word": "Thea",
-    "start": 23.82,
-    "end": 23.94
+    "start": 23.44,
+    "end": 23.7
   }
 ]

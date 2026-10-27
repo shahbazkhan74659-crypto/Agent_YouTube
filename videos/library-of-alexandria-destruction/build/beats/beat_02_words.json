@@ -2,141 +2,141 @@
   {
     "word": "Today",
     "start": 0.0,
-    "end": 0.16
+    "end": 0.24
   },
   {
     "word": "we're",
-    "start": 0.16,
-    "end": 0.4
+    "start": 0.24,
+    "end": 0.44
   },
   {
     "word": "tracing",
-    "start": 0.4,
-    "end": 0.72
+    "start": 0.44,
+    "end": 0.82
   },
   {
     "word": "what",
-    "start": 0.72,
-    "end": 1.08
+    "start": 0.82,
+    "end": 1.1
   },
   {
     "word": "actually",
-    "start": 1.08,
-    "end": 1.42
+    "start": 1.1,
+    "end": 1.5
   },
   {
     "word": "happened",
-    "start": 1.42,
-    "end": 1.86
+    "start": 1.5,
+    "end": 1.9
   },
   {
     "word": "to",
-    "start": 1.86,
-    "end": 2.08
+    "start": 1.9,
+    "end": 2.1
   },
   {
     "word": "the",
-    "start": 2.08,
-    "end": 2.14
+    "start": 2.1,
+    "end": 2.18
   },
   {
     "word": "library",
-    "start": 2.14,
-    "end": 2.5
+    "start": 2.18,
+    "end": 2.62
   },
   {
     "word": "of",
-    "start": 2.5,
-    "end": 2.86
+    "start": 2.62,
+    "end": 2.92
   },
   {
     "word": "Alexandria,",
-    "start": 2.86,
-    "end": 3.32
+    "start": 2.92,
+    "end": 3.48
   },
   {
-    "word": "what",
-    "start": 4.26,
-    "end": 4.32
+    "word": "what's",
+    "start": 4.14,
+    "end": 4.54
   },
   {
     "word": "solid,",
-    "start": 4.32,
-    "end": 4.6
+    "start": 4.54,
+    "end": 4.84
   },
   {
     "word": "what",
-    "start": 5.3,
-    "end": 5.44
+    "start": 5.24,
+    "end": 5.46
   },
   {
     "word": "historians",
-    "start": 5.44,
-    "end": 5.6
+    "start": 5.46,
+    "end": 5.98
   },
   {
     "word": "still",
-    "start": 5.6,
-    "end": 6.34
+    "start": 5.98,
+    "end": 6.36
   },
   {
     "word": "argue",
-    "start": 6.34,
-    "end": 6.6
+    "start": 6.36,
+    "end": 6.72
   },
   {
     "word": "about,",
-    "start": 6.6,
-    "end": 7.0
+    "start": 6.72,
+    "end": 7.06
   },
   {
     "word": "and",
-    "start": 7.48,
-    "end": 7.58
+    "start": 7.38,
+    "end": 7.6
   },
   {
     "word": "the",
-    "start": 7.58,
-    "end": 7.68
+    "start": 7.6,
+    "end": 7.7
   },
   {
     "word": "one",
-    "start": 7.68,
-    "end": 7.86
+    "start": 7.7,
+    "end": 7.9
   },
   {
     "word": "popular",
-    "start": 7.86,
-    "end": 8.32
+    "start": 7.9,
+    "end": 8.38
   },
   {
     "word": "version",
-    "start": 8.32,
-    "end": 8.72
+    "start": 8.38,
+    "end": 8.78
   },
   {
     "word": "that's",
-    "start": 8.72,
-    "end": 9.12
+    "start": 8.78,
+    "end": 9.16
   },
   {
     "word": "almost",
-    "start": 9.12,
-    "end": 9.38
+    "start": 9.16,
+    "end": 9.4
   },
   {
     "word": "certainly",
-    "start": 9.38,
-    "end": 9.88
+    "start": 9.4,
+    "end": 10.02
   },
   {
     "word": "a",
-    "start": 9.88,
-    "end": 10.16
+    "start": 10.02,
+    "end": 10.22
   },
   {
     "word": "myth.",
-    "start": 10.16,
-    "end": 10.32
+    "start": 10.22,
+    "end": 10.4
   }
 ]

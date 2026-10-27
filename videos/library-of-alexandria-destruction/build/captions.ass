@@ -11,80 +11,408 @@ ScriptType: v4.00+
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Default,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
-Style: Karaoke,Arial,78,&H0000D1FF,&H00FFFFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,4,1,2,60,60,180,1
+Style: Word,Arial,70,&H0000D1FF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,5,1,5,10,10,10,1
 Style: Title,Arial,84,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,3,1,8,60,60,300,1
+Style: EvidenceLabel,Arial,28,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,2,2,7,10,10,10,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0,0:00:00.00,0:02:38.82,Title,,0,0,0,,The Destruction of the Library of Alexandria
-Dialogue: 0,0:00:00.00,0:00:01.54,Karaoke,,0,0,0,,{\k18}Before {\k18}you {\k22}believe {\k26}the {\k40}caliph {\k30}burned
-Dialogue: 0,0:00:01.54,0:00:04.24,Karaoke,,0,0,0,,{\k36}the {\k42}Library {\k34}of {\k124}Alexandria, {\k18}know {\k16}the
-Dialogue: 0,0:00:04.24,0:00:06.10,Karaoke,,0,0,0,,{\k28}story {\k30}has {\k40}zero {\k36}evidence {\k38}from {\k14}the
-Dialogue: 0,0:00:06.10,0:00:08.40,Karaoke,,0,0,0,,{\k38}century {\k36}it {\k26}happened {\k108}in. {\k8}The {\k14}real
-Dialogue: 0,0:00:08.40,0:00:10.66,Karaoke,,0,0,0,,{\k40}story {\k58}isn't {\k18}one {\k34}fire {\k58}— {\k18}it's
-Dialogue: 0,0:00:10.66,0:00:12.46,Karaoke,,0,0,0,,{\k4}a {\k96}three-hundred-year {\k30}death {\k24}with {\k16}at {\k10}least
-Dialogue: 0,0:00:12.46,0:00:14.52,Karaoke,,0,0,0,,{\k38}three {\k30}different {\k108}suspects, {\k8}and {\k10}the {\k12}most
-Dialogue: 0,0:00:14.52,0:00:16.66,Karaoke,,0,0,0,,{\k38}famous {\k32}one {\k40}probably {\k42}never {\k32}touched {\k30}a
-Dialogue: 0,0:00:16.66,0:00:17.18,Karaoke,,0,0,0,,{\k20}single {\k32}scroll.
-Dialogue: 0,0:00:17.87,0:00:19.73,Karaoke,,0,0,0,,{\k16}Today {\k24}we're {\k32}tracing {\k36}what {\k34}actually {\k44}happened
-Dialogue: 0,0:00:19.73,0:00:22.16,Karaoke,,0,0,0,,{\k22}to {\k6}the {\k36}Library {\k36}of {\k140}Alexandria {\k3}—
-Dialogue: 0,0:00:22.16,0:00:24.47,Karaoke,,0,0,0,,{\k3}what's {\k98}solid, {\k14}what {\k16}historians {\k74}still {\k26}argue
-Dialogue: 0,0:00:24.47,0:00:26.59,Karaoke,,0,0,0,,{\k88}about, {\k10}and {\k10}the {\k18}one {\k46}popular {\k40}version
-Dialogue: 0,0:00:26.59,0:00:28.19,Karaoke,,0,0,0,,{\k40}that's {\k26}almost {\k50}certainly {\k28}a {\k16}myth.
-Dialogue: 0,0:00:28.84,0:00:30.16,Karaoke,,0,0,0,,{\k10}The {\k24}Library {\k50}was {\k24}part {\k16}of {\k8}the
-Dialogue: 0,0:00:30.16,0:00:33.00,Karaoke,,0,0,0,,{\k88}Mouseion, {\k24}a {\k28}research {\k60}institution {\k50}founded {\k34}in
-Dialogue: 0,0:00:33.00,0:00:35.64,Karaoke,,0,0,0,,{\k10}the {\k30}early {\k74}Ptolemaic {\k77}dynasty, {\k33}in {\k40}Egypt.
-Dialogue: 0,0:00:37.00,0:00:39.20,Karaoke,,0,0,0,,{\k1}Tradition {\k36}credits {\k72}Demetrius {\k22}of {\k44}Phalerum {\k46}with
-Dialogue: 0,0:00:39.20,0:00:40.62,Karaoke,,0,0,0,,{\k40}proposing {\k30}it {\k14}to {\k19}Ptolemy {\k19}I {\k19}—
-Dialogue: 0,0:00:41.20,0:00:43.30,Karaoke,,0,0,0,,{\k28}though {\k30}some {\k24}historians {\k64}call {\k22}his {\k42}exact
-Dialogue: 0,0:00:43.30,0:00:45.74,Karaoke,,0,0,0,,{\k30}role {\k114}debatable, {\k20}so {\k20}treat {\k28}that {\k32}detail
-Dialogue: 0,0:00:45.74,0:00:47.38,Karaoke,,0,0,0,,{\k38}as {\k26}likely, {\k72}not {\k28}certain.
-Dialogue: 0,0:00:48.09,0:00:50.07,Karaoke,,0,0,0,,{\k24}Nobody {\k34}knows {\k52}exactly {\k44}how {\k16}many {\k28}scrolls
-Dialogue: 0,0:00:50.07,0:00:53.19,Karaoke,,0,0,0,,{\k34}it {\k122}held. {\k1}Estimates {\k36}range {\k32}from {\k88}40,000
-Dialogue: 0,0:00:53.19,0:00:55.67,Karaoke,,0,0,0,,{\k48}to {\k18}as {\k34}high {\k28}as {\k60}700,000 {\k60}—
-Dialogue: 0,0:00:56.01,0:00:57.85,Karaoke,,0,0,0,,{\k38}but {\k16}that {\k26}top {\k36}figure {\k40}comes {\k28}from
-Dialogue: 0,0:00:57.85,0:01:00.23,Karaoke,,0,0,0,,{\k24}ancient {\k38}writers {\k34}centuries {\k112}later, {\k8}and {\k22}modern
-Dialogue: 0,0:01:00.23,0:01:02.93,Karaoke,,0,0,0,,{\k46}historians {\k70}consider {\k26}it {\k30}almost {\k58}certainly {\k40}exaggerated.
-Dialogue: 0,0:01:04.04,0:01:06.86,Karaoke,,0,0,0,,{\k6}The {\k18}most {\k42}commonly {\k54}blamed {\k122}culprit. {\k40}Caesar's
-Dialogue: 0,0:01:06.86,0:01:09.10,Karaoke,,0,0,0,,{\k16}own {\k24}account {\k44}only {\k56}mentions {\k42}burning {\k42}ships
-Dialogue: 0,0:01:09.10,0:01:10.76,Karaoke,,0,0,0,,{\k32}and {\k20}docks {\k82}— {\k6}it's {\k10}a {\k16}later
-Dialogue: 0,0:01:10.76,0:01:13.78,Karaoke,,0,0,0,,{\k76}writer, {\k66}Strabo, {\k32}writing {\k42}twenty-five {\k46}years {\k40}afterward,
-Dialogue: 0,0:01:14.40,0:01:15.64,Karaoke,,0,0,0,,{\k12}who {\k26}connects {\k30}the {\k22}fire {\k26}to {\k8}the
-Dialogue: 0,0:01:15.64,0:01:18.84,Karaoke,,0,0,0,,{\k130}library. {\k50}Historians {\k46}still {\k28}dispute {\k44}how {\k22}much
-Dialogue: 0,0:01:18.84,0:01:21.06,Karaoke,,0,0,0,,{\k24}was {\k38}actually {\k98}lost, {\k8}and {\k20}there's {\k34}evidence
-Dialogue: 0,0:01:21.06,0:01:23.10,Karaoke,,0,0,0,,{\k30}the {\k28}library {\k50}kept {\k50}functioning {\k46}afterward.
-Dialogue: 0,0:01:23.86,0:01:26.88,Karaoke,,0,0,0,,{\k10}In {\k68}391 {\k106}CE, {\k20}the {\k90}Serapeum {\k8}temple
-Dialogue: 0,0:01:26.88,0:01:29.24,Karaoke,,0,0,0,,{\k20}in {\k46}Alexandria {\k62}was {\k40}destroyed {\k36}under {\k32}Bishop
-Dialogue: 0,0:01:29.24,0:01:31.52,Karaoke,,0,0,0,,{\k35}Theophilus {\k91}— {\k18}that {\k26}part {\k38}is {\k20}well
-Dialogue: 0,0:01:31.52,0:01:34.94,Karaoke,,0,0,0,,{\k50}documented {\k44}by {\k78}near-contemporary {\k128}writers. {\k28}What's {\k14}not
-Dialogue: 0,0:01:34.94,0:01:37.90,Karaoke,,0,0,0,,{\k120}documented: {\k4}any {\k34}ancient {\k42}source {\k52}actually {\k44}connecting
-Dialogue: 0,0:01:37.90,0:01:40.02,Karaoke,,0,0,0,,{\k34}that {\k32}destruction {\k50}to {\k12}a {\k22}library {\k62}collection
-Dialogue: 0,0:01:40.02,0:01:42.60,Karaoke,,0,0,0,,{\k62}still {\k34}existing {\k44}at {\k8}the {\k102}time. {\k8}The
-Dialogue: 0,0:01:42.60,0:01:44.44,Karaoke,,0,0,0,,{\k16}two {\k32}events {\k30}get {\k30}merged {\k38}in {\k38}popular
-Dialogue: 0,0:01:44.44,0:01:47.26,Karaoke,,0,0,0,,{\k134}retellings. {\k10}The {\k24}sources {\k56}don't {\k24}support {\k34}that
-Dialogue: 0,0:01:47.26,0:01:47.46,Karaoke,,0,0,0,,{\k20}merge.
-Dialogue: 0,0:01:48.19,0:01:49.73,Karaoke,,0,0,0,,{\k8}The {\k10}most {\k44}famous {\k28}version {\k60}— {\k4}a
-Dialogue: 0,0:01:49.73,0:01:51.79,Karaoke,,0,0,0,,{\k38}caliph {\k28}ordering {\k24}the {\k20}library {\k50}burned {\k46}because
-Dialogue: 0,0:01:51.79,0:01:53.35,Karaoke,,0,0,0,,{\k16}its {\k20}books {\k24}were {\k22}either {\k40}redundant {\k34}with
-Dialogue: 0,0:01:53.35,0:01:54.45,Karaoke,,0,0,0,,{\k18}or {\k38}contrary {\k28}to {\k8}the {\k9}Quran {\k9}—
-Dialogue: 0,0:01:55.11,0:01:56.89,Karaoke,,0,0,0,,{\k26}traces {\k36}to {\k10}a {\k20}single {\k78}writer, {\k8}Bar
-Dialogue: 0,0:01:56.89,0:01:59.29,Karaoke,,0,0,0,,{\k90}Hebraeus, {\k30}writing {\k36}roughly {\k18}six {\k18}hundred {\k48}years
-Dialogue: 0,0:01:59.29,0:02:01.49,Karaoke,,0,0,0,,{\k34}after {\k14}the {\k112}fact. {\k8}No {\k28}source {\k24}from
-Dialogue: 0,0:02:01.49,0:02:03.43,Karaoke,,0,0,0,,{\k12}the {\k36}century {\k24}it {\k34}supposedly {\k48}happened {\k40}mentions
-Dialogue: 0,0:02:03.43,0:02:05.51,Karaoke,,0,0,0,,{\k82}it. {\k18}And {\k12}the {\k18}same {\k18}exact {\k60}story
-Dialogue: 0,0:02:05.51,0:02:06.93,Karaoke,,0,0,0,,{\k26}gets {\k34}told {\k22}about {\k10}a {\k22}different {\k28}library,
-Dialogue: 0,0:02:07.63,0:02:09.43,Karaoke,,0,0,0,,{\k16}under {\k18}the {\k18}same {\k76}caliph, {\k18}somewhere {\k34}else
-Dialogue: 0,0:02:09.43,0:02:11.87,Karaoke,,0,0,0,,{\k44}entirely {\k78}— {\k10}a {\k26}strong {\k38}sign {\k48}it's
-Dialogue: 0,0:02:11.87,0:02:13.67,Karaoke,,0,0,0,,{\k4}a {\k28}reused {\k106}legend, {\k12}not {\k10}a {\k20}record.
-Dialogue: 0,0:02:14.35,0:02:16.43,Karaoke,,0,0,0,,{\k12}So {\k10}the {\k34}Library {\k40}of {\k44}Alexandria {\k68}wasn't
-Dialogue: 0,0:02:16.43,0:02:18.45,Karaoke,,0,0,0,,{\k128}destroyed. {\k2}It {\k10}was {\k22}worn {\k40}down {\k1}—
-Dialogue: 0,0:02:18.79,0:02:20.69,Karaoke,,0,0,0,,{\k14}a {\k32}fire {\k72}here, {\k8}a {\k26}purge {\k38}there,
-Dialogue: 0,0:02:21.31,0:02:23.25,Karaoke,,0,0,0,,{\k8}a {\k22}temple {\k48}demolition {\k50}that {\k16}got {\k50}conflated
-Dialogue: 0,0:02:23.25,0:02:25.47,Karaoke,,0,0,0,,{\k24}with {\k12}it {\k70}later, {\k20}across {\k38}three {\k58}centuries
-Dialogue: 0,0:02:25.47,0:02:27.91,Karaoke,,0,0,0,,{\k80}— {\k10}and {\k10}the {\k54}single-villain {\k62}version {\k28}everyone
-Dialogue: 0,0:02:27.91,0:02:29.63,Karaoke,,0,0,0,,{\k90}repeats {\k8}is {\k14}the {\k20}one {\k26}part {\k14}of
-Dialogue: 0,0:02:29.63,0:02:31.17,Karaoke,,0,0,0,,{\k8}the {\k32}story {\k42}with {\k14}the {\k20}least {\k38}evidence
-Dialogue: 0,0:02:31.17,0:02:31.97,Karaoke,,0,0,0,,{\k54}behind {\k26}it.
-Dialogue: 0,0:02:32.52,0:02:34.62,Karaoke,,0,0,0,,{\k22}Full {\k24}source {\k34}list {\k50}and {\k36}confidence {\k44}ratings
-Dialogue: 0,0:02:34.62,0:02:36.40,Karaoke,,0,0,0,,{\k60}for {\k26}every {\k34}claim {\k16}in {\k14}this {\k28}video
-Dialogue: 0,0:02:36.40,0:02:38.06,Karaoke,,0,0,0,,{\k56}are {\k24}linked {\k44}in {\k10}the {\k32}description.
+Dialogue: 0,0:00:00.00,0:00:00.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Before
+Dialogue: 0,0:00:00.20,0:00:00.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}you
+Dialogue: 0,0:00:00.38,0:00:00.66,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}believe
+Dialogue: 0,0:00:00.66,0:00:00.92,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:00.92,0:00:01.26,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}caliph
+Dialogue: 0,0:00:01.26,0:00:01.66,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}burned
+Dialogue: 0,0:00:01.66,0:00:01.94,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:01.94,0:00:02.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Library
+Dialogue: 0,0:00:02.38,0:00:02.70,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
+Dialogue: 0,0:00:02.70,0:00:03.34,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Alexandria,
+Dialogue: 0,0:00:03.98,0:00:04.10,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}know
+Dialogue: 0,0:00:04.10,0:00:04.26,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:04.26,0:00:04.62,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}story
+Dialogue: 0,0:00:04.62,0:00:04.88,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}has
+Dialogue: 0,0:00:04.88,0:00:05.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}zero
+Dialogue: 0,0:00:05.28,0:00:05.72,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}evidence
+Dialogue: 0,0:00:05.72,0:00:05.98,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}from
+Dialogue: 0,0:00:05.98,0:00:06.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:06.12,0:00:06.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}century
+Dialogue: 0,0:00:06.60,0:00:06.84,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
+Dialogue: 0,0:00:06.84,0:00:07.16,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}happened
+Dialogue: 0,0:00:07.16,0:00:07.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in.
+Dialogue: 0,0:00:08.10,0:00:08.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}The
+Dialogue: 0,0:00:08.28,0:00:08.52,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}real
+Dialogue: 0,0:00:08.52,0:00:08.98,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}story
+Dialogue: 0,0:00:08.98,0:00:09.40,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}isn't
+Dialogue: 0,0:00:09.40,0:00:09.58,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}one
+Dialogue: 0,0:00:09.58,0:00:09.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}fire
+Dialogue: 0,0:00:10.52,0:00:10.70,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it's
+Dialogue: 0,0:00:10.70,0:00:10.74,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:00:10.74,0:00:11.70,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}300-year
+Dialogue: 0,0:00:11.70,0:00:12.08,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}death
+Dialogue: 0,0:00:12.08,0:00:12.22,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}with
+Dialogue: 0,0:00:12.22,0:00:12.36,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}at
+Dialogue: 0,0:00:12.36,0:00:12.48,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}least
+Dialogue: 0,0:00:12.48,0:00:12.84,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}three
+Dialogue: 0,0:00:12.84,0:00:13.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}different
+Dialogue: 0,0:00:13.20,0:00:13.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}suspects,
+Dialogue: 0,0:00:14.08,0:00:14.32,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:00:14.32,0:00:14.42,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:14.42,0:00:14.62,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}most
+Dialogue: 0,0:00:14.62,0:00:14.98,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}famous
+Dialogue: 0,0:00:14.98,0:00:15.22,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}one
+Dialogue: 0,0:00:15.22,0:00:15.70,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}probably
+Dialogue: 0,0:00:15.70,0:00:16.08,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}never
+Dialogue: 0,0:00:16.08,0:00:16.50,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}touched
+Dialogue: 0,0:00:16.50,0:00:16.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:00:16.68,0:00:16.94,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}single
+Dialogue: 0,0:00:16.94,0:00:17.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}scroll.
+Dialogue: 0,0:00:17.87,0:00:18.11,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Today
+Dialogue: 0,0:00:18.11,0:00:18.31,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}we're
+Dialogue: 0,0:00:18.31,0:00:18.69,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}tracing
+Dialogue: 0,0:00:18.69,0:00:18.97,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}what
+Dialogue: 0,0:00:18.97,0:00:19.37,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}actually
+Dialogue: 0,0:00:19.37,0:00:19.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}happened
+Dialogue: 0,0:00:19.77,0:00:19.97,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:00:19.97,0:00:20.05,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:20.05,0:00:20.49,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Library
+Dialogue: 0,0:00:20.49,0:00:20.79,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
+Dialogue: 0,0:00:20.79,0:00:21.35,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Alexandria
+Dialogue: 0,0:00:22.01,0:00:22.41,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}what's
+Dialogue: 0,0:00:22.41,0:00:22.71,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}solid,
+Dialogue: 0,0:00:23.11,0:00:23.33,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}what
+Dialogue: 0,0:00:23.33,0:00:23.85,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}historians
+Dialogue: 0,0:00:23.85,0:00:24.23,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}still
+Dialogue: 0,0:00:24.23,0:00:24.59,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}argue
+Dialogue: 0,0:00:24.59,0:00:24.93,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}about,
+Dialogue: 0,0:00:25.25,0:00:25.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:00:25.47,0:00:25.57,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:25.57,0:00:25.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}one
+Dialogue: 0,0:00:25.77,0:00:26.25,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}popular
+Dialogue: 0,0:00:26.25,0:00:26.65,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}version
+Dialogue: 0,0:00:26.65,0:00:27.03,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that's
+Dialogue: 0,0:00:27.03,0:00:27.27,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}almost
+Dialogue: 0,0:00:27.27,0:00:27.89,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}certainly
+Dialogue: 0,0:00:27.89,0:00:28.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:00:28.09,0:00:28.27,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}myth.
+Dialogue: 0,0:00:28.84,0:00:28.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}The
+Dialogue: 0,0:00:28.96,0:00:29.42,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Library
+Dialogue: 0,0:00:29.42,0:00:29.72,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}was
+Dialogue: 0,0:00:29.72,0:00:29.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}part
+Dialogue: 0,0:00:29.96,0:00:30.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
+Dialogue: 0,0:00:30.12,0:00:30.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:30.20,0:00:30.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Mouseion,
+Dialogue: 0,0:00:31.18,0:00:31.30,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:00:31.30,0:00:31.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}research
+Dialogue: 0,0:00:31.60,0:00:32.32,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}institution
+Dialogue: 0,0:00:32.32,0:00:32.80,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}founded
+Dialogue: 0,0:00:32.80,0:00:33.02,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in
+Dialogue: 0,0:00:33.02,0:00:33.14,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:00:33.14,0:00:33.48,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}early
+Dialogue: 0,0:00:33.48,0:00:34.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Ptolemaic
+Dialogue: 0,0:00:34.20,0:00:34.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}dynasty,
+Dialogue: 0,0:00:35.20,0:00:35.30,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in
+Dialogue: 0,0:00:35.30,0:00:35.74,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Egypt.
+Dialogue: 0,0:00:36.56,0:00:37.04,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Tradition
+Dialogue: 0,0:00:37.04,0:00:37.44,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}credits
+Dialogue: 0,0:00:37.44,0:00:38.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Demetrius
+Dialogue: 0,0:00:38.20,0:00:38.34,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
+Dialogue: 0,0:00:38.34,0:00:38.86,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Phalerum
+Dialogue: 0,0:00:38.86,0:00:39.24,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}with
+Dialogue: 0,0:00:39.24,0:00:39.74,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}proposing
+Dialogue: 0,0:00:39.74,0:00:39.92,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
+Dialogue: 0,0:00:39.92,0:00:40.06,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:00:40.06,0:00:40.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Ptolemy
+Dialogue: 0,0:00:40.54,0:00:41.02,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}I
+Dialogue: 0,0:00:41.28,0:00:41.52,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}though
+Dialogue: 0,0:00:41.52,0:00:41.80,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}some
+Dialogue: 0,0:00:41.80,0:00:42.32,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}historians
+Dialogue: 0,0:00:42.32,0:00:42.66,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}call
+Dialogue: 0,0:00:42.66,0:00:42.92,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}his
+Dialogue: 0,0:00:42.92,0:00:43.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}exact
+Dialogue: 0,0:00:43.28,0:00:43.64,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}role
+Dialogue: 0,0:00:43.64,0:00:44.32,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}debatable,
+Dialogue: 0,0:00:44.72,0:00:44.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}so
+Dialogue: 0,0:00:44.96,0:00:45.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}treat
+Dialogue: 0,0:00:45.20,0:00:45.46,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
+Dialogue: 0,0:00:45.46,0:00:45.86,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}detail
+Dialogue: 0,0:00:45.86,0:00:46.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}as
+Dialogue: 0,0:00:46.20,0:00:46.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}likely,
+Dialogue: 0,0:00:46.90,0:00:47.14,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}not
+Dialogue: 0,0:00:47.14,0:00:47.56,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}certain.
+Dialogue: 0,0:00:48.09,0:00:48.45,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Nobody
+Dialogue: 0,0:00:48.45,0:00:48.73,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}knows
+Dialogue: 0,0:00:48.73,0:00:49.21,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}exactly
+Dialogue: 0,0:00:49.21,0:00:49.63,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}how
+Dialogue: 0,0:00:49.63,0:00:49.87,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}many
+Dialogue: 0,0:00:49.87,0:00:50.37,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}scrolls
+Dialogue: 0,0:00:50.37,0:00:50.43,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
+Dialogue: 0,0:00:50.43,0:00:50.73,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}held.
+Dialogue: 0,0:00:51.39,0:00:51.83,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Estimates
+Dialogue: 0,0:00:51.83,0:00:52.05,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}range
+Dialogue: 0,0:00:52.05,0:00:52.33,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}from
+Dialogue: 0,0:00:52.33,0:00:53.29,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}40,000
+Dialogue: 0,0:00:53.29,0:00:53.71,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:00:53.71,0:00:53.91,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}as
+Dialogue: 0,0:00:53.91,0:00:54.25,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}high
+Dialogue: 0,0:00:54.25,0:00:54.51,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}as
+Dialogue: 0,0:00:54.51,0:00:55.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}700,000
+Dialogue: 0,0:00:55.12,0:00:55.73,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}—
+Dialogue: 0,0:00:56.19,0:00:56.39,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}but
+Dialogue: 0,0:00:56.39,0:00:56.59,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
+Dialogue: 0,0:00:56.59,0:00:56.87,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}top
+Dialogue: 0,0:00:56.87,0:00:57.23,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}figure
+Dialogue: 0,0:00:57.23,0:00:57.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}comes
+Dialogue: 0,0:00:57.61,0:00:57.87,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}from
+Dialogue: 0,0:00:57.87,0:00:58.23,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}ancient
+Dialogue: 0,0:00:58.23,0:00:58.59,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}writers
+Dialogue: 0,0:00:58.83,0:00:59.01,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}centuries
+Dialogue: 0,0:00:59.01,0:00:59.41,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}later,
+Dialogue: 0,0:00:59.85,0:01:00.03,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:01:00.03,0:01:00.37,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}modern
+Dialogue: 0,0:01:00.37,0:01:00.95,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}historians
+Dialogue: 0,0:01:00.95,0:01:01.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}consider
+Dialogue: 0,0:01:01.47,0:01:01.65,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
+Dialogue: 0,0:01:01.65,0:01:02.01,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}almost
+Dialogue: 0,0:01:02.01,0:01:02.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}certainly
+Dialogue: 0,0:01:02.67,0:01:03.31,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}exaggerated.
+Dialogue: 0,0:01:04.04,0:01:04.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}The
+Dialogue: 0,0:01:04.12,0:01:04.34,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}most
+Dialogue: 0,0:01:04.34,0:01:04.76,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}commonly
+Dialogue: 0,0:01:04.76,0:01:05.32,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}blamed
+Dialogue: 0,0:01:05.32,0:01:05.74,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}culprit.
+Dialogue: 0,0:01:06.50,0:01:06.90,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Caesar's
+Dialogue: 0,0:01:06.90,0:01:07.04,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}own
+Dialogue: 0,0:01:07.04,0:01:07.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}account
+Dialogue: 0,0:01:07.38,0:01:07.88,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}only
+Dialogue: 0,0:01:07.88,0:01:08.46,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}mentions
+Dialogue: 0,0:01:08.46,0:01:08.78,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}burning
+Dialogue: 0,0:01:08.78,0:01:09.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}ships
+Dialogue: 0,0:01:09.12,0:01:09.44,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:01:09.44,0:01:09.94,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}docks
+Dialogue: 0,0:01:10.36,0:01:10.58,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it's
+Dialogue: 0,0:01:10.58,0:01:10.62,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:01:10.62,0:01:10.82,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}later
+Dialogue: 0,0:01:10.82,0:01:11.18,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}writer,
+Dialogue: 0,0:01:11.54,0:01:11.88,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Strabo,
+Dialogue: 0,0:01:12.36,0:01:12.52,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}writing
+Dialogue: 0,0:01:12.52,0:01:13.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}twenty-five
+Dialogue: 0,0:01:13.12,0:01:13.40,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}years
+Dialogue: 0,0:01:13.40,0:01:13.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}afterward,
+Dialogue: 0,0:01:14.46,0:01:14.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}who
+Dialogue: 0,0:01:14.54,0:01:14.84,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}connects
+Dialogue: 0,0:01:14.84,0:01:15.10,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:15.10,0:01:15.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}fire
+Dialogue: 0,0:01:15.38,0:01:15.58,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:01:15.58,0:01:15.66,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:15.66,0:01:16.04,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}library.
+Dialogue: 0,0:01:16.94,0:01:17.62,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Historians
+Dialogue: 0,0:01:17.62,0:01:17.94,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}still
+Dialogue: 0,0:01:17.94,0:01:18.36,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}dispute
+Dialogue: 0,0:01:18.36,0:01:18.66,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}how
+Dialogue: 0,0:01:18.66,0:01:18.94,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}much
+Dialogue: 0,0:01:18.94,0:01:19.10,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}was
+Dialogue: 0,0:01:19.10,0:01:19.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}actually
+Dialogue: 0,0:01:19.54,0:01:19.88,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}lost,
+Dialogue: 0,0:01:20.34,0:01:20.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:01:20.54,0:01:20.76,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}there's
+Dialogue: 0,0:01:20.76,0:01:21.12,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}evidence
+Dialogue: 0,0:01:21.12,0:01:21.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:21.38,0:01:21.86,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}library
+Dialogue: 0,0:01:21.86,0:01:22.18,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}kept
+Dialogue: 0,0:01:22.18,0:01:22.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}functioning
+Dialogue: 0,0:01:22.68,0:01:23.30,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}afterward.
+Dialogue: 0,0:01:23.86,0:01:23.98,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}In
+Dialogue: 0,0:01:23.98,0:01:25.06,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}391
+Dialogue: 0,0:01:25.06,0:01:25.36,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}CE,
+Dialogue: 0,0:01:25.84,0:01:25.92,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:25.92,0:01:26.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Serapeum
+Dialogue: 0,0:01:26.64,0:01:26.92,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}temple
+Dialogue: 0,0:01:26.92,0:01:27.10,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in
+Dialogue: 0,0:01:27.10,0:01:27.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Alexandria
+Dialogue: 0,0:01:27.68,0:01:28.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}was
+Dialogue: 0,0:01:28.20,0:01:28.72,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}destroyed
+Dialogue: 0,0:01:28.72,0:01:28.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}under
+Dialogue: 0,0:01:28.96,0:01:29.26,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Bishop
+Dialogue: 0,0:01:29.26,0:01:30.06,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Theophilus
+Dialogue: 0,0:01:30.42,0:01:30.70,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
+Dialogue: 0,0:01:30.70,0:01:30.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}part
+Dialogue: 0,0:01:30.96,0:01:31.34,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}is
+Dialogue: 0,0:01:31.34,0:01:31.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}well
+Dialogue: 0,0:01:31.60,0:01:32.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}documented
+Dialogue: 0,0:01:32.20,0:01:32.48,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}by
+Dialogue: 0,0:01:32.48,0:01:33.46,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}near-contemporary
+Dialogue: 0,0:01:33.46,0:01:33.80,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}writers.
+Dialogue: 0,0:01:34.38,0:01:34.84,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}What's
+Dialogue: 0,0:01:34.84,0:01:34.98,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}not
+Dialogue: 0,0:01:34.98,0:01:35.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}documented:
+Dialogue: 0,0:01:36.10,0:01:36.26,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}any
+Dialogue: 0,0:01:36.26,0:01:36.64,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}ancient
+Dialogue: 0,0:01:36.64,0:01:36.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}source
+Dialogue: 0,0:01:36.96,0:01:37.56,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}actually
+Dialogue: 0,0:01:37.56,0:01:38.06,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}connecting
+Dialogue: 0,0:01:38.06,0:01:38.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
+Dialogue: 0,0:01:38.28,0:01:38.76,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}destruction
+Dialogue: 0,0:01:38.76,0:01:39.08,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:01:39.08,0:01:39.22,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:01:39.22,0:01:39.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}library
+Dialogue: 0,0:01:39.54,0:01:40.14,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}collection
+Dialogue: 0,0:01:40.14,0:01:40.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}still
+Dialogue: 0,0:01:40.68,0:01:41.24,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}existing
+Dialogue: 0,0:01:41.24,0:01:41.42,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}at
+Dialogue: 0,0:01:41.42,0:01:41.54,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:41.54,0:01:41.82,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}time.
+Dialogue: 0,0:01:42.46,0:01:42.62,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}The
+Dialogue: 0,0:01:42.62,0:01:42.82,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}two
+Dialogue: 0,0:01:42.82,0:01:43.16,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}events
+Dialogue: 0,0:01:43.16,0:01:43.42,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}get
+Dialogue: 0,0:01:43.42,0:01:43.80,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}merged
+Dialogue: 0,0:01:43.80,0:01:44.08,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in
+Dialogue: 0,0:01:44.08,0:01:44.50,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}popular
+Dialogue: 0,0:01:44.50,0:01:45.22,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}retellings.
+Dialogue: 0,0:01:45.70,0:01:45.90,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}The
+Dialogue: 0,0:01:45.90,0:01:46.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}sources
+Dialogue: 0,0:01:46.28,0:01:46.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}don't
+Dialogue: 0,0:01:46.68,0:01:47.04,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}support
+Dialogue: 0,0:01:47.04,0:01:47.30,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
+Dialogue: 0,0:01:47.30,0:01:47.56,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}merge.
+Dialogue: 0,0:01:48.19,0:01:48.27,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}The
+Dialogue: 0,0:01:48.27,0:01:48.45,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}most
+Dialogue: 0,0:01:48.45,0:01:48.81,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}famous
+Dialogue: 0,0:01:48.81,0:01:49.23,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}version
+Dialogue: 0,0:01:49.69,0:01:49.75,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:01:49.75,0:01:50.17,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}caliph
+Dialogue: 0,0:01:50.17,0:01:50.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}ordering
+Dialogue: 0,0:01:50.47,0:01:50.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:50.67,0:01:50.95,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}library
+Dialogue: 0,0:01:50.95,0:01:51.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}burned
+Dialogue: 0,0:01:51.47,0:01:51.81,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}because
+Dialogue: 0,0:01:51.81,0:01:52.01,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}its
+Dialogue: 0,0:01:52.01,0:01:52.19,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}books
+Dialogue: 0,0:01:52.19,0:01:52.41,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}were
+Dialogue: 0,0:01:52.41,0:01:52.65,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}either
+Dialogue: 0,0:01:52.65,0:01:53.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}redundant
+Dialogue: 0,0:01:53.09,0:01:53.39,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}with
+Dialogue: 0,0:01:53.39,0:01:53.55,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}or
+Dialogue: 0,0:01:53.55,0:01:53.97,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}contrary
+Dialogue: 0,0:01:53.97,0:01:54.21,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:01:54.21,0:01:54.31,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:54.31,0:01:54.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Quran
+Dialogue: 0,0:01:55.29,0:01:55.51,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}traces
+Dialogue: 0,0:01:55.51,0:01:55.75,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
+Dialogue: 0,0:01:55.75,0:01:55.85,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:01:55.85,0:01:56.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}single
+Dialogue: 0,0:01:56.09,0:01:56.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}writer,
+Dialogue: 0,0:01:56.83,0:01:56.99,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Bar
+Dialogue: 0,0:01:56.99,0:01:57.51,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Hebraeus,
+Dialogue: 0,0:01:57.99,0:01:58.15,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}writing
+Dialogue: 0,0:01:58.15,0:01:58.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}roughly
+Dialogue: 0,0:01:58.47,0:01:58.74,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}six
+Dialogue: 0,0:01:58.74,0:01:59.01,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}hundred
+Dialogue: 0,0:01:59.01,0:01:59.29,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}years
+Dialogue: 0,0:01:59.29,0:01:59.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}after
+Dialogue: 0,0:01:59.67,0:01:59.79,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:01:59.79,0:02:00.07,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}fact.
+Dialogue: 0,0:02:00.79,0:02:01.01,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}No
+Dialogue: 0,0:02:01.01,0:02:01.31,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}source
+Dialogue: 0,0:02:01.31,0:02:01.51,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}from
+Dialogue: 0,0:02:01.51,0:02:01.63,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:01.63,0:02:02.03,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}century
+Dialogue: 0,0:02:02.03,0:02:02.25,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
+Dialogue: 0,0:02:02.25,0:02:02.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}supposedly
+Dialogue: 0,0:02:02.67,0:02:03.13,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}happened
+Dialogue: 0,0:02:03.27,0:02:03.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}mentions
+Dialogue: 0,0:02:03.61,0:02:03.81,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it.
+Dialogue: 0,0:02:04.27,0:02:04.45,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}And
+Dialogue: 0,0:02:04.45,0:02:04.55,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:04.55,0:02:04.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}same
+Dialogue: 0,0:02:04.77,0:02:05.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}exact
+Dialogue: 0,0:02:05.09,0:02:05.57,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}story
+Dialogue: 0,0:02:05.57,0:02:05.79,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}gets
+Dialogue: 0,0:02:05.79,0:02:06.11,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}told
+Dialogue: 0,0:02:06.11,0:02:06.37,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}about
+Dialogue: 0,0:02:06.37,0:02:06.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:06.47,0:02:06.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}different
+Dialogue: 0,0:02:06.67,0:02:07.25,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}library,
+Dialogue: 0,0:02:07.67,0:02:07.85,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}under
+Dialogue: 0,0:02:07.85,0:02:07.99,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:07.99,0:02:08.19,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}same
+Dialogue: 0,0:02:08.19,0:02:08.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}caliph,
+Dialogue: 0,0:02:09.01,0:02:09.25,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}somewhere
+Dialogue: 0,0:02:09.25,0:02:09.51,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}else
+Dialogue: 0,0:02:09.51,0:02:10.11,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}entirely
+Dialogue: 0,0:02:10.67,0:02:10.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:10.77,0:02:11.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}strong
+Dialogue: 0,0:02:11.09,0:02:11.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}sign
+Dialogue: 0,0:02:11.47,0:02:11.89,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it's
+Dialogue: 0,0:02:11.89,0:02:11.95,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:11.95,0:02:12.53,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}reused
+Dialogue: 0,0:02:12.53,0:02:12.87,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}legend,
+Dialogue: 0,0:02:13.29,0:02:13.39,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}not
+Dialogue: 0,0:02:13.39,0:02:13.49,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:13.49,0:02:13.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}record.
+Dialogue: 0,0:02:14.35,0:02:14.49,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}So
+Dialogue: 0,0:02:14.49,0:02:14.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:14.61,0:02:15.07,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Library
+Dialogue: 0,0:02:15.07,0:02:15.33,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
+Dialogue: 0,0:02:15.33,0:02:15.87,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Alexandria
+Dialogue: 0,0:02:15.87,0:02:16.45,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}wasn't
+Dialogue: 0,0:02:16.45,0:02:16.89,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}destroyed.
+Dialogue: 0,0:02:17.63,0:02:17.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}It
+Dialogue: 0,0:02:17.77,0:02:17.87,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}was
+Dialogue: 0,0:02:17.87,0:02:18.15,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}worn
+Dialogue: 0,0:02:18.15,0:02:18.49,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}down
+Dialogue: 0,0:02:18.85,0:02:18.97,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:18.97,0:02:19.27,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}fire
+Dialogue: 0,0:02:19.27,0:02:19.57,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}here,
+Dialogue: 0,0:02:19.97,0:02:20.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:20.09,0:02:20.53,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}purge
+Dialogue: 0,0:02:20.53,0:02:20.71,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}there,
+Dialogue: 0,0:02:21.27,0:02:21.43,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
+Dialogue: 0,0:02:21.43,0:02:21.75,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}temple
+Dialogue: 0,0:02:21.75,0:02:22.37,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}demolition
+Dialogue: 0,0:02:22.37,0:02:22.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
+Dialogue: 0,0:02:22.61,0:02:22.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}got
+Dialogue: 0,0:02:22.77,0:02:23.25,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}conflated
+Dialogue: 0,0:02:23.25,0:02:23.53,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}with
+Dialogue: 0,0:02:23.53,0:02:23.63,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
+Dialogue: 0,0:02:23.63,0:02:23.93,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}later,
+Dialogue: 0,0:02:23.93,0:02:24.57,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}across
+Dialogue: 0,0:02:24.57,0:02:24.97,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}three
+Dialogue: 0,0:02:24.97,0:02:25.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}centuries
+Dialogue: 0,0:02:26.15,0:02:26.37,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:02:26.37,0:02:26.49,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:26.49,0:02:27.05,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}single-villain
+Dialogue: 0,0:02:27.05,0:02:27.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}version
+Dialogue: 0,0:02:27.69,0:02:27.97,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}everyone
+Dialogue: 0,0:02:27.97,0:02:28.49,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}repeats
+Dialogue: 0,0:02:28.49,0:02:28.91,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}is
+Dialogue: 0,0:02:28.91,0:02:29.07,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:29.07,0:02:29.29,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}one
+Dialogue: 0,0:02:29.29,0:02:29.51,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}part
+Dialogue: 0,0:02:29.51,0:02:29.65,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
+Dialogue: 0,0:02:29.65,0:02:29.75,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:29.75,0:02:30.09,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}story
+Dialogue: 0,0:02:30.09,0:02:30.47,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}with
+Dialogue: 0,0:02:30.47,0:02:30.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:30.61,0:02:30.91,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}least
+Dialogue: 0,0:02:30.91,0:02:31.31,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}evidence
+Dialogue: 0,0:02:31.31,0:02:31.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}behind
+Dialogue: 0,0:02:31.77,0:02:32.05,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it.
+Dialogue: 0,0:02:32.52,0:02:32.76,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Full
+Dialogue: 0,0:02:32.76,0:02:33.16,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}source
+Dialogue: 0,0:02:33.16,0:02:33.50,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}list
+Dialogue: 0,0:02:33.50,0:02:33.84,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}and
+Dialogue: 0,0:02:33.84,0:02:34.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}confidence
+Dialogue: 0,0:02:34.28,0:02:34.76,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}ratings
+Dialogue: 0,0:02:34.76,0:02:35.24,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}for
+Dialogue: 0,0:02:35.24,0:02:35.58,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}every
+Dialogue: 0,0:02:35.58,0:02:35.88,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}claim
+Dialogue: 0,0:02:35.88,0:02:36.02,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in
+Dialogue: 0,0:02:36.02,0:02:36.16,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}this
+Dialogue: 0,0:02:36.16,0:02:36.50,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}video
+Dialogue: 0,0:02:36.50,0:02:36.98,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}are
+Dialogue: 0,0:02:36.98,0:02:37.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}linked
+Dialogue: 0,0:02:37.38,0:02:37.64,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}in
+Dialogue: 0,0:02:37.64,0:02:37.76,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
+Dialogue: 0,0:02:37.76,0:02:38.16,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}description.
