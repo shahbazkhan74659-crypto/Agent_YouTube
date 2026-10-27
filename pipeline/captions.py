@@ -17,6 +17,7 @@ import re
 import pysubs2
 
 import config
+import evidence
 
 WORD_FONT_SIZE = 70
 
@@ -148,6 +149,24 @@ def _build_title_style() -> pysubs2.SSAStyle:
     return style
 
 
+def _build_evidence_label_style() -> pysubs2.SSAStyle:
+    """The small "SOURCE" label burned over an evidence inset (see assemble.py's
+    EVIDENCE_* compositing). Positioned per-event via \\pos() below, not a fixed
+    alignment/margin - a label needs to land at whichever of the 5
+    config.EVIDENCE_POSITIONS anchors evidence.position_for_segment() picked for
+    that specific segment, which a single static alignment can't express."""
+    style = pysubs2.SSAStyle()
+    style.fontname = "Arial"
+    style.fontsize = 28
+    style.bold = True
+    style.primarycolor = pysubs2.Color(255, 255, 255)
+    style.outlinecolor = pysubs2.Color(0, 0, 0)
+    style.borderstyle = 1
+    style.outline = 2
+    style.alignment = 7  # top-left anchor - \pos() below places it exactly, this just sets the anchor corner
+    return style
+
+
 def _normalize(token: str) -> str:
     return re.sub(r"[^a-z0-9]", "", token.lower())
 
@@ -225,11 +244,19 @@ def build_captions(slug: str) -> str:
     romanized_path = build / "romanized.json"
     romanized = json.loads(romanized_path.read_text(encoding="utf-8")) if romanized_path.exists() else {}
 
+    # manifest.json - read here only to know which segments carry an evidence inset
+    # (visuals/resolve.py's "evidence" key), so the matching "SOURCE" label can be
+    # burned at the same absolute coordinates assemble.py composited the bordered
+    # image at (both call evidence.position_for_segment(seg_id) with the same seed).
+    manifest_path = build / "manifest.json"
+    manifest = {e["id"]: e for e in json.loads(manifest_path.read_text(encoding="utf-8"))} if manifest_path.exists() else {}
+
     subs = pysubs2.SSAFile()
     subs.info["PlayResX"] = str(config.WIDTH)
     subs.info["PlayResY"] = str(config.HEIGHT)
     subs.styles["Word"] = _build_word_style()
     subs.styles["Title"] = _build_title_style()
+    subs.styles["EvidenceLabel"] = _build_evidence_label_style()
 
     total_duration = meta[-1]["end"] + config.BEAT_GAP_SEC  # matches audio_mix.py's trailing apad
     subs.append(
@@ -259,6 +286,28 @@ def build_captions(slug: str) -> str:
                 text="{" + POP_TAG + "}" + display_word,
             )
             subs.append(event)
+
+    # Evidence "SOURCE" labels - one event per segment that has a resolved evidence
+    # inset, spanning exactly that segment's own start/end (already absolute/global
+    # timeline values from narration.py's _segment_timing(), no beat-start offset
+    # needed here, unlike the per-word loop above). \pos() places it at the same
+    # (ex, ey) assemble.py composited the bordered image at, 8px inside its border.
+    for beat in meta:
+        for seg_i, seg in enumerate(beat["segments"]):
+            seg_id = f"{beat['id']}_seg{seg_i:02d}"
+            ev = manifest.get(seg_id, {}).get("evidence")
+            if not ev:
+                continue
+            ex, ey = evidence.position_for_segment(seg_id)
+            label_x, label_y = ex + 8, ey + 8
+            subs.append(
+                pysubs2.SSAEvent(
+                    start=round(seg["start"] * 1000),
+                    end=round(seg["end"] * 1000),
+                    style="EvidenceLabel",
+                    text=f"{{\\pos({label_x},{label_y})}}{config.EVIDENCE_LABEL_TEXT}",
+                )
+            )
 
     out_path = build / "captions.ass"
     subs.save(str(out_path))
