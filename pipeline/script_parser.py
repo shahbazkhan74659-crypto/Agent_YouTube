@@ -48,6 +48,56 @@ def strip_markdown_emphasis(text: str) -> str:
     return MARKDOWN_EMPHASIS_RE.sub(r"\1", text)
 
 
+# Pause-punctuation normalization (2026-10-27, see idea.md's punctuation
+# decision-log entry) - kokoro_onnx's chunker.py only actively manages pauses for
+# its own SENTENCE_MARKS ".!?…" and CLAUSE_MARKS ",;:"; anything outside that either
+# gets an uncontrolled, model-learned pause (em-dash, en-dash, parentheses) or none
+# at all (plain hyphen - dropped before it even reaches kokoro's vocab). This
+# channel's allowed set is narrower still: only `. , ! : ?` - no `;` and no `…`,
+# even though kokoro_onnx already pauses on those two, because the rule governs
+# what a human script-writer should reach for (voice.md / yt-script/SKILL.md's
+# Punctuation section), not just what already produces a pause today.
+ELLIPSIS_RE = re.compile(r"\.{3,}|…")
+SEMICOLON_RE = re.compile(r";")
+# A spaced em/en-dash, spaced double-hyphen, or spaced single hyphen - deliberately
+# NOT an unspaced hyphen inside a word ("three-hundred-year"), a compound modifier,
+# not a pause, which must survive untouched.
+DASH_RE = re.compile(r"\s*[—–]\s*|\s+--\s+|\s+-\s+")
+PAREN_RE = re.compile(r"\(([^()]*)\)")
+SPACE_BEFORE_PUNCT_RE = re.compile(r"\s+([,.!?:])")
+MULTI_COMMA_RE = re.compile(r"(,\s*){2,}")
+COMMA_BEFORE_TERMINATOR_RE = re.compile(r",\s*([.!?:])")
+MULTI_SPACE_RE = re.compile(r" {2,}")
+CAPITALIZE_AFTER_PERIOD_RE = re.compile(r"(\.\s+)([a-z])")
+
+
+def normalize_pause_punctuation(text: str) -> str:
+    """Narration must only pause on `. , ! : ?` (voice.md / yt-script/SKILL.md's
+    Punctuation rule). Mechanically substitutes every off-list mark down to the
+    nearest allowed one, then cleans up the punctuation collisions adjacent
+    substitutions can produce (stray space before a comma, a doubled comma, a
+    comma stacked right before a period).
+
+    Known accepted simplifications (flag, don't solve - same call as
+    captions.py's _convert_number_token and visuals/sources.py's Pixabay
+    relevance filter): an em-dash used as a hard interruption often reads better
+    as a period than a comma, this always picks comma; an ellipsis used for
+    trailing-off loses that nuance, collapsed to a flat period; capitalizing the
+    word after every ". " can mis-capitalize a word following an abbreviation's
+    period (e.g. "U.S. forces" -> "U.S. Forces").
+    """
+    text = ELLIPSIS_RE.sub(". ", text)
+    text = SEMICOLON_RE.sub(". ", text)
+    text = DASH_RE.sub(", ", text)
+    text = PAREN_RE.sub(r", \1,", text)
+    text = SPACE_BEFORE_PUNCT_RE.sub(r"\1", text)
+    text = MULTI_COMMA_RE.sub(", ", text)
+    text = COMMA_BEFORE_TERMINATOR_RE.sub(r"\1", text)
+    text = MULTI_SPACE_RE.sub(" ", text)
+    text = CAPITALIZE_AFTER_PERIOD_RE.sub(lambda m: m.group(1) + m.group(2).upper(), text)
+    return text.strip()
+
+
 @dataclass
 class Cue:
     raw: str
@@ -178,7 +228,7 @@ def parse_script(slug: str) -> tuple[str, list[Beat]]:
         nonlocal pending_cue, pending_evidence, current_segment_buf
         if current_beat is None:
             return
-        text = strip_markdown_emphasis(" ".join(current_segment_buf).strip())
+        text = normalize_pause_punctuation(strip_markdown_emphasis(" ".join(current_segment_buf).strip()))
         if text:
             current_beat.segments.append(Segment(on_screen=pending_cue, text=text, evidence=pending_evidence))
             pending_cue = None  # consumed - an empty-text flush (nothing accumulated

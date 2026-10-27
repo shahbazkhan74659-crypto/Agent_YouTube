@@ -125,7 +125,27 @@ def _resolve_evidence(cue: dict | None, seg_id: str, evidence_dir: Path) -> dict
     return None
 
 
+def _warn_if_narration_stale(slug: str) -> None:
+    """Warn, don't block - same pattern as narration.py's cut-rate warning.
+    script.md being newer than narration_meta.json means resolve_all() is about
+    to resolve visuals against beats/segments that may no longer match the
+    actual script (same staleness class as memory.md's logged stale-captions.ass
+    and silently-wiped-alignment-data incidents)."""
+    script_path = config.video_dir(slug) / "script.md"
+    meta_path = config.build_dir(slug) / "narration_meta.json"
+    if not script_path.exists() or not meta_path.exists():
+        return
+    if script_path.stat().st_mtime > meta_path.stat().st_mtime:
+        print(
+            "  [stale] WARNING: script.md is newer than narration_meta.json - "
+            "visuals are about to resolve against beats/segments that may no "
+            "longer match script.md. Re-run from `parse` (or at least "
+            "`narration`) before trusting this visuals pass."
+        )
+
+
 def resolve_all(slug: str, force: bool = False) -> tuple[list[dict], str]:
+    _warn_if_narration_stale(slug)
     build = config.build_dir(slug)
     meta = json.loads((build / "narration_meta.json").read_text(encoding="utf-8"))["beats"]
     visuals_dir = build / "visuals"
