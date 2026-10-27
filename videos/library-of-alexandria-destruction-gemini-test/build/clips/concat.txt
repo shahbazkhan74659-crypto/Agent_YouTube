@@ -1,0 +1,7 @@
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_01_seg00.mp4'
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_01_seg01.mp4'
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_02_seg00.mp4'
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_03_seg00.mp4'
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_03_seg01.mp4'
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_04_seg00.mp4'
+file 'C:/YouTube/videos/library-of-alexandria-destruction-gemini-test/build/clips/beat_04_seg01.mp4'

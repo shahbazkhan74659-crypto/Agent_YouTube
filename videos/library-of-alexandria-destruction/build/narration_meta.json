@@ -1,0 +1,390 @@
+{
+  "title": "The Destruction of the Library of Alexandria",
+  "beats": [
+    {
+      "id": "beat_01",
+      "index": 1,
+      "label": "HOOK",
+      "tag": "0:00-0:15",
+      "confidence_tags": [],
+      "narration": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in. The real story isn't one fire — it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Library of Alexandria illustration\" — the tested public-domain O. Von Corven engraving, `alexandria_library.jpg`",
+            "search_terms": [
+              "Library of Alexandria illustration"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in.",
+          "start": 0.0,
+          "end": 7.706
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Alexandria fire illustration\"",
+            "search_terms": [
+              "ancient Alexandria fire illustration"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "The real story isn't one fire — it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll.",
+          "start": 7.706,
+          "end": 17.515
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_01.wav",
+      "duration": 17.515,
+      "start": 0.0,
+      "end": 17.515,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_02",
+      "index": 2,
+      "label": "THE TURN",
+      "tag": "0:15-0:30",
+      "confidence_tags": [],
+      "narration": "Today we're tracing what actually happened to the Library of Alexandria — what's solid, what historians still argue about, and the one popular version that's almost certainly a myth.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Library of Alexandria depiction\"",
+            "search_terms": [
+              "ancient Library of Alexandria depiction"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Today we're tracing what actually happened to the Library of Alexandria — what's solid, what historians still argue about, and the one popular version that's almost certainly a myth.",
+          "start": 17.865,
+          "end": 28.489
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_02.wav",
+      "duration": 10.624,
+      "start": 17.865,
+      "end": 28.489,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_03",
+      "index": 3,
+      "label": "BEAT 1 — The founding",
+      "tag": "SOLID",
+      "confidence_tags": [
+        "SOLID"
+      ],
+      "narration": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt. Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I — though some historians call his exact role debatable, so treat that detail as likely, not certain.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Ptolemy I Soter bust\" / \"ancient Alexandria map\"",
+            "search_terms": [
+              "Ptolemy I Soter bust",
+              "ancient Alexandria map"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt.",
+          "start": 28.839,
+          "end": 36.235
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Demetrius of Phalerum\"",
+            "search_terms": [
+              "Demetrius of Phalerum"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I — though some historians call his exact role debatable, so treat that detail as likely, not certain.",
+          "start": 36.235,
+          "end": 47.74
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_03.wav",
+      "duration": 18.901,
+      "start": 28.839,
+      "end": 47.74,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_04",
+      "index": 4,
+      "label": "BEAT 2 — How big was it, really",
+      "tag": "SOLID, with a caveat",
+      "confidence_tags": [
+        "SOLID"
+      ],
+      "narration": "Nobody knows exactly how many scrolls it held. Estimates range from 40,000 to as high as 700,000 — but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient papyrus scroll\"",
+            "search_terms": [
+              "ancient papyrus scroll"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Nobody knows exactly how many scrolls it held.",
+          "start": 48.09,
+          "end": 51.555
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient library scrolls shelves\"",
+            "search_terms": [
+              "ancient library scrolls shelves"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Estimates range from 40,000 to as high as 700,000 — but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated.",
+          "start": 51.555,
+          "end": 63.685
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_04.wav",
+      "duration": 15.595,
+      "start": 48.09,
+      "end": 63.685,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_05",
+      "index": 5,
+      "label": "BEAT 3 — Caesar's fire, 48 BCE",
+      "tag": "CONTESTED",
+      "confidence_tags": [
+        "CONTESTED"
+      ],
+      "narration": "The most commonly blamed culprit. Caesar's own account only mentions burning ships and docks — it's a later writer, Strabo, writing twenty-five years afterward, who connects the fire to the library. Historians still dispute how much was actually lost, and there's evidence the library kept functioning afterward.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Julius Caesar bust\" / \"ancient Alexandria harbor\"",
+            "search_terms": [
+              "Julius Caesar bust",
+              "ancient Alexandria harbor"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "The most commonly blamed culprit. Caesar's own account only mentions burning ships and docks —",
+          "start": 64.035,
+          "end": 70.251
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient scribe writing scroll\"",
+            "search_terms": [
+              "ancient scribe writing scroll"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "it's a later writer, Strabo, writing twenty-five years afterward, who connects the fire to the library.",
+          "start": 70.251,
+          "end": 76.881
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Alexandria library ruins\"",
+            "search_terms": [
+              "ancient Alexandria library ruins"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Historians still dispute how much was actually lost, and there's evidence the library kept functioning afterward.",
+          "start": 76.881,
+          "end": 83.512
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_05.wav",
+      "duration": 19.477,
+      "start": 64.035,
+      "end": 83.512,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_06",
+      "index": 6,
+      "label": "BEAT 4 — The Serapeum, 391 CE",
+      "tag": "SOLID temple destruction / UNCERTAIN library link",
+      "confidence_tags": [
+        "SOLID",
+        "UNCERTAIN"
+      ],
+      "narration": "In 391 CE, the Serapeum temple in Alexandria was destroyed under Bishop Theophilus — that part is well documented by near-contemporary writers. What's not documented: any ancient source actually connecting that destruction to a library collection still existing at the time. The two events get merged in popular retellings. The sources don't support that merge.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Serapeum Alexandria ruins\" — or AI-generate: \"4th century CE temple destruction, Alexandria, dramatic lighting, historical illustration style\" if no real image is found",
+            "search_terms": [
+              "Serapeum Alexandria ruins"
+            ],
+            "ai_generate_prompt": "4th century CE temple destruction, Alexandria, dramatic lighting, historical illustration style"
+          },
+          "text": "In 391 CE, the Serapeum temple in Alexandria was destroyed under Bishop Theophilus — that part is well documented by near-contemporary writers.",
+          "start": 83.862,
+          "end": 93.453
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"abandoned ancient ruins\"",
+            "search_terms": [
+              "abandoned ancient ruins"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "What's not documented: any ancient source actually connecting that destruction to a library collection still existing at the time.",
+          "start": 93.453,
+          "end": 101.737
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"ancient temple ruins overlaid with faded library scrolls, conceptual historical illustration, muted tones\"",
+            "search_terms": [],
+            "ai_generate_prompt": "ancient temple ruins overlaid with faded library scrolls, conceptual historical illustration, muted tones"
+          },
+          "text": "The two events get merged in popular retellings. The sources don't support that merge.",
+          "start": 101.737,
+          "end": 107.841
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_06.wav",
+      "duration": 23.979,
+      "start": 83.862,
+      "end": 107.841,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_07",
+      "index": 7,
+      "label": "BEAT 5 — The caliph myth, 641 CE",
+      "tag": "UNCERTAIN — treat as legend",
+      "confidence_tags": [
+        "UNCERTAIN"
+      ],
+      "narration": "The most famous version — a caliph ordering the library burned because its books were either redundant with or contrary to the Quran — traces to a single writer, Bar Hebraeus, writing roughly six hundred years after the fact. No source from the century it supposedly happened mentions it. And the same exact story gets told about a different library, under the same caliph, somewhere else entirely — a strong sign it's a reused legend, not a record.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"medieval manuscript illustration style, books and scrolls, myth and legend visual framing\"",
+            "search_terms": [],
+            "ai_generate_prompt": "medieval manuscript illustration style, books and scrolls, myth and legend visual framing"
+          },
+          "text": "The most famous version — a caliph ordering the library burned because its books were either redundant with or contrary to the Quran —",
+          "start": 108.191,
+          "end": 116.133
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"medieval scribe illustration\"",
+            "search_terms": [
+              "medieval scribe illustration"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "traces to a single writer, Bar Hebraeus, writing roughly six hundred years after the fact.",
+          "start": 116.133,
+          "end": 121.097
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient empty archive shelves\"",
+            "search_terms": [
+              "ancient empty archive shelves"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "No source from the century it supposedly happened mentions it.",
+          "start": 121.097,
+          "end": 124.407
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"two identical ancient libraries side by side, mirrored illustration, myth and legend visual framing\"",
+            "search_terms": [],
+            "ai_generate_prompt": "two identical ancient libraries side by side, mirrored illustration, myth and legend visual framing"
+          },
+          "text": "And the same exact story gets told about a different library, under the same caliph, somewhere else entirely — a strong sign it's a reused legend, not a record.",
+          "start": 124.407,
+          "end": 134.004
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_07.wav",
+      "duration": 25.813,
+      "start": 108.191,
+      "end": 134.004,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_08",
+      "index": 8,
+      "label": "PAYOFF",
+      "tag": "delivering the hook's promise",
+      "confidence_tags": [],
+      "narration": "So the Library of Alexandria wasn't destroyed. It was worn down — a fire here, a purge there, a temple demolition that got conflated with it later, across three centuries — and the single-villain version everyone repeats is the one part of the story with the least evidence behind it.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Alexandria ruins present day\"",
+            "search_terms": [
+              "ancient Alexandria ruins present day"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "So the Library of Alexandria wasn't destroyed. It was worn down — a fire here, a purge there, a temple demolition that got conflated with it later, across three centuries —",
+          "start": 134.354,
+          "end": 145.398
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Alexandria harbor sunset\"",
+            "search_terms": [
+              "ancient Alexandria harbor sunset"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "and the single-villain version everyone repeats is the one part of the story with the least evidence behind it.",
+          "start": 145.398,
+          "end": 152.167
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_08.wav",
+      "duration": 17.813,
+      "start": 134.354,
+      "end": 152.167,
+      "voice": "af_heart"
+    },
+    {
+      "id": "beat_09",
+      "index": 9,
+      "label": "CLOSE",
+      "tag": null,
+      "confidence_tags": [],
+      "narration": "Full source list and confidence ratings for every claim in this video are linked in the description.",
+      "segments": [
+        {
+          "on_screen": null,
+          "text": "Full source list and confidence ratings for every claim in this video are linked in the description.",
+          "start": 152.517,
+          "end": 158.469
+        }
+      ],
+      "emotion": null,
+      "wav_path": "C:\\YouTube\\videos\\library-of-alexandria-destruction\\build\\beats\\beat_09.wav",
+      "duration": 5.952,
+      "start": 152.517,
+      "end": 158.469,
+      "voice": "af_heart"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+[
+  {
+    "word": "Today",
+    "start": 0.0,
+    "end": 0.22
+  },
+  {
+    "word": "we're",
+    "start": 0.22,
+    "end": 0.5
+  },
+  {
+    "word": "tracing",
+    "start": 0.5,
+    "end": 0.92
+  },
+  {
+    "word": "what",
+    "start": 0.92,
+    "end": 1.28
+  },
+  {
+    "word": "actually",
+    "start": 1.28,
+    "end": 1.74
+  },
+  {
+    "word": "happened",
+    "start": 1.74,
+    "end": 2.16
+  },
+  {
+    "word": "to",
+    "start": 2.16,
+    "end": 2.38
+  },
+  {
+    "word": "the",
+    "start": 2.38,
+    "end": 2.5
+  },
+  {
+    "word": "Library",
+    "start": 2.5,
+    "end": 2.88
+  },
+  {
+    "word": "of",
+    "start": 2.88,
+    "end": 3.28
+  },
+  {
+    "word": "Alexandria,",
+    "start": 3.28,
+    "end": 3.92
+  },
+  {
+    "word": "what",
+    "start": 4.42,
+    "end": 4.54
+  },
+  {
+    "word": "solid,",
+    "start": 4.54,
+    "end": 5.0
+  },
+  {
+    "word": "what",
+    "start": 5.3,
+    "end": 5.52
+  },
+  {
+    "word": "historians",
+    "start": 5.52,
+    "end": 6.02
+  },
+  {
+    "word": "still",
+    "start": 6.02,
+    "end": 6.4
+  },
+  {
+    "word": "argue",
+    "start": 6.4,
+    "end": 6.8
+  },
+  {
+    "word": "about,",
+    "start": 6.8,
+    "end": 7.14
+  },
+  {
+    "word": "and",
+    "start": 7.42,
+    "end": 7.62
+  },
+  {
+    "word": "the",
+    "start": 7.62,
+    "end": 7.74
+  },
+  {
+    "word": "one",
+    "start": 7.74,
+    "end": 7.96
+  },
+  {
+    "word": "popular",
+    "start": 7.96,
+    "end": 8.44
+  },
+  {
+    "word": "version",
+    "start": 8.44,
+    "end": 8.9
+  },
+  {
+    "word": "that's",
+    "start": 8.9,
+    "end": 9.46
+  },
+  {
+    "word": "almost",
+    "start": 9.46,
+    "end": 9.74
+  },
+  {
+    "word": "certainly",
+    "start": 9.74,
+    "end": 10.3
+  }
+]

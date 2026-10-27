@@ -1,0 +1,124 @@
+{
+  "title": "The Destruction of the Library of Alexandria",
+  "beats": [
+    {
+      "id": "beat_01",
+      "index": 1,
+      "label": "HOOK",
+      "tag": "0:00-0:15",
+      "confidence_tags": [],
+      "narration": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in. The real story isn't one fire — it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Library of Alexandria illustration\" — the tested public-domain O. Von Corven engraving, `alexandria_library.jpg`",
+            "search_terms": [
+              "Library of Alexandria illustration"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in."
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Alexandria fire illustration\"",
+            "search_terms": [
+              "ancient Alexandria fire illustration"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "The real story isn't one fire — it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll."
+        }
+      ],
+      "emotion": null
+    },
+    {
+      "id": "beat_02",
+      "index": 2,
+      "label": "THE TURN",
+      "tag": "0:15-0:30",
+      "confidence_tags": [],
+      "narration": "Today we're tracing what actually happened to the Library of Alexandria — what's solid, what historians still argue about, and the one popular version that's almost certainly a myth.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient Library of Alexandria depiction\"",
+            "search_terms": [
+              "ancient Library of Alexandria depiction"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Today we're tracing what actually happened to the Library of Alexandria — what's solid, what historians still argue about, and the one popular version that's almost certainly a myth."
+        }
+      ],
+      "emotion": null
+    },
+    {
+      "id": "beat_03",
+      "index": 3,
+      "label": "BEAT 1 — The founding",
+      "tag": "SOLID",
+      "confidence_tags": [
+        "SOLID"
+      ],
+      "narration": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt. Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I — though some historians call his exact role debatable, so treat that detail as likely, not certain.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Ptolemy I Soter bust\" / \"ancient Alexandria map\"",
+            "search_terms": [
+              "Ptolemy I Soter bust",
+              "ancient Alexandria map"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt."
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"Demetrius of Phalerum\"",
+            "search_terms": [
+              "Demetrius of Phalerum"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I — though some historians call his exact role debatable, so treat that detail as likely, not certain."
+        }
+      ],
+      "emotion": null
+    },
+    {
+      "id": "beat_04",
+      "index": 4,
+      "label": "BEAT 2 — How big was it, really",
+      "tag": "SOLID, with a caveat",
+      "confidence_tags": [
+        "SOLID"
+      ],
+      "narration": "Nobody knows exactly how many scrolls it held. Estimates range from 40,000 to as high as 700,000 — but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated.",
+      "segments": [
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient papyrus scroll\"",
+            "search_terms": [
+              "ancient papyrus scroll"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Nobody knows exactly how many scrolls it held."
+        },
+        {
+          "on_screen": {
+            "raw": "Wikimedia Commons: \"ancient library scrolls shelves\"",
+            "search_terms": [
+              "ancient library scrolls shelves"
+            ],
+            "ai_generate_prompt": null
+          },
+          "text": "Estimates range from 40,000 to as high as 700,000 — but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated."
+        }
+      ],
+      "emotion": null
+    }
+  ]
+}

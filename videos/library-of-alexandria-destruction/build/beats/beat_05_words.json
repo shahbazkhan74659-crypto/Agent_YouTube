@@ -1,0 +1,232 @@
+[
+  {
+    "word": "the",
+    "start": 0.0,
+    "end": 0.06
+  },
+  {
+    "word": "most",
+    "start": 0.06,
+    "end": 0.24
+  },
+  {
+    "word": "commonly",
+    "start": 0.24,
+    "end": 0.66
+  },
+  {
+    "word": "blamed",
+    "start": 0.66,
+    "end": 1.2
+  },
+  {
+    "word": "culprit.",
+    "start": 1.2,
+    "end": 1.52
+  },
+  {
+    "word": "Caesar's",
+    "start": 2.42,
+    "end": 2.82
+  },
+  {
+    "word": "own",
+    "start": 2.82,
+    "end": 2.98
+  },
+  {
+    "word": "account",
+    "start": 2.98,
+    "end": 3.22
+  },
+  {
+    "word": "only",
+    "start": 3.22,
+    "end": 3.66
+  },
+  {
+    "word": "mentions",
+    "start": 3.66,
+    "end": 4.22
+  },
+  {
+    "word": "burning",
+    "start": 4.22,
+    "end": 4.64
+  },
+  {
+    "word": "ships",
+    "start": 4.64,
+    "end": 5.06
+  },
+  {
+    "word": "and",
+    "start": 5.06,
+    "end": 5.38
+  },
+  {
+    "word": "docks.",
+    "start": 5.38,
+    "end": 5.58
+  },
+  {
+    "word": "It's",
+    "start": 6.4,
+    "end": 6.46
+  },
+  {
+    "word": "a",
+    "start": 6.46,
+    "end": 6.56
+  },
+  {
+    "word": "later",
+    "start": 6.56,
+    "end": 6.72
+  },
+  {
+    "word": "writer,",
+    "start": 6.72,
+    "end": 7.06
+  },
+  {
+    "word": "Strabo,",
+    "start": 7.48,
+    "end": 7.76
+  },
+  {
+    "word": "writing",
+    "start": 8.14,
+    "end": 8.46
+  },
+  {
+    "word": "25",
+    "start": 8.46,
+    "end": 8.88
+  },
+  {
+    "word": "years",
+    "start": 8.88,
+    "end": 9.34
+  },
+  {
+    "word": "afterward,",
+    "start": 9.34,
+    "end": 9.74
+  },
+  {
+    "word": "who",
+    "start": 10.36,
+    "end": 10.48
+  },
+  {
+    "word": "connects",
+    "start": 10.48,
+    "end": 10.74
+  },
+  {
+    "word": "the",
+    "start": 10.74,
+    "end": 11.04
+  },
+  {
+    "word": "fire",
+    "start": 11.04,
+    "end": 11.26
+  },
+  {
+    "word": "to",
+    "start": 11.26,
+    "end": 11.52
+  },
+  {
+    "word": "the",
+    "start": 11.52,
+    "end": 11.6
+  },
+  {
+    "word": "library.",
+    "start": 11.6,
+    "end": 11.9
+  },
+  {
+    "word": "Historians",
+    "start": 12.9,
+    "end": 13.4
+  },
+  {
+    "word": "still",
+    "start": 13.4,
+    "end": 13.86
+  },
+  {
+    "word": "dispute",
+    "start": 13.86,
+    "end": 14.14
+  },
+  {
+    "word": "how",
+    "start": 14.14,
+    "end": 14.58
+  },
+  {
+    "word": "much",
+    "start": 14.58,
+    "end": 14.8
+  },
+  {
+    "word": "was",
+    "start": 14.8,
+    "end": 15.04
+  },
+  {
+    "word": "actually",
+    "start": 15.04,
+    "end": 15.42
+  },
+  {
+    "word": "lost,",
+    "start": 15.42,
+    "end": 15.8
+  },
+  {
+    "word": "and",
+    "start": 16.4,
+    "end": 16.48
+  },
+  {
+    "word": "there's",
+    "start": 16.48,
+    "end": 16.68
+  },
+  {
+    "word": "evidence",
+    "start": 16.68,
+    "end": 17.02
+  },
+  {
+    "word": "the",
+    "start": 17.02,
+    "end": 17.32
+  },
+  {
+    "word": "library",
+    "start": 17.32,
+    "end": 17.6
+  },
+  {
+    "word": "kept",
+    "start": 17.6,
+    "end": 18.1
+  },
+  {
+    "word": "functioning",
+    "start": 18.1,
+    "end": 18.6
+  },
+  {
+    "word": "afterward.",
+    "start": 18.6,
+    "end": 19.06
+  }
+]

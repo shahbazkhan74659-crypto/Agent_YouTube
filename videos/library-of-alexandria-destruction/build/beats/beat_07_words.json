@@ -1,0 +1,372 @@
+[
+  {
+    "word": "The",
+    "start": 0.0,
+    "end": 0.08
+  },
+  {
+    "word": "most",
+    "start": 0.08,
+    "end": 0.18
+  },
+  {
+    "word": "famous",
+    "start": 0.18,
+    "end": 0.62
+  },
+  {
+    "word": "version,",
+    "start": 0.62,
+    "end": 0.9
+  },
+  {
+    "word": "a",
+    "start": 1.5,
+    "end": 1.54
+  },
+  {
+    "word": "caliph",
+    "start": 1.54,
+    "end": 1.92
+  },
+  {
+    "word": "ordering",
+    "start": 1.92,
+    "end": 2.2
+  },
+  {
+    "word": "the",
+    "start": 2.2,
+    "end": 2.44
+  },
+  {
+    "word": "library",
+    "start": 2.44,
+    "end": 2.64
+  },
+  {
+    "word": "burned",
+    "start": 2.64,
+    "end": 3.14
+  },
+  {
+    "word": "because",
+    "start": 3.14,
+    "end": 3.6
+  },
+  {
+    "word": "its",
+    "start": 3.6,
+    "end": 3.76
+  },
+  {
+    "word": "books",
+    "start": 3.76,
+    "end": 3.96
+  },
+  {
+    "word": "were",
+    "start": 3.96,
+    "end": 4.2
+  },
+  {
+    "word": "either",
+    "start": 4.2,
+    "end": 4.42
+  },
+  {
+    "word": "redundant",
+    "start": 4.42,
+    "end": 4.82
+  },
+  {
+    "word": "with",
+    "start": 4.82,
+    "end": 5.16
+  },
+  {
+    "word": "or",
+    "start": 5.16,
+    "end": 5.34
+  },
+  {
+    "word": "contrary",
+    "start": 5.34,
+    "end": 5.72
+  },
+  {
+    "word": "to",
+    "start": 5.72,
+    "end": 6.0
+  },
+  {
+    "word": "the",
+    "start": 6.0,
+    "end": 6.08
+  },
+  {
+    "word": "Koran,",
+    "start": 6.08,
+    "end": 6.26
+  },
+  {
+    "word": "traces",
+    "start": 6.92,
+    "end": 7.18
+  },
+  {
+    "word": "to",
+    "start": 7.18,
+    "end": 7.54
+  },
+  {
+    "word": "a",
+    "start": 7.54,
+    "end": 7.64
+  },
+  {
+    "word": "single",
+    "start": 7.64,
+    "end": 7.84
+  },
+  {
+    "word": "writer,",
+    "start": 7.84,
+    "end": 8.18
+  },
+  {
+    "word": "bar",
+    "start": 8.62,
+    "end": 8.7
+  },
+  {
+    "word": "hebreus,",
+    "start": 8.7,
+    "end": 9.28
+  },
+  {
+    "word": "writing",
+    "start": 9.6,
+    "end": 9.9
+  },
+  {
+    "word": "roughly",
+    "start": 9.9,
+    "end": 10.26
+  },
+  {
+    "word": "600",
+    "start": 10.26,
+    "end": 10.62
+  },
+  {
+    "word": "years",
+    "start": 10.62,
+    "end": 11.1
+  },
+  {
+    "word": "after",
+    "start": 11.1,
+    "end": 11.44
+  },
+  {
+    "word": "the",
+    "start": 11.44,
+    "end": 11.58
+  },
+  {
+    "word": "fact.",
+    "start": 11.58,
+    "end": 11.76
+  },
+  {
+    "word": "No",
+    "start": 12.7,
+    "end": 12.78
+  },
+  {
+    "word": "source",
+    "start": 12.78,
+    "end": 13.06
+  },
+  {
+    "word": "from",
+    "start": 13.06,
+    "end": 13.3
+  },
+  {
+    "word": "the",
+    "start": 13.3,
+    "end": 13.42
+  },
+  {
+    "word": "century",
+    "start": 13.42,
+    "end": 13.78
+  },
+  {
+    "word": "it",
+    "start": 13.78,
+    "end": 14.02
+  },
+  {
+    "word": "supposedly",
+    "start": 14.02,
+    "end": 14.36
+  },
+  {
+    "word": "happened",
+    "start": 14.36,
+    "end": 14.84
+  },
+  {
+    "word": "mentions",
+    "start": 14.84,
+    "end": 15.24
+  },
+  {
+    "word": "it,",
+    "start": 15.24,
+    "end": 15.56
+  },
+  {
+    "word": "and",
+    "start": 16.06,
+    "end": 16.24
+  },
+  {
+    "word": "the",
+    "start": 16.24,
+    "end": 16.36
+  },
+  {
+    "word": "same",
+    "start": 16.36,
+    "end": 16.54
+  },
+  {
+    "word": "exact",
+    "start": 16.54,
+    "end": 16.72
+  },
+  {
+    "word": "story",
+    "start": 16.72,
+    "end": 17.32
+  },
+  {
+    "word": "gets",
+    "start": 17.32,
+    "end": 17.58
+  },
+  {
+    "word": "told",
+    "start": 17.58,
+    "end": 17.92
+  },
+  {
+    "word": "about",
+    "start": 17.92,
+    "end": 18.14
+  },
+  {
+    "word": "a",
+    "start": 18.14,
+    "end": 18.24
+  },
+  {
+    "word": "different",
+    "start": 18.24,
+    "end": 18.46
+  },
+  {
+    "word": "library,",
+    "start": 18.46,
+    "end": 18.74
+  },
+  {
+    "word": "under",
+    "start": 19.44,
+    "end": 19.6
+  },
+  {
+    "word": "the",
+    "start": 19.6,
+    "end": 19.78
+  },
+  {
+    "word": "same",
+    "start": 19.78,
+    "end": 19.96
+  },
+  {
+    "word": "caliph,",
+    "start": 19.96,
+    "end": 20.44
+  },
+  {
+    "word": "somewhere",
+    "start": 20.72,
+    "end": 20.9
+  },
+  {
+    "word": "else",
+    "start": 20.9,
+    "end": 21.24
+  },
+  {
+    "word": "entirely,",
+    "start": 21.24,
+    "end": 21.68
+  },
+  {
+    "word": "a",
+    "start": 22.46,
+    "end": 22.56
+  },
+  {
+    "word": "strong",
+    "start": 22.56,
+    "end": 22.82
+  },
+  {
+    "word": "sign",
+    "start": 22.82,
+    "end": 23.2
+  },
+  {
+    "word": "it's",
+    "start": 23.2,
+    "end": 23.68
+  },
+  {
+    "word": "a",
+    "start": 23.68,
+    "end": 23.72
+  },
+  {
+    "word": "reused",
+    "start": 23.72,
+    "end": 24.0
+  },
+  {
+    "word": "legend,",
+    "start": 24.0,
+    "end": 24.66
+  },
+  {
+    "word": "not",
+    "start": 25.06,
+    "end": 25.18
+  },
+  {
+    "word": "a",
+    "start": 25.18,
+    "end": 25.28
+  },
+  {
+    "word": "record.",
+    "start": 25.28,
+    "end": 25.48
+  }
+]
