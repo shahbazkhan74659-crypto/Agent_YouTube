@@ -22,11 +22,20 @@ import config
 
 ON_SCREEN_START_RE = re.compile(r"^\*{0,2}\[ON SCREEN:", re.IGNORECASE)
 ON_SCREEN_INNER_RE = re.compile(r"ON SCREEN:\s*(.*?)\]", re.IGNORECASE | re.DOTALL)
+# EVIDENCE cue (2026-10-27 visual-sourcing flip) - a second, independent cue type
+# alongside ON SCREEN, same precedent as MUSIC_CUE_RE below. Unlike ON SCREEN (which
+# opens a new visual segment), EVIDENCE attaches to whichever segment is flushed next
+# and is then cleared - it never spans more than one segment, and must never be
+# inherited by a later cue-less segment (that fallback risk lives in resolve.py, not
+# here - see Segment.evidence below).
+EVIDENCE_START_RE = re.compile(r"^\*{0,2}\[EVIDENCE:", re.IGNORECASE)
+EVIDENCE_INNER_RE = re.compile(r"EVIDENCE:\s*(.*?)\]", re.IGNORECASE | re.DOTALL)
 MUSIC_CUE_RE = re.compile(r"^\*{0,2}\[MUSIC:\s*([a-z_\- ]+?)\]\*{0,2}\s*$", re.IGNORECASE)
 LABEL_LINE_RE = re.compile(r"^\*\*(.+?):\*\*\s*(.*)$")
 HEADING_RE = re.compile(r"^#{1,6}\s")
 QUOTED_RE = re.compile(r'"([^"]+)"')
 AI_GENERATE_BEFORE_RE = re.compile(r"ai-generate\s*:?\s*$", re.IGNORECASE)
+SCREENSHOT_BEFORE_RE = re.compile(r"screenshot\s*:?\s*$", re.IGNORECASE)
 CONFIDENCE_RE = re.compile(r"\b(SOLID|CONTESTED|UNCERTAIN)\b", re.IGNORECASE)
 MARKDOWN_EMPHASIS_RE = re.compile(r"\*{1,2}([^*]+?)\*{1,2}")
 
@@ -44,12 +53,14 @@ class Cue:
     raw: str
     search_terms: list = field(default_factory=list)
     ai_generate_prompt: str | None = None
+    screenshot_url: str | None = None  # EVIDENCE cue only - a URL to capture live via Chrome
 
 
 @dataclass
 class Segment:
     on_screen: Cue | None
     text: str
+    evidence: Cue | None = None  # optional - real-source proof inset for this segment only
 
 
 @dataclass
@@ -68,20 +79,31 @@ class Beat:
 
 
 def parse_cue(inner_text: str) -> Cue:
-    """Splits an ON SCREEN cue's quoted strings into search terms vs. an AI-generate prompt."""
+    """Splits a cue's quoted strings into search terms vs. an AI-generate prompt vs.
+    (EVIDENCE only) a screenshot URL to capture live via Chrome."""
     search_terms = []
     ai_prompt = None
+    screenshot_url = None
     for m in QUOTED_RE.finditer(inner_text):
         preceding = inner_text[max(0, m.start() - 30) : m.start()]
         if AI_GENERATE_BEFORE_RE.search(preceding):
             ai_prompt = m.group(1)
+        elif SCREENSHOT_BEFORE_RE.search(preceding):
+            screenshot_url = m.group(1)
         else:
             search_terms.append(m.group(1))
-    return Cue(raw=inner_text.strip(), search_terms=search_terms, ai_generate_prompt=ai_prompt)
+    return Cue(
+        raw=inner_text.strip(),
+        search_terms=search_terms,
+        ai_generate_prompt=ai_prompt,
+        screenshot_url=screenshot_url,
+    )
 
 
-def read_cue_block(lines: list[str], i: int) -> tuple[Cue, int]:
-    """Reads a (possibly multi-line) ON SCREEN block starting at line i. Returns
+def read_cue_block(lines: list[str], i: int, inner_re: re.Pattern = ON_SCREEN_INNER_RE) -> tuple[Cue, int]:
+    """Reads a (possibly multi-line) cue block starting at line i. `inner_re` selects
+    which cue type's inner-text pattern to extract with (ON SCREEN or EVIDENCE) - the
+    multi-line continuation/termination logic itself is generic to both. Returns
     (Cue, index of the line after the block)."""
     buf = [lines[i].strip()]
     n = len(lines)
@@ -89,7 +111,7 @@ def read_cue_block(lines: list[str], i: int) -> tuple[Cue, int]:
         i += 1
         buf.append(lines[i].strip())
     cue_block = " ".join(buf)
-    inner = ON_SCREEN_INNER_RE.search(cue_block)
+    inner = inner_re.search(cue_block)
     return parse_cue(inner.group(1) if inner else cue_block), i + 1
 
 
@@ -149,18 +171,21 @@ def parse_script(slug: str) -> tuple[str, list[Beat]]:
     current_beat: Beat | None = None
     current_segment_buf: list[str] = []
     pending_cue: Cue | None = None
+    pending_evidence: Cue | None = None
     current_emotion: str | None = None
 
     def flush_segment():
-        nonlocal pending_cue, current_segment_buf
+        nonlocal pending_cue, pending_evidence, current_segment_buf
         if current_beat is None:
             return
         text = strip_markdown_emphasis(" ".join(current_segment_buf).strip())
         if text:
-            current_beat.segments.append(Segment(on_screen=pending_cue, text=text))
+            current_beat.segments.append(Segment(on_screen=pending_cue, text=text, evidence=pending_evidence))
             pending_cue = None  # consumed - an empty-text flush (nothing accumulated
             # yet) leaves pending_cue untouched so it carries forward to whatever
             # segment/beat comes next, instead of being dropped or misattributed.
+            pending_evidence = None  # same consumption rule - EVIDENCE attaches to
+            # exactly one segment (the next one that actually gets text), never more.
         current_segment_buf = []
 
     i = 0
@@ -174,6 +199,14 @@ def parse_script(slug: str) -> tuple[str, list[Beat]]:
             cue, i = read_cue_block(lines, i)
             flush_segment()
             pending_cue = cue
+            continue
+
+        if EVIDENCE_START_RE.match(line):
+            # Unlike ON SCREEN, EVIDENCE does NOT flush_segment() - it never opens a
+            # new visual segment, it attaches a proof inset to whatever segment is
+            # already accumulating (or about to start) around it.
+            cue, i = read_cue_block(lines, i, EVIDENCE_INNER_RE)
+            pending_evidence = cue
             continue
 
         music_m = MUSIC_CUE_RE.match(line)
@@ -265,4 +298,11 @@ if __name__ == "__main__":
             else:
                 cue_desc = ", ".join(seg.on_screen.search_terms) or seg.on_screen.raw[:40]
             snippet = seg.text[:70] + ("..." if len(seg.text) > 70 else "")
-            print(f"    seg{s_i}: [{cue_desc}] {snippet}")
+            ev = seg.evidence
+            if ev is None:
+                ev_desc = ""
+            elif ev.screenshot_url:
+                ev_desc = f" | EVIDENCE: screenshot {ev.screenshot_url[:40]}"
+            else:
+                ev_desc = f" | EVIDENCE: {', '.join(ev.search_terms)}"
+            print(f"    seg{s_i}: [{cue_desc}] {snippet}{ev_desc}")
