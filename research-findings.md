@@ -10,10 +10,32 @@ Research only — nothing acted on. Covers (1) an evaluation of the source PDF's
 - The $28K/28-days and 2M-views/2-days figures are disclosed as best-case/not-typical
   results — good that they said so, but still the hook.
 - **Technically legit parts:** Wan2GP (github.com/deepbeepmeep/Wan2GP) is a real,
-  free, open-source local video tool. The Claude Code motion-graphics workflow (script →
-  voice → word-synced text → described animation → render) is a sound, real workflow.
-  YouTube Partner Program thresholds as stated (1,000 subs + 4,000 watch hrs/12mo OR 10M
-  Shorts views/90 days) were accurate at time of writing.
+  free, local video tool — see the 2026-10-27/28 follow-up below, which corrects
+  "open-source" to source-available/custom-licensed. The Claude Code motion-graphics
+  workflow (script → voice → word-synced text → described animation → render) is a
+  sound, real workflow. YouTube Partner Program thresholds as stated (1,000 subs +
+  4,000 watch hrs/12mo OR 10M Shorts views/90 days) were accurate at time of writing.
+- **Key follow-up (2026-10-27/28) — corrects "open-source" above.** User asked
+  directly where Wan2GP is used in this project (nowhere — confirmed via a
+  repo-wide grep, it only appears in this doc and `idea.md` as the rejected
+  "Path 1") and whether it could legally be used at all. Fetched the actual current
+  `LICENSE.txt` from `github.com/deepbeepmeep/WanGP` (renamed from Wan2GP) directly,
+  not a third-party mirror. It's the **WanGP Community License 2.0** — source-
+  available with a custom license, not a standard OSI open-source license as the
+  bullet above implied. It explicitly permits free use "including inside a company"
+  (internal/business use regardless of revenue is "Free Use," not "Restricted
+  Commercialization"), and exempts free/ad-monetized publication of outputs from even
+  the attribution requirement (attribution is only owed on a "Direct Output Sale" —
+  selling the output itself as the product, which an ad-monetized YouTube upload
+  isn't under the license's own definition). The underlying Wan 2.2 model weights
+  (Alibaba) are separately Apache 2.0. Net: legally clear, free, no attribution
+  needed for this channel's actual use case — a paid commercial license would only
+  be needed to resell/white-label the software itself or sell outputs as direct paid
+  deliverables. **Still blocked practically, not legally**: Wan2GP's video diffusion
+  models need a real discrete GPU; this machine has integrated graphics only — the
+  same hardware wall that already drove the pivot away from local video generation
+  described below. Not pursued further (would need a cloud-GPU-rental budget line
+  that doesn't exist today).
 - **What it leaves out / undersells:**
   - YouTube's **"inauthentic content" policy** (renamed from "repetitious content" in
     July 2025, clarified further in July 2026) specifically targets mass-produced,

@@ -1564,3 +1564,285 @@ New from today:
    slug's `captions.ass` was last built, run `captions.py` explicitly too, or risk
    silently muxing a stale or (per today's second bug) completely empty caption
    file.
+
+## Progress log — 2026-10-27 (continued): content-rectangle template, visual-style pivot, cut-rate/punctuation/script-first rules, captions back to the bottom bar
+
+Long session covering a full redesign pass on the branded frame template, a
+reference-video-driven visual/tone pivot, two new measured production rules, and a
+caption-position revert - each verified against real renders, not just written down.
+User handled the content-rectangle template code (item 1 below) and the test-folder
+cleanup (item 2) via their own manual commit (`650bbea "Template update"`) partway
+through; everything from item 3 onward was committed separately, in 7 logical
+commits, at the end of the session (see item 11).
+
+### 1. Content box: square -> full-width letterboxed rectangle
+
+User wanted the content square's height decreased ("make it a full rectangle") and
+width increased to span the full mobile screen, "same this size" as a reference
+WhatsApp image. Measured the reference precisely with PIL (`numpy` row/column
+brightness scan, not eyeballing): content band spans rows 592-1007 of a 738x1600
+image - 416px tall, full 738px width, symmetric 592px black bars top and bottom.
+That band's own aspect ratio (738/416 = 1.774) is essentially 16:9. Scaled onto the
+project's 1080-wide canvas at that aspect (not by copying the reference's raw margin
+fractions, which belong to a differently-shaped source canvas): **1080x608**,
+vertically centered (`SQUARE_Y = (1920-608)//2 = 656`), growing both the title band
+and bottom bar from 560/480px to 656/656px symmetrically.
+
+Ran this through full plan mode (two Explore agents mapping every `SQUARE_SIZE`/
+`SQUARE_X`/`SQUARE_Y` usage across `config.py`/`assemble.py`/`character.py`/
+`evidence.py`/`visuals/ai_generate.py`, then a Plan agent for the concrete diffs).
+Key findings from that research: `SQUARE_SIZE` had been used as *both* a width and a
+height term everywhere, only correct because it used to be a true square - splitting
+it into `SQUARE_WIDTH`/`SQUARE_HEIGHT` required auditing every dependent line, not a
+blind rename. The host-character "overflow past the square's edge" anchors
+(dormant, `SHOW_CHARACTER=False`) were redesigned to stay on-canvas now that there's
+no outer margin to overflow into. `assemble.py`'s three hardcoded `SQUARE_SIZE:
+SQUARE_SIZE` ffmpeg filter calls (video crop, video scale, zoompan output size) were
+the real functional fix - left as-is they'd have stretched every future visual to a
+false 1:1.
+
+Verified by re-rendering `library-of-alexandria-destruction-gemini-test`
+(`assemble.py --force` + `review.py --force`, visuals/narration/captions untouched)
+and reading frames from both a Veo video segment and a still-image segment: full-width
+band, correct ~16:9 proportions, symmetric letterboxing, no stretch.
+
+### 2. Test folder cleanup: `library-of-alexandria-destruction-gemini-test`
+
+User asked to delete all visuals from this slug, keeping only the script, template,
+and audio. Deleted `build/visuals`, `visuals_gemini`, `visuals_v2`, `evidence`,
+`clips`, `review_frames`, `manifest.json`, `video_silent.mp4`, `output/final.mp4`
+(recreated the now-empty directories so the pipeline doesn't need to). Kept
+`script.md`, `build/beats.json`, `build/captions.ass`, `build/beats/` (per-beat
+narration wav + word timings), `build/narration_meta.json`, `build/mix.wav` -
+`manifest.json` had to go too, since keeping it without the actual image files would
+make the pipeline think stale visuals were still cached. Everything deleted was
+already committed to git, so fully recoverable if ever needed.
+
+### 3. Reference-video style analysis -> new `visual-style-brief.md`
+
+User sent a second reference video (5:45, stone-age medicine topic) and asked for
+its styling/tone analyzed, then turned into a reusable brief for every future
+`AI-generate:` prompt. Read 16 frames + the full Whisper transcript via the global
+`video-reader` skill. Found a genuinely different, reusable visual system from the
+project's prior photoreal-documentary direction:
+
+- **Two-mode illustration system**: flat vector-line explainer cards (diagrams,
+  comparisons, bar charts, short hand-drawn-caps diagram labels, red annotation
+  arrows) alternating with fully painted/shaded narrative scenes using the same flat
+  stick-figure character (round cream head, black dot eyes, single eyebrow line for
+  expression, thin black-outline limbs, scribble hair/fur).
+- Muted earth palette (gray/brown/tan/dusty teal) with saturated color reserved for
+  semantic meaning only (red=danger/annotation, green=parasite/nature, blue=neutral).
+- Narration tone: conversational, dryly sarcastic, dark humor landing mid-fact,
+  named/dated sourcing delivered as casually as the jokes, uncertainty stated flatly
+  ("we don't know exactly why") rather than hedged apologetically - noted this
+  overlaps closely with the channel's own existing SOLID/CONTESTED/UNCERTAIN
+  epistemic-transparency angle, just with a more sarcastic register than `voice.md`
+  had locked in before today.
+- A content-specific CTA pattern (*"Still have all your limbs? Hit like and
+  subscribe"*) - a punchline tied to the episode's own content, not boilerplate.
+
+User then asked for this turned into a visual-style brief plus a tone pivot
+(sarcastic lore/dark humor, loud/confident delivery) plus a sarcastic Like &
+Subscribe line added to the actual audio/script. Full plan mode: two Explore agents
+(one mapping `yt-script`/`yt-factcheck`'s exact current wording for the confidence-
+treatment rule and the Questionary beat's existing "replaces a generic like/
+subscribe pitch, not stacks on top of one" rule - the real conflict point; one
+mapping Kokoro's actual audio-gain levers and the existing `gemini_master_prompt.md`
+structural precedent), then a Plan agent. Three real design decisions surfaced and
+resolved via `AskUserQuestion` rather than assumed: the sarcastic CTA line placement
+(end-of-script, alongside the closing question - not mid-script, not a per-video
+judgment call), whether "loud and confident" means an audio-engineering change
+(no - Kokoro's TTS call has no volume/pitch parameter at all, confirmed by reading
+the installed `kokoro_onnx` library directly; it's writing/tone only), and whether
+the new illustrated style fully replaces photoreal as the default (yes, full
+replacement, matching every prior style decision's pattern in this project).
+
+Built `C:\YouTube\visual-style-brief.md` (new, channel-wide reusable doc, same tier
+as `voice.md`): the two-mode system, character guidance (explicitly NOT chasing
+cross-prompt character consistency - tied directly to why `config.SHOW_CHARACTER`
+is dormant), palette, a baked-in-text constraint (short diagram labels fine, full
+caption-length sentences not, since `captions.py` already burns its own captions -
+this is the kind of collision-with-existing-system flag this project's docs always
+call out explicitly), confidence treatment adapted from photoreal to illustrated
+(SOLID=clean confident rendering, CONTESTED/UNCERTAIN=sketchier line weight/muted
+palette/dashed motif instead of grain-and-blur, myth=painted-manuscript/storybook),
+a per-prompt field checklist, and workflow discipline for the live Gemini session
+(max 2 retries for a minor fix, max 4 total attempts before switching to a new
+Gemini chat tab - citing the real stale-chat near-miss wrong-clip download logged
+2026-10-26 as the reason this matters, not just discipline for its own sake).
+
+Updated `yt-script/SKILL.md` (confidence-treatment block now points at the brief,
+same pattern as its existing `voice.md` pointer; Questionary beat rewritten to add
+the mandatory sarcastic closing CTA right after the existing closing question,
+explicitly reconciling rather than silently contradicting the old "replaces, not
+stacks" sentence; "What to hand back" gained a bullet), `yt-factcheck/SKILL.md`
+(one-line pointer in the visual-anchors step), and `voice.md` (master + the
+`~/.claude/youtube/voice.md` mirror, kept byte-identical as always): tone rewritten
+to "loud, confident, sarcastic, and disciplined" without loosening the no-invented-
+claims rule or the banned-vague-superlative list, visual-style-mix bullet repointed
+at the brief (also fixed a stale "content square" reference left from item 1),
+content-structure bullet documents the new closing CTA. Also fixed one more stale
+"content square" reference in `yt-script/SKILL.md`'s Title section while in there.
+
+Generated one real test image live through Chrome/Gemini using the new brief - a
+painted-scene, SOLID-confidence prompt (Demetrius of Phalerum presenting the library
+idea to Ptolemy I). Result matched the brief well on every axis (character style,
+palette, confident clean linework, no baked-in text, 2752x1536 = 1.79:1, close to
+the target 16:9). Saved to `visuals-test/style_brief_test_01_demetrius_ptolemy.png`.
+
+### 4. Cut-rate rule: no image holds longer than ~4 seconds
+
+User asked for a hard-ish ceiling (images shouldn't all mechanically be 4s, but none
+should exceed it, timed to the audio like the reference) and to re-analyze the
+reference video properly rather than relying on the earlier eyeballed frame sample.
+Ran real ffmpeg scene-cut detection (`select='gt(scene,0.25)'`,`showinfo`) across the
+full 345s runtime: 98 shots, median 3.03s, mean 3.52s, **78% of all shots at 4s or
+under**. Pulled frames from the handful of outliers (7-15s) and confirmed they were
+all a single flat-explainer diagram card held through one extended explanation (a
+timeline comparison, a map+skull graphic, a survival-rate chart), not narrative beats
+- informed the rule's exception language without softening the default cap.
+
+Added `config.MAX_SEGMENT_DURATION_SEC = 4.0` and a matching (non-fatal) warning in
+`narration.py`'s `_segment_timing()` - prints the exact beat/segment id and a text
+preview whenever a resolved segment would hold past the cap, so an under-densified
+script gets caught at build time instead of relying on the writer's eye. Smoke-tested
+with synthetic segments before trusting it (fires exactly on the oversized one, silent
+on well-split ones) - same "verify before trusting new text/timing logic" discipline
+this project has used all along. Tightened `yt-script/SKILL.md`'s cue-density rule
+(was "~5-8s of narration" per cue, now targets under 4s, cut points at natural
+narration breaks) and added a "Cut rate" section to `visual-style-brief.md` with the
+full measurement. Logged in `idea.md`.
+
+### 5. Punctuation rule: narration only pauses on `. , ! : ?`
+
+User wanted narration to only pause on period/comma/exclamation/colon/question mark,
+with the script using them "excessively but not too much" and "perfect grammar."
+Full plan mode again: two Explore agents (one tracing `render.py`'s actual stage
+order - confirmed `parse` always runs before `visuals` in a normal run, but
+`--from-stage visuals` jumps straight to `resolve_all()` reading
+`narration_meta.json` with zero staleness check; and a punctuation audit of the real
+production `script.md` - em-dash is the dominant real offender, ~8 uses, no
+semicolons/ellipses/parentheses exist in it today, and it has no `!`/`?` at all yet;
+one reading `kokoro_onnx`'s and `phonemizer`'s actual installed source directly -
+found `kokoro_onnx/chunker.py` only actively manages pauses for its own
+`SENTENCE_MARKS=".!?…"` and `CLAUSE_MARKS=",;:"`, so a plain/spaced hyphen is
+silently dropped with zero pause today and an em-dash/parenthesis gets an
+uncontrolled, purely model-learned pause), then a Plan agent for the exact regex
+design.
+
+Built `script_parser.normalize_pause_punctuation()`, composed with the existing
+`strip_markdown_emphasis()` at the exact point raw script text becomes `Segment.text`
+(`flush_segment()`): em-dash/en-dash/spaced-hyphen/double-hyphen -> comma;
+semicolon/ellipsis -> period, capitalizing the following word; parentheticals ->
+comma-wrapped inline asides; several cleanup passes for the punctuation collisions
+those substitutions can produce (doubled commas, a comma stacked right before a
+terminator, stray spacing). **Smoke-tested and found a real bug before trusting it**:
+a leading/unspaced ellipsis produced a glued `.word` with no space - fixed by making
+the ellipsis/semicolon substitutions insert their own trailing space
+(`". "`/`". "` instead of bare `"."`), then re-verified the full synthetic case list
+plus the real production script (all ~8 em-dashes converted to commas cleanly, the
+one pre-existing colon untouched, word-internal hyphens like "three-hundred-year"
+correctly left alone).
+
+Also added `visuals/resolve.py`'s `_warn_if_narration_stale()` - the staleness gap
+the stage-order research surfaced - a non-fatal mtime comparison (`script.md` vs.
+`narration_meta.json`) at the top of `resolve_all()`, the one function reachable from
+both a normal full run and `--from-stage visuals`. Verified directly: fires when
+`script.md`'s mtime is bumped past `narration_meta.json`'s, goes silent again once
+`narration_meta.json` is regenerated, silent when either file is simply missing -
+same "warn, don't silently proceed" pattern as the cut-rate warning, and the same
+staleness-bug class this file already logs real incidents for (stale `captions.ass`,
+silently-wiped alignment data).
+
+Documented as two paired rules - punctuation in `yt-script/SKILL.md`'s new
+"Punctuation" section (maps each of the five marks to a beat the skill already
+defines: period=declarative, colon=reveal, comma=breath, exclamation=loud delivery
+sparingly, question mark=Questionary close) plus a `voice.md` Pacing cross-reference;
+script-first in `yt-script/SKILL.md`'s "The gate" (visual generation starts only
+after the gate, never alongside it) and a precondition sentence in
+`visual-style-brief.md`'s workflow-discipline section. Both logged in `idea.md`.
+
+### 6. Wan2GP: where it's used (nowhere) and whether it's legally usable (yes, but hardware blocks it)
+
+User asked where Wan2GP is used in the pipeline - answer: nowhere, it's only
+mentioned in `idea.md`/`research-findings.md` as "Path 1" of the original
+lead-magnet PDF (a faceless autopilot cartoon-character channel), explicitly
+rejected early on in favor of the current Kokoro+Gemini/Pollinations+ffmpeg pipeline.
+Confirmed via a repo-wide grep - zero code usage.
+
+Follow-up: is there any legal way to use it. Fetched the actual current
+`LICENSE.txt` directly from `github.com/deepbeepmeep/WanGP` (the project renamed
+from Wan2GP to WanGP) rather than trusting a third-party mirror copy found first via
+search. The **WanGP Community License 2.0** explicitly permits free use "including
+inside a company" (SS1.8/1.9(ii)/3.3 - internal/business use regardless of revenue is
+Free Use, not Restricted Commercialization), and SS6.5(b) exempts free/ad-monetized
+publication of outputs from even the attribution requirement (attribution is only
+owed on a "Direct Output Sale" - selling the output itself as the product, which an
+ad-monetized YouTube upload isn't under their own definition). The underlying Wan 2.2
+model weights (Alibaba) are separately Apache 2.0. Net: legally clear, free, no
+attribution needed for this channel's actual use case - a paid commercial license
+would only be needed to resell/white-label the software itself or sell outputs as
+direct paid deliverables, neither of which applies here.
+
+The real blocker is hardware, not law: Wan2GP's video diffusion models need a real
+discrete GPU; this machine has integrated graphics only - the same wall that already
+made this project pivot away from local video generation in the first place
+(`idea.md`'s "Production pipeline" decision). Offered to look into minimal cloud-GPU
+rental costs if the user wants to revisit that budget stance - not pursued yet.
+
+### 7. Captions moved back to the bottom bar
+
+User asked to move the word-pop captions back below the content rectangle, same
+nature (one word visible at a time, pop animation), just repositioned - the
+2026-10-26 redesign had made them full-frame-centered (`alignment=5`). Changed
+`captions.py`'s `_build_word_style()` to `alignment=2` (bottom-center), with
+`marginv` computed from `config.HEIGHT - SQUARE_Y - SQUARE_HEIGHT` (the bottom bar's
+actual current height, 656px, divided in half) instead of a hardcoded number, so it
+stays correct automatically if the content rectangle's size ever changes again.
+Nothing else about the caption style touched - color, pop animation, one-word-only
+behavior all unchanged.
+
+Verified by regenerating `captions.ass`, re-running `assemble.py --force` on the
+production `library-of-alexandria-destruction` slug, pulling the first word event's
+exact timing straight from the regenerated `captions.ass` ("Before", 0.00-0.20s,
+same discipline as the 2026-10-27 caption-centering bug verification), and sampling
+an accurate (output-side-seeked) frame at that timestamp - confirmed the word renders
+centered in the bottom bar below the image. Logged in `idea.md`.
+
+### 8. Committed and pushed - 7 logical commits
+
+User asked for everything committed and pushed, specifically as 7 commits. Checked
+`git status`/`git fetch` first and found the user had already manually committed and
+pushed the content-rectangle template change plus the test-folder cleanup themselves
+(`650bbea "Template update"`, confirmed local matched `origin/main` exactly before
+starting) - avoided re-committing that work. Split everything from `visual-style-
+brief.md` onward into 7 coherent commits (new brief; `voice.md` tone/CTA/pointer
+rewrite; cut-rate `config.py`+`narration.py`; punctuation `script_parser.py`+
+`visuals/resolve.py`; captions `captions.py` + the full re-rendered production-slug
+build artifacts; `idea.md`'s decision-log entries; the style-brief test image),
+verified a clean working tree between each, and pushed
+(`650bbea..f22f48f` on `origin/main`).
+
+## Carried-forward open items (as of end of this session)
+
+Everything from the 2026-10-27 list above is either resolved by this session's work
+or unaffected. New/updated:
+
+1. **The new visual-style-brief.md format has been used for exactly one real
+   generation** (the Demetrius/Ptolemy test image) - a full real script hasn't been
+   written and illustrated under the new style/tone/punctuation/cut-rate rules
+   together yet. That's the real end-to-end test still pending.
+2. **Nothing has actually been heard** under the new "loud, confident, sarcastic"
+   tone or the new punctuation-normalized narration - same standing caveat this
+   project always carries for anything judged by eye/transcript rather than by ear.
+3. **The sarcastic Like & Subscribe closing line has never been written into a real
+   script yet** - the rule exists in `yt-script/SKILL.md` and `voice.md`, untested
+   against an actual beat.
+4. **Wan2GP/WanGP remains legally usable but practically blocked by hardware** - no
+   action taken, flagged as a possible future budget conversation (cloud GPU rental)
+   if ever revisited.
+5. Everything else carried from before (Bollywood music library still zero tracks,
+   character pose variety still single-pose, actual YouTube channel still doesn't
+   exist, mobile push notifications still disabled, Kokoro's Greek/Ptolemaic
+   pronunciation still unconfirmed by ear) is unchanged by this session.
