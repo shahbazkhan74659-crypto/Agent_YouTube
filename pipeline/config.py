@@ -29,14 +29,18 @@ FPS = 30
 MAX_DURATION_SEC = 180  # YouTube Shorts ceiling
 
 # Branded frame template (same on every video): black canvas, title band near the
-# top, segment visuals confined to a centered square. Layout measured from a
-# reference screenshot (495x703): title ~14-22% down, content square ~57% of
-# height at ~82% of width, centered. Converted to clean numbers on our 1080x1920
-# canvas: 560 (title band) + 880 (square) + 480 (bottom bar, also where captions
-# now live) = 1920 exactly.
-SQUARE_SIZE = 880
-SQUARE_X = (WIDTH - SQUARE_SIZE) // 2  # 100
-SQUARE_Y = 560
+# top, segment visuals confined to a full-width letterboxed rectangle, captions in
+# the bottom band. Layout derived from a reference image showing a full-width
+# 16:9 content band (738x416, aspect 1.774 ≈ 16:9) with symmetric black margins
+# top/bottom. Scaled onto our 1080-wide canvas at the band's own 16:9 aspect (not
+# by literally copying the reference's margin fractions, which belong to a
+# differently-shaped 738x1600 source image): 1080 wide x 608 tall (1080*9/16=607.5,
+# rounded to the even 608 so the vertical split below is exactly symmetric).
+# Centered vertically: 656 (title band) + 608 (content) + 656 (bottom bar) = 1920.
+SQUARE_WIDTH = 1080
+SQUARE_HEIGHT = 608
+SQUARE_X = (WIDTH - SQUARE_WIDTH) // 2  # 0 - box now spans the full canvas width
+SQUARE_Y = (HEIGHT - SQUARE_HEIGHT) // 2  # 656 - vertically centered, symmetric bands
 
 # Host character (branding/character/<pose>.png, generated once by
 # tools/generate_character_poses.py, reused across every video like Assets_audio).
@@ -46,44 +50,46 @@ SQUARE_Y = 560
 # still cycles per segment, which is the actual source of on-screen movement.
 SHOW_CHARACTER = False  # off for now - user asked to drop the overlay; flip back to re-enable
 CHARACTER_POSES = ("neutral",)
-CHARACTER_HEIGHT = 520  # ~60% of SQUARE_SIZE - reads clearly without dominating the background
-CHARACTER_EST_WIDTH = 350  # nominal estimate for positioning math; actual width varies slightly per pose
-CHARACTER_Y = SQUARE_Y + SQUARE_SIZE - CHARACTER_HEIGHT  # feet rest on the square's bottom edge
+CHARACTER_HEIGHT = 365  # ~60% of SQUARE_HEIGHT (608) - same ratio the old 520/880 used, rebased to the new height axis
+CHARACTER_EST_WIDTH = 243  # nominal estimate for positioning math; derived from the character render's fixed 600x900 aspect at CHARACTER_HEIGHT (365 * 600/900)
+CHARACTER_Y = SQUARE_Y + SQUARE_HEIGHT - CHARACTER_HEIGHT  # feet rest on the box's bottom edge
 
-# 4 position anchors to cycle through per segment - alternating left/right, two of
-# them overflowing the square's horizontal edge slightly (the "moves across the
-# square, can poke outside it a little" effect the user asked for).
+# 4 position anchors to cycle through per segment - alternating left/right. The box
+# now spans the full canvas width (SQUARE_X=0), so there's no outer margin left to
+# overflow into like the old centered-square layout had; these anchors stay fully
+# on-canvas instead (two well inside, two near the edge).
 CHARACTER_POSITIONS = (
-    SQUARE_X + 40,  # left, inside the square
-    SQUARE_X - 60,  # left, overflowing the square's left edge
-    SQUARE_X + SQUARE_SIZE - CHARACTER_EST_WIDTH - 40,  # right, inside the square
-    SQUARE_X + SQUARE_SIZE - CHARACTER_EST_WIDTH + 60,  # right, overflowing the square's right edge
+    SQUARE_X + 40,  # left, well inside
+    SQUARE_X + 10,  # left, near the edge
+    SQUARE_X + SQUARE_WIDTH - CHARACTER_EST_WIDTH - 40,  # right, well inside
+    SQUARE_X + SQUARE_WIDTH - CHARACTER_EST_WIDTH - 10,  # right, near the edge
 )
 
 # Evidence inset (2026-10-27 visual-sourcing flip) - a smaller bordered image shown
 # over the primary AI-generated visual, labeled SOURCE, for exactly one segment at a
 # time. Carries the real Wikimedia/NASA/Pixabay/Smithsonian/screenshot proof now that
 # those sources no longer fill the full content square - see idea.md.
-EVIDENCE_INSET_SIZE = 280  # ~32% of SQUARE_SIZE - readable as proof, clearly secondary
+EVIDENCE_INSET_SIZE = 280  # ~46% of SQUARE_HEIGHT / ~26% of SQUARE_WIDTH - readable as proof, clearly secondary
 EVIDENCE_BORDER_PX = 6
 EVIDENCE_BORDER_COLOR = "white"
 EVIDENCE_LABEL_TEXT = "SOURCE"
 
-_EV_MARGIN = 24
+_EV_MARGIN = 24  # with SQUARE_X=0 this is now the only padding against the true canvas
+# edge (was SQUARE_X(100)+24=124px before) - bump if it reads as too tight by eye.
 # 4 corners + center, same cycling-anchor style as CHARACTER_POSITIONS above -
 # evidence.position_for_segment() picks one of these per segment (seeded, not truly
 # random, so re-renders stay reproducible).
 EVIDENCE_POSITIONS = (
     (SQUARE_X + _EV_MARGIN, SQUARE_Y + _EV_MARGIN),  # top-left
-    (SQUARE_X + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN, SQUARE_Y + _EV_MARGIN),  # top-right
-    (SQUARE_X + _EV_MARGIN, SQUARE_Y + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN),  # bottom-left
+    (SQUARE_X + SQUARE_WIDTH - EVIDENCE_INSET_SIZE - _EV_MARGIN, SQUARE_Y + _EV_MARGIN),  # top-right
+    (SQUARE_X + _EV_MARGIN, SQUARE_Y + SQUARE_HEIGHT - EVIDENCE_INSET_SIZE - _EV_MARGIN),  # bottom-left
     (
-        SQUARE_X + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN,
-        SQUARE_Y + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN,
+        SQUARE_X + SQUARE_WIDTH - EVIDENCE_INSET_SIZE - _EV_MARGIN,
+        SQUARE_Y + SQUARE_HEIGHT - EVIDENCE_INSET_SIZE - _EV_MARGIN,
     ),  # bottom-right
     (
-        SQUARE_X + (SQUARE_SIZE - EVIDENCE_INSET_SIZE) // 2,
-        SQUARE_Y + (SQUARE_SIZE - EVIDENCE_INSET_SIZE) // 2,
+        SQUARE_X + (SQUARE_WIDTH - EVIDENCE_INSET_SIZE) // 2,
+        SQUARE_Y + (SQUARE_HEIGHT - EVIDENCE_INSET_SIZE) // 2,
     ),  # center
 )
 

@@ -119,8 +119,8 @@ def _build_segment_clip(
         # audio track is implicitly dropped - no separate -an/mute step needed.
         visual_input = ["-stream_loop", "-1", "-t", f"{duration:.3f}", "-i", str(visual_path)]
         bg_chain = (
-            f"[0:v]scale={config.SQUARE_SIZE}:{config.SQUARE_SIZE}:force_original_aspect_ratio=increase,"
-            f"crop={config.SQUARE_SIZE}:{config.SQUARE_SIZE},"
+            f"[0:v]scale={config.SQUARE_WIDTH}:{config.SQUARE_HEIGHT}:force_original_aspect_ratio=increase,"
+            f"crop={config.SQUARE_WIDTH}:{config.SQUARE_HEIGHT},"
             f"fps={config.FPS},"
             f"pad={config.WIDTH}:{config.HEIGHT}:{config.SQUARE_X}:{config.SQUARE_Y}:color=black,"
             "format=yuv420p[bg];"
@@ -136,7 +136,7 @@ def _build_segment_clip(
             "[0:v]scale=2000:-2,"  # oversample before zoompan - avoids zoompan's known jitter at low input res
             f"zoompan=z='{z_expr}':d=1:"
             f"x='{x_expr}':y='{y_expr}':"
-            f"s={config.SQUARE_SIZE}x{config.SQUARE_SIZE}:fps={config.FPS},"
+            f"s={config.SQUARE_WIDTH}x{config.SQUARE_HEIGHT}:fps={config.FPS},"
             f"pad={config.WIDTH}:{config.HEIGHT}:{config.SQUARE_X}:{config.SQUARE_Y}:color=black,"
             "format=yuv420p[bg];"
         )

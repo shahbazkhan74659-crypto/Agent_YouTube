@@ -42,7 +42,7 @@ def _wait_for_slot() -> None:
         _last_call_time = time.time()
 
 
-def generate(prompt: str, dest_path: Path, width: int = config.SQUARE_SIZE, height: int = config.SQUARE_SIZE) -> Path:
+def generate(prompt: str, dest_path: Path, width: int = config.SQUARE_WIDTH, height: int = config.SQUARE_HEIGHT) -> Path:
     url = config.POLLINATIONS_URL.format(prompt=urllib.parse.quote(prompt))
     last_error = None
     for attempt in range(1, MAX_ATTEMPTS + 1):
