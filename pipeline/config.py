@@ -60,6 +60,40 @@ CHARACTER_POSITIONS = (
     SQUARE_X + SQUARE_SIZE - CHARACTER_EST_WIDTH + 60,  # right, overflowing the square's right edge
 )
 
+# Evidence inset (2026-10-27 visual-sourcing flip) - a smaller bordered image shown
+# over the primary AI-generated visual, labeled SOURCE, for exactly one segment at a
+# time. Carries the real Wikimedia/NASA/Pixabay/Smithsonian/screenshot proof now that
+# those sources no longer fill the full content square - see idea.md.
+EVIDENCE_INSET_SIZE = 280  # ~32% of SQUARE_SIZE - readable as proof, clearly secondary
+EVIDENCE_BORDER_PX = 6
+EVIDENCE_BORDER_COLOR = "white"
+EVIDENCE_LABEL_TEXT = "SOURCE"
+
+_EV_MARGIN = 24
+# 4 corners + center, same cycling-anchor style as CHARACTER_POSITIONS above -
+# evidence.position_for_segment() picks one of these per segment (seeded, not truly
+# random, so re-renders stay reproducible).
+EVIDENCE_POSITIONS = (
+    (SQUARE_X + _EV_MARGIN, SQUARE_Y + _EV_MARGIN),  # top-left
+    (SQUARE_X + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN, SQUARE_Y + _EV_MARGIN),  # top-right
+    (SQUARE_X + _EV_MARGIN, SQUARE_Y + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN),  # bottom-left
+    (
+        SQUARE_X + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN,
+        SQUARE_Y + SQUARE_SIZE - EVIDENCE_INSET_SIZE - _EV_MARGIN,
+    ),  # bottom-right
+    (
+        SQUARE_X + (SQUARE_SIZE - EVIDENCE_INSET_SIZE) // 2,
+        SQUARE_Y + (SQUARE_SIZE - EVIDENCE_INSET_SIZE) // 2,
+    ),  # center
+)
+
+# Live-session asset drop locations - populated manually by Claude during a session
+# where the user has Chrome connected (Gemini generation, URL screenshots), never
+# written by code. visuals/resolve.py checks these before falling back to Pollinations
+# (primary) or skipping evidence entirely for that segment (evidence, fail-soft).
+GEMINI_VISUALS_DIRNAME = "visuals_gemini"  # build/visuals_gemini/<seg_id>.*
+EVIDENCE_DIRNAME = "evidence"  # build/evidence/<seg_id>.*
+
 # Narration
 PACING_WPM = 150
 BEAT_GAP_SEC = 0.35  # silence between beats
