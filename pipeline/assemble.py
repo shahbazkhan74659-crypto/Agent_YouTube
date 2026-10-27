@@ -29,6 +29,7 @@ from pathlib import Path
 
 import character
 import config
+import evidence
 import ffmpeg_tool
 
 TARGET_ZOOM = 1.12  # zoom_in/zoom_out motions - subtle, centered
@@ -96,7 +97,14 @@ def _motion_exprs(motion: str, n_frames: int) -> tuple[str, str, str]:
 
 
 def _build_segment_clip(
-    visual_path: str, duration: float, char_path: Path, char_x: int, motion: str, out_path: Path
+    visual_path: str,
+    duration: float,
+    char_path: Path,
+    char_x: int,
+    motion: str,
+    out_path: Path,
+    evidence_path: Path | None = None,
+    evidence_xy: tuple[int, int] | None = None,
 ) -> None:
     n_frames = max(1, round(duration * config.FPS))
     is_video = Path(visual_path).suffix.lower() in VIDEO_EXTS
@@ -133,18 +141,42 @@ def _build_segment_clip(
             "format=yuv420p[bg];"
         )
 
+    # Two independent optional overlay layers (character, evidence inset) chained
+    # onto the background - each appends its own filter stage and its own extra
+    # input, advancing a running `label`/`next_idx` rather than special-casing every
+    # on/off combination. No enable='between(t,...)' time-gating anywhere: each call
+    # to this function is already scoped to exactly one segment's duration (that's
+    # the whole reason this pipeline composites per-segment, not over the whole
+    # video - see the module docstring), so a present layer is simply there for the
+    # clip's entire length, same as the background always has been.
+    parts = [bg_chain]
+    label = "bg"
+    next_idx = 1
+    extra_inputs: list[str] = []
+
     if config.SHOW_CHARACTER:
-        filter_complex = (
-            bg_chain
-            + f"[1:v]scale=-2:{config.CHARACTER_HEIGHT}[char];"
-            + f"[bg][char]overlay=x={char_x}:y={config.CHARACTER_Y}[out]"
+        parts.append(f"[{next_idx}:v]scale=-2:{config.CHARACTER_HEIGHT}[char];")
+        parts.append(f"[{label}][char]overlay=x={char_x}:y={config.CHARACTER_Y}[char_out];")
+        extra_inputs += ["-loop", "1", "-i", str(char_path)]
+        label, next_idx = "char_out", next_idx + 1
+
+    if evidence_path is not None:
+        ex, ey = evidence_xy
+        inner = config.EVIDENCE_INSET_SIZE - 2 * config.EVIDENCE_BORDER_PX
+        parts.append(
+            f"[{next_idx}:v]scale={inner}:{inner}:force_original_aspect_ratio=increase,"
+            f"crop={inner}:{inner},"
+            f"pad={config.EVIDENCE_INSET_SIZE}:{config.EVIDENCE_INSET_SIZE}:"
+            f"{config.EVIDENCE_BORDER_PX}:{config.EVIDENCE_BORDER_PX}:color={config.EVIDENCE_BORDER_COLOR}[ev];"
         )
-        extra_inputs = ["-loop", "1", "-i", str(char_path)]
-        map_label = "[out]"
-    else:
-        filter_complex = bg_chain.rstrip(";")  # bg_chain already ends in ...[bg]; - drop the final ;
-        extra_inputs = []
-        map_label = "[bg]"
+        parts.append(f"[{label}][ev]overlay=x={ex}:y={ey}[ev_out];")
+        extra_inputs += ["-loop", "1", "-i", str(evidence_path)]
+        label, next_idx = "ev_out", next_idx + 1
+
+    filter_complex = "".join(parts)
+    if label == "bg":
+        filter_complex = filter_complex.rstrip(";")  # neither layer present - today's exact no-overlay behavior
+    map_label = f"[{label}]"
 
     ffmpeg_tool.run(
         visual_input
@@ -159,17 +191,21 @@ def _build_segment_clip(
     )
 
 
-def _flatten_segments(meta: list[dict]) -> list[dict]:
+def _flatten_segments(meta: list[dict], manifest: dict) -> list[dict]:
     """One entry per visual segment, carrying its resolved pose (per-beat, from
     character.pose_for_beat) and cycling position (per-segment, from
     character.position_for_segment - this is what actually creates the
-    "character moves across the square" effect, independent of pose variety)."""
+    "character moves across the square" effect, independent of pose variety), plus
+    an optional evidence image/position pulled from the segment's own manifest entry
+    (resolve.py already guarantees a cue-less fallback segment never inherits a
+    neighbor's evidence - see visuals/resolve.py's resolve_all())."""
     flat = []
     global_idx = 0
     for beat in meta:
         pose = character.pose_for_beat(beat)
         for seg_i, seg in enumerate(beat["segments"]):
             seg_id = f"{beat['id']}_seg{seg_i:02d}"
+            ev = manifest.get(seg_id, {}).get("evidence")
             flat.append(
                 {
                     "id": seg_id,
@@ -178,6 +214,8 @@ def _flatten_segments(meta: list[dict]) -> list[dict]:
                     "pose": pose,
                     "x": character.position_for_segment(global_idx),
                     "motion": motion_for_segment(seg_id),
+                    "evidence_path": Path(ev["path"]) if ev else None,
+                    "evidence_xy": evidence.position_for_segment(seg_id) if ev else None,
                 }
             )
             global_idx += 1
@@ -192,7 +230,7 @@ def build_video_track(slug: str, force: bool = False) -> str:
     clips_dir.mkdir(exist_ok=True)
 
     total_duration = meta[-1]["end"] + config.BEAT_GAP_SEC  # matches audio_mix.py's trailing apad
-    segments = _flatten_segments(meta)
+    segments = _flatten_segments(meta, manifest)
 
     clip_paths = []
     for i, seg in enumerate(segments):
@@ -203,7 +241,14 @@ def build_video_track(slug: str, force: bool = False) -> str:
         if force or not clip_path.exists():
             char_path = config.CHARACTER_DIR / f"{seg['pose']}.png"
             _build_segment_clip(
-                manifest[seg["id"]]["path"], duration, char_path, seg["x"], seg["motion"], clip_path
+                manifest[seg["id"]]["path"],
+                duration,
+                char_path,
+                seg["x"],
+                seg["motion"],
+                clip_path,
+                evidence_path=seg["evidence_path"],
+                evidence_xy=seg["evidence_xy"],
             )
         clip_paths.append(clip_path)
 
