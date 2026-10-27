@@ -1,8 +1,8 @@
 """Builds one ASS subtitle file for the whole video from narration_meta.json's
-per-beat word timestamps. One word on screen at a time, centered in the frame,
-plain yellow, with a quick pop-in scale animation - only the word currently
-being spoken is ever visible (no accumulating line, no karaoke highlight
-progression across several words).
+per-beat word timestamps. One word on screen at a time, in the bottom bar below
+the content rectangle, plain yellow, with a quick pop-in scale animation - only
+the word currently being spoken is ever visible (no accumulating line, no
+karaoke highlight progression across several words).
 
 Each beat's words are already timestamped relative to that beat's own wav
 (alignment.py ran faster-whisper per beat); this stage just adds each beat's
@@ -128,7 +128,13 @@ def _build_word_style() -> pysubs2.SSAStyle:
     style.borderstyle = 1
     style.outline = 5
     style.shadow = 1
-    style.alignment = 5  # middle-center - center of the full frame
+    # Bottom bar, below the content rectangle (2026-10-27: moved back from
+    # full-frame-center) - alignment=2 is bottom-center, marginv roughly
+    # centers the word in the bottom bar's current 656px height
+    # (HEIGHT - SQUARE_Y - SQUARE_HEIGHT = 1920-656-608). Same word-pop nature
+    # as the full-frame version, only the position changed.
+    style.alignment = 2  # bottom-center
+    style.marginv = (config.HEIGHT - config.SQUARE_Y - config.SQUARE_HEIGHT) // 2
     return style
 
 
