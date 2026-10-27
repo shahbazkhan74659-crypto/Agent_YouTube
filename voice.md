@@ -14,16 +14,18 @@ Kurzgesagt/Eons audience, but mid-scroll with up to 3 minutes (the Shorts format
 see "My format" below), not someone looking for personal drama or a creator's life
 update.
 
-## How I actually talk (narration tone) [CONFIRMED]
+## How I actually talk (narration tone) [CONFIRMED, revised 2026-10-27]
 
-**Cheerful, curious, hyped, and disciplined.** Energetic and enthusiastic in
-delivery - this is not documentary-calm - but the enthusiasm is about the *ideas*,
-not about inflating what the sources support. "Disciplined" is doing real work
-here: the energy is in how a line is delivered, never in what it claims. Still
-treats "we don't actually know" as a genuinely interesting beat, not a letdown to
-rush past - the curiosity is what makes contested/uncertain claims land as
-fascinating rather than as a hedge. This still follows the `yt-factcheck`
-discipline: hyped tone, never hyped claims.
+**Loud, confident, sarcastic, and disciplined.** Delivery is hyped and
+unapologetically blunt - dark humor and sarcastic lore land mid-fact, the way
+a narrator who's a little tired of the subject's own body count would say it,
+not as a bit layered on top. "Disciplined" still does the same job it always
+did: the edge is in *how* a true claim is delivered, never in what it claims -
+sarcasm about a fact is not license to invent, exaggerate, or round up a
+number the source doesn't support. Still treats "we don't actually know" as a
+genuinely interesting beat, not a letdown to rush past. This still follows the
+`yt-factcheck` discipline: loud and sarcastic tone, never hyped or invented
+claims.
 
 ## Words I never use
 
@@ -34,7 +36,8 @@ game-changer, secret, powerful, ultimate, best, revolutionary, mind-blowing,
 unbelievable.** Also generic channel filler: "unlock", "dive in", "let's get into
 it", "welcome back". This list stays even with a hyped tone - "hyped" describes
 delivery energy, not permission to reach for vague unsubstantiated superlatives;
-that's exactly what "disciplined" in the tone above rules out.
+that's exactly what "disciplined" in the tone above rules out - sarcastic
+delivery included.
 
 ## Words I do use
 
@@ -81,17 +84,22 @@ won't actually match the finished narration.
   `hf_alpha` here is specifically the English-with-Indian-tone pairing, not a Hindi
   voice pick.
 - **Pacing:** 150 wpm baseline, matching `yt-script`'s own runtime-estimate math.
-- **Visual style mix [CONFIRMED, flipped 2026-10-27]:** AI-generated is primary on
-  every segment now - Gemini (live, via the Chrome browser extension, in a session
-  manually started around 10 PM) first, Pollinations.ai (`AI-generate:` cues, free,
-  keyless, already automatable) as the always-available fallback for whatever Gemini
-  doesn't cover that session. Every `AI-generate:` prompt carries the confidence-based
-  visual treatment as a standing rule: SOLID = documentary-real, CONTESTED/UNCERTAIN =
-  same but visibly softened/grained/blurred, myths = illustrated retelling, never a
-  reenactment. Wikimedia Commons / NASA / Pixabay / Smithsonian, plus live-captured
-  Chrome screenshots, are demoted to evidence-only: a smaller bordered inset, labeled
-  SOURCE, over the primary visual, for exactly one segment at a time, never the full
-  content square again - see `idea.md`'s "Visual sourcing priority flipped" entry and
+  Punctuation is part of pacing too - see `yt-script/SKILL.md`'s Punctuation
+  section for the allowed `. , ! : ?` set and how each maps onto this voice's
+  delivery beats.
+- **Visual style mix [CONFIRMED, flipped 2026-10-27; style replaced 2026-10-27]:**
+  AI-generated is primary on every segment - Gemini (live, via the Chrome
+  browser extension, in a session manually started around 10 PM) first,
+  Pollinations.ai (`AI-generate:` cues, free, keyless, already automatable) as
+  the always-available fallback for whatever Gemini doesn't cover that
+  session. Every `AI-generate:` prompt follows `C:\YouTube\visual-style-brief.md`
+  - the flat-explainer/painted-scene illustrated style, replacing the old
+  photoreal-documentary default - including its SOLID/CONTESTED/UNCERTAIN/myth
+  treatment and its workflow/iteration-discipline rules. Wikimedia Commons /
+  NASA / Pixabay / Smithsonian, plus live-captured Chrome screenshots, are
+  demoted to evidence-only: a smaller bordered inset, labeled SOURCE, over the
+  primary visual, for exactly one segment at a time, never the full content
+  rectangle again - see `idea.md`'s "Visual sourcing priority flipped" entry and
   `pipeline/script_parser.py`'s `[EVIDENCE: ...]` cue.
 - **Content structure: Storytelling → Explanation → Questionary.** Open with the
   narrative hook (storytelling), move through the claims at their actual confidence
@@ -101,7 +109,10 @@ won't actually match the finished narration.
   comes after the payoff, never instead of it. Content stays agnostic and rational
   across perspectives rather than arguing one side, stays open to challenge rather
   than presenting itself as the final word, and treats incomplete knowledge as the
-  normal state of a topic, not something to smooth over.
+  normal state of a topic, not something to smooth over. Immediately after the
+  closing question, the script ends on one sarcastic like/subscribe line - a
+  punchline tied to that episode's content, never a generic pitch - see
+  `yt-script/SKILL.md`'s "Questionary" section for the exact rule.
 
 ## Differentiation angle
 
