@@ -350,6 +350,115 @@ entries. **Not retroactively applied**: the existing `library-of-alexandria-dest
 render still uses its original test voice — this decision governs videos made going
 forward, not a forced re-render of what already exists.
 
+## Visual style and narration tone (decided 2026-10-27, supersedes the
+2026-10-27 photoreal-documentary default and the original cheerful-only tone)
+
+**Visual**: the photoreal-documentary `AI-generate:` default (SOLID=
+documentary-real, CONTESTED/UNCERTAIN=softened/grained/blurred, myth=
+illustrated retelling - set earlier the same day, "Visual sourcing priority
+flipped") is fully replaced by a flat-vector/painted-scene illustrated style
+modeled on a reference video, documented in the new
+`C:\YouTube\visual-style-brief.md`. Character consistency is deliberately
+scoped to within a single prompt, not across prompts/segments - Gemini/
+Pollinations can't hold an exact recurring character, the same limitation
+that already left the project's own host-overlay flag
+(`config.SHOW_CHARACTER = False`) dormant. `yt-script/SKILL.md` and
+`voice.md`'s "Visual style mix" bullet now point at the brief instead of
+inlining photoreal wording.
+
+**Tone**: `voice.md`'s "How I actually talk" adds sarcastic lore and dark
+humor mid-fact, with louder/more confident delivery, without loosening the
+existing "disciplined"/no-invented-claims rule or the "Words I never use"
+list - this is a writing/delivery change only, no audio-engineering change
+(Kokoro's TTS call exposes no volume/pitch parameter to drive, confirmed by
+reading the installed `kokoro-onnx` library directly).
+
+**CTA**: a sarcastic, episode-specific like/subscribe line (modeled on the
+reference video's own CTA style - a punchline tied to the episode's content,
+never generic) is now part of the audio/script, closing every script
+immediately after the Questionary beat's existing CONTESTED/UNCERTAIN
+question.
+
+## Cut rate: no image holds longer than ~4 seconds (decided 2026-10-27)
+
+Measured, not guessed: ffmpeg scene-cut detection run against the full 345s
+reference video found 98 shots, median 3.03s, mean 3.52s, 78% of shots at 4s or
+under - cuts tracked the audio (sentence/clause breaks), not a fixed interval. The
+handful of longer outliers (7-15s) were all a single flat-explainer diagram card
+held through one extended explanation, not a narrative beat.
+
+Adopted as a standing rule: `yt-script/SKILL.md`'s cue-density guidance (previously
+"~5-8s of narration" per cue) is tightened to target under 4s per segment, cut
+points placed at natural narration breaks rather than mechanically. A technical
+safety net was added alongside the authoring rule - `pipeline/config.py`'s new
+`MAX_SEGMENT_DURATION_SEC = 4.0`, checked in `pipeline/narration.py`'s
+`_segment_timing()`, which prints a (non-fatal) warning naming the offending
+beat/segment when a script's cues are too sparse, instead of relying on the writer
+to catch it by eye. Full detail in `C:\YouTube\visual-style-brief.md`'s "Cut rate"
+section.
+
+## Punctuation: narration only pauses on `. , ! : ?` (decided 2026-10-27)
+
+Researched, not guessed: reading the installed `kokoro_onnx` 0.6.1 library's source
+directly found it only actively manages pauses for its own
+`SENTENCE_MARKS = ".!?…"` and `CLAUSE_MARKS = ",;:"` - everything else either gets
+an uncontrolled, model-learned pause (em-dash, en-dash, parentheses) or is silently
+dropped with no pause at all (plain hyphen, before it even reaches kokoro's
+vocabulary). This channel's allowed set is narrower than kokoro's own: `. , ! : ?`
+only - no `;`, no `…`, even though kokoro already pauses reliably on both - because
+the rule governs what a human script-writer should reach for, not just what
+happens to already produce a pause. Writing guidance (lean on the five marks for
+delivery/pacing without fragmenting sentences or breaking grammar) lives in
+`yt-script/SKILL.md`'s new "Punctuation" section and `voice.md`'s Pacing bullet.
+
+A technical safety net sits alongside the authoring rule, same "warn/fix
+mechanically, don't just document" pattern as the cut-rate rule:
+`pipeline/script_parser.py`'s new `normalize_pause_punctuation()`, composed with
+`strip_markdown_emphasis()` at `flush_segment()` - the single point raw script
+text becomes `Segment.text` - substitutes em-dash/en-dash/spaced-hyphen/
+double-hyphen to commas, semicolons and ellipses to periods (capitalizing the next
+word), and parentheticals to comma-wrapped inline asides. Verified against
+synthetic cases and the real `library-of-alexandria-destruction/script.md`: all
+~8 em-dashes in that script became commas cleanly, its one pre-existing colon was
+untouched, and word-internal hyphens (e.g. "three-hundred-year") were correctly
+left alone.
+
+## Script-first workflow rule: visuals never start before script.md is final (decided 2026-10-27)
+
+Standing rule, not just a structural accident of a normal render order: a live
+Gemini session or an `AI-generate:` prompt only ever runs against a `script.md`
+that's already cleared `yt-script/SKILL.md`'s gate - "ship it, or change it?"
+answered ship it. Documented as the primary mechanism in `yt-script/SKILL.md`'s
+"The gate" and `visual-style-brief.md`'s section 8.
+
+A real gap this surfaced: `render.py`'s `--from-stage visuals` jumps straight to
+`visuals/resolve.py`'s `resolve_all()`, reading `narration_meta.json` directly
+with no staleness check - if `script.md` is edited after that file was built,
+`resolve_all()` would silently resolve visuals against stale beats/segments with
+no warning. Added a non-fatal mtime-comparison warning
+(`_warn_if_narration_stale()`, script.md vs. narration_meta.json) at the top of
+`resolve_all()` - the one function reachable from both a normal full run and
+`--from-stage visuals` - same "warn, don't silently proceed" pattern as the
+cut-rate warning, and the same staleness-bug class this project's `memory.md`
+already logs real incidents for (stale `captions.ass`, silently-wiped alignment
+data). Verified directly: fires when script.md's mtime is bumped past
+narration_meta.json's, goes silent again once narration_meta.json is regenerated,
+and stays silent when either file is simply missing.
+
+## Captions moved back to the bottom bar (decided 2026-10-27)
+
+Word-pop captions (2026-10-26 redesign: one word visible at a time, yellow,
+quick scale-up pop, no accumulating line) were full-frame-centered
+(`alignment=5`). Moved back to the bottom bar below the content rectangle
+(`alignment=2`, bottom-center) - same word-pop nature, only the position
+changed. `captions.py::_build_word_style()`'s `marginv` is derived from
+`config.HEIGHT - config.SQUARE_Y - config.SQUARE_HEIGHT` (the bottom bar's
+current implied height, 656px) rather than a hardcoded number, so it stays
+correct automatically if the content rectangle's size ever changes again.
+Verified against the production `library-of-alexandria-destruction` render by
+pulling the first word event's exact timing from `captions.ass` and sampling
+an accurate (output-side-seeked) frame at that timestamp.
+
 ## Differentiation angle (decided)
 
 Not visual style (stock/AI-sourced, same raw material any channel can use) —
