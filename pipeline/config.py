@@ -106,6 +106,15 @@ BEAT_GAP_SEC = 0.35  # silence between beats
 KOKORO_SPEED = 1.0
 DEFAULT_VOICE_PRESET = "af_heart"  # used only if voice.md hasn't locked one in yet
 
+# Visual cut rate (2026-10-27) - no single resolved segment should display for
+# longer than this. Measured from a reference video's actual scene cuts (ffmpeg
+# scene-cut detection over its full runtime): median shot 3.03s, 78% of shots at
+# 4s or under. narration.py warns (doesn't fail) when a segment exceeds this, as a
+# build-time signal that a beat's [ON SCREEN: ...]/AI-generate: cues need to be
+# placed more densely - see visual-style-brief.md's "Cut rate" section and
+# yt-script/SKILL.md's cue-density rule.
+MAX_SEGMENT_DURATION_SEC = 4.0
+
 # Alignment
 # Multilingual (not base.en) - this pipeline now also renders Hindi/Hinglish
 # narration (lang="hi" below), same reasoning the global video-reader skill

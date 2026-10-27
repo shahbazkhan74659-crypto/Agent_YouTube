@@ -25,7 +25,7 @@ def load_beats(slug: str) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _segment_timing(segments: list[dict], start: float, end: float) -> list[dict]:
+def _segment_timing(segments: list[dict], start: float, end: float, beat_id: str = "?") -> list[dict]:
     word_counts = [max(1, len(seg["text"].split())) for seg in segments]
     total_words = sum(word_counts)
     duration = end - start
@@ -37,6 +37,15 @@ def _segment_timing(segments: list[dict], start: float, end: float) -> list[dict
         cursor = seg_end
     if timed:
         timed[-1]["end"] = round(end, 3)  # avoid float drift leaving a gap at the beat boundary
+    for i, seg in enumerate(timed):
+        seg_dur = seg["end"] - seg["start"]
+        if seg_dur > config.MAX_SEGMENT_DURATION_SEC:
+            preview = seg["text"][:40] + ("..." if len(seg["text"]) > 40 else "")
+            print(
+                f"  [cut-rate] WARNING: {beat_id} seg{i:02d} would hold for {seg_dur:.1f}s "
+                f"(cap {config.MAX_SEGMENT_DURATION_SEC:.1f}s) - \"{preview}\" - place "
+                f"another [ON SCREEN: ...]/AI-generate: cue in this stretch of script.md"
+            )
     return timed
 
 
@@ -71,7 +80,7 @@ def synthesize(slug: str, voice: str | None = None, force: bool = False, lang: s
         timed.append(
             {
                 **b,
-                "segments": _segment_timing(b["segments"], start, end),
+                "segments": _segment_timing(b["segments"], start, end, b["id"]),
                 "wav_path": str(wav_path),
                 "duration": round(duration, 3),
                 "start": round(start, 3),
