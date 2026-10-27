@@ -1,0 +1,9 @@
+kokoro-onnx
+faster-whisper
+soundfile
+requests
+pillow
+imageio-ffmpeg
+pysubs2
+python-dotenv
+rembg
