@@ -1261,3 +1261,306 @@ voice decision (`af_heart`→`am_michael`→`af_bella`→`hf_alpha`): this gover
 made from here on; `library-of-alexandria-destruction`'s existing render still uses
 its original test voice unless/until the user asks for an actual re-render with the
 new global default.
+
+## Visual sourcing priority flipped: AI-generated primary, real sources → evidence inset (2026-10-27, same day)
+
+Biggest design conversation of the day. Started from a scheduling question ("run this
+without my laptop on") that led nowhere useful (Gemini has no API - confirmed again
+that free-tier image/video generation returns 0 quota and the user's Google One
+subscription doesn't unlock API billing, so Gemini only works via a live, logged-in
+Chrome session) - but the user's actual resolution was simpler than any scheduling
+fix: **no deployment at all**. They'll manually start a fresh Claude Code conversation
+around 10 PM with Chrome connected and logged into Gemini, laptop staying on/connected
+through the night, and drive Gemini generation live from inside that session; Pollinations
+("already settled") stays the code-automatable fallback. That resolved the entire
+automation tension without building anything - the actual ask that followed was a
+content/architecture redesign, not infrastructure: **flip which sources are "primary"
+visuals vs. which are reduced to "evidence."**
+
+Went through full plan-mode: an Explore agent confirmed the exact pre-existing cue
+grammar in the global `yt-script`/`yt-factcheck` skills (`~/.claude/skills/`) - flat,
+one cue = one image, no primary/evidence distinction anywhere, no validator for the
+grammar at all. Two `AskUserQuestion` rounds resolved the open design points: (1)
+Gemini's role - live via Chrome during the 10PM session, Pollinations as the automatable
+fallback; (2) "screenshots" as an evidence source - captured live via Chrome in the same
+session, not a new API; (3) evidence layout - a small corner/center inset over the
+primary visual, randomized position, one at a time, labeled SOURCE (the user's own
+wording and ASCII mockup). A Plan agent then produced the concrete file-by-file design,
+read against the exact current code (not guessed) - confirmed the existing per-segment
+(not whole-video) compositing architecture means the evidence overlay needs zero
+time-gating, since each `_build_segment_clip()` call is already scoped to one segment's
+duration.
+
+**Implementation** (plan file: `ok-then-redesign-the-zany-waffle.md`):
+
+- **New `[EVIDENCE: ...]` cue** in `script_parser.py` - `[EVIDENCE: "term"]` (real
+  source) or `[EVIDENCE: screenshot: "<url>"]` (live Chrome capture), parsed the same
+  way `MUSIC_CUE_RE` already was (a second independent cue type in the same loop).
+  Unlike `ON SCREEN`, it does NOT flush the current segment - it attaches to whatever
+  segment is already accumulating, consumed exactly once on the next real flush (same
+  consumption rule `pending_cue` already had). Verified with a throwaway test script
+  exercising every path (plain AI-generate, pre-placed Gemini stub, search-term
+  evidence, screenshot evidence, and a no-cue segment immediately after an
+  evidence-bearing one) - `beats.json` showed evidence attached only where intended,
+  never leaking onto the neighbor with no cue.
+- **`visuals/resolve.py` rewritten**: `_resolve_cue` → `_resolve_primary` - checks
+  `build/visuals_gemini/<seg_id>.*` first (a file dropped manually during the live
+  session, never written by code), else Pollinations via the unchanged
+  `ai_generate.py`. The `sources.py` (Wikimedia/NASA/Pixabay/Smithsonian) call was
+  **removed entirely** from this path, not just reordered - a bare search-term
+  `ON SCREEN` cue now raises `ValueError` instead of silently resolving against those
+  sources, forcing old-style scripts to be rewritten rather than reinterpreted (verified
+  directly: constructed a bare-search-term cue and confirmed the exact error fires).
+  New `_resolve_evidence` (fail-soft, never raises - a missing/empty result just means
+  no inset for that one segment) handles the two evidence cue types, the screenshot
+  path checking `build/evidence/<seg_id>.*` the same way. **Real bug caught and fixed
+  before it shipped**: the existing no-cue fallback (`entry = {**last_resolved, "id":
+  seg_id, ...}`) would have silently copied a neighbor's `evidence` key onto a segment
+  that never asked for one - fixed by stripping `"evidence"` from the inherited entry
+  and resolving each segment's own evidence cue independently (skipped only when this
+  exact segment already has a valid cached evidence entry of its own, same
+  skip-if-already-resolved discipline every other pipeline stage already follows - not
+  unconditionally re-fetching on every plain re-run, which would otherwise re-hit
+  Wikimedia/Pixabay for nothing). Verified end-to-end against the real `manifest.json`:
+  the fallback segment had no `"evidence"` key at all, confirmed via direct JSON
+  inspection, not just eyeballing.
+- **New `pipeline/evidence.py`** - pure placement logic, same role as `character.py`:
+  `position_for_segment(seg_id)` picks one of 5 anchors (`config.EVIDENCE_POSITIONS` -
+  4 corners + center) via `random.Random(seg_id + "_evidence").choice(...)`, same
+  seeded-random pattern as today's Ken Burns `motion_for_segment`. Shared by
+  `assemble.py` (places the bordered image) and `captions.py` (places the SOURCE
+  label) so the two separate ffmpeg passes can never land them in different spots -
+  confirmed by direct coordinate check (captions' `\pos()` values were exactly the
+  image position + 8px).
+- **`assemble.py`**: `_build_segment_clip()` gained `evidence_path`/`evidence_xy`
+  params; the old two-branch `if config.SHOW_CHARACTER: ... else: ...` structure was
+  generalized into a small chain of optional layers (character, then evidence), each
+  advancing a running output label - correctly collapses back to today's exact
+  behavior when neither is present (maps `[bg]` directly, same trailing-`;` strip).
+  Border composited with only `scale`/`crop`/`pad` (already-proven filters, no new
+  ffmpeg dependency) - no `drawtext`, since `ffmpeg_tool.py`'s own docstring only
+  confirms `libx264/libx265/libass/zoompan` on this build, not freetype/drawtext.
+  `_flatten_segments()` now also takes `manifest` (new param) to look up each
+  segment's resolved evidence and compute its position.
+- **`captions.py`**: the "SOURCE" label goes through the existing `pysubs2`/libass
+  pipeline instead of a new ffmpeg filter - a new `EvidenceLabel` style, positioned
+  per-event via `\pos()` (needed since the label has 5 possible anchor points, not one
+  fixed spot `alignment`/`marginv` could express). New per-segment loop (separate from
+  the existing per-beat word loop) reads `manifest.json` and emits one event per
+  evidence-bearing segment, scoped to exactly that segment's own `start`/`end` (already
+  absolute/global timeline values from `narration.py`'s `_segment_timing()`, no offset
+  math needed).
+- **`config.py`**: `EVIDENCE_INSET_SIZE=280` (~32% of the square), 6px white border,
+  "SOURCE" label text, `EVIDENCE_POSITIONS` (4 corners + center, same style as
+  `CHARACTER_POSITIONS`), and the two new manual-drop directory names
+  (`visuals_gemini/`, `evidence/`).
+- **Skill files updated**: `~/.claude/skills/yt-script/SKILL.md`'s "Explanation"
+  section now documents `AI-generate:` as the only valid primary cue and folds in the
+  confidence-based visual-treatment language (lifted verbatim from
+  `gemini_master_prompt.md`'s already-proven SOLID/CONTESTED/UNCERTAIN/myth rules,
+  previously only applied to a one-off Veo re-visualization exercise, now a standing
+  rule for every script going forward) plus the new optional `[EVIDENCE: ...]` cue.
+  `~/.claude/skills/yt-factcheck/SKILL.md`'s "visual anchors" step split into (a) a
+  mood/scene prompt for the primary visual (every section needs one) and (b) an
+  optional real sourceable term/URL for an evidence inset (only where a real source
+  actually exists).
+- **Docs**: `voice.md` (master + `~/.claude/youtube/voice.md` mirror, confirmed
+  byte-identical after the edit) and `idea.md` both updated with the new priority,
+  matching this project's existing decision-log conventions.
+
+**End-to-end verification** (a throwaway `videos/__evidence_smoketest__/` slug, deleted
+after - not committed, not left in the repo): ran every real stage (`script_parser.py`
+→ `narration.py` → `resolve.py` with a stub Gemini asset and a stub screenshot dropped
+in place of a live Chrome session → `alignment.py` → `captions.py` → `audio_mix.py
+--no-music` → `assemble.py`) and actually looked at the rendered frames, not just
+exit codes - confirmed by eye: the Gemini-stub segment showed its evidence inset
+(a real Wikimedia Julius Caesar bust, found live through `sources.py`) bottom-right
+with a white border and "SOURCE" label inside it; the screenshot-evidence segment
+showed its stub bottom-left; the plain segment and the no-evidence fallback segment
+showed neither border nor label at all. This is the same "pixel-diff/frame-check the
+real output, don't trust a clean exit code" discipline the Ken Burns motion fix used
+earlier today.
+
+**Not yet done**: nothing has actually been generated via a live Gemini/Chrome session
+under this new convention - the whole live-10PM-session workflow is still only
+exercised by the smoke test's stub files. The two existing rendered test videos were
+deliberately left untouched (their `script.md`s predate this grammar and would raise
+`ValueError` on a bare search-term cue if ever force-re-resolved without being
+rewritten first - documented in `resolve.py`'s module docstring, not just here).
+
+## Production video regenerated with real Gemini visuals - first live use of the new pipeline (2026-10-27, same day)
+
+User connected Chrome live (not waiting for the planned 10PM window - "Chrome is
+connected", then logged into the Google One Plus account mid-session: "wait! Plus
+account is logged out, let me log in"/"ok logged in!") and asked to actually generate
+the production `library-of-alexandria-destruction` video's 17 non-compliant segments
+(everything still on Wikimedia/Pixabay/NASA as primary - the other 3 were already
+`pollinations`, confirmed compliant already) via Gemini, confirming afterward:
+"generate images only from gemini" (not Veo video - images only, simpler/faster/no
+separate video quota).
+
+**Reused existing work rather than re-deriving prompts**: `veo_prompts.md` (from the
+2026-10-26 Veo retrofit exercise) already had all 20 segments' prompts written with
+the confidence-based visual treatment correctly applied (SOLID=photorealistic
+documentary, CONTESTED/UNCERTAIN=desaturated/grained/blurred, myth=illustrated
+manuscript) - adapted each one for still-image generation (dropped camera-movement
+language like "slow push-in," added "square 1:1 composition" framing) instead of
+re-inventing them.
+
+**Generation workflow** (`gemini.google.com/app`, Flash model, Plus account): one new
+chat per segment (avoids the exact "stale similar-looking chat" mixup bug logged
+2026-10-26), type prompt, wait for generation, click the image's own download icon
+(top-right overlay on hover - NOT the circular icon in the image's center, which is a
+share-link flow per the 2026-10-26 note; this is a cleaner, more reliable control than
+the "..." menu's "Download image" used last time), verify via `PowerShell
+Get-ChildItem ... Sort-Object LastWriteTime` which exact file just landed (never
+assumed the filename), then moved+renamed into
+`build/visuals_gemini/<seg_id>.png`. **Real tooling snag found and fixed**: the Bash
+tool's `~` resolved to a stale/different path than the actual Windows Downloads folder
+for file-listing purposes (a plain `ls ~/Downloads` kept showing yesterday's files
+even after a confirmed-fresh download) - switched to PowerShell
+`$env:USERPROFILE\Downloads` for every download-detection check, and used the
+explicit `/c/Users/shahb/Downloads/...` path (not `~`) for the actual `mv` into place,
+which worked correctly throughout. One real mid-session Gemini error ("Something went
+wrong (1076)") on segment 12/17 - the prompt text survived in the input box unsent;
+re-clicking send recovered it without re-typing, confirmed by the chat title changing
+and a real image landing right after.
+
+All 17 generated, verified by file listing (`beat_01_seg00.png` through
+`beat_09_seg00.png`, 8-12MB each - full-resolution downloads, not thumbnails) before
+touching the pipeline.
+
+**Re-resolving without wasting the 3 already-compliant segments**: running
+`resolve.py --force` on the whole slug would have been wrong - the 3 segments already
+on `pollinations` (`beat_06_seg02`/`beat_07_seg00`/`beat_07_seg03`) have empty
+`search_terms` (confirmed by reading their actual cue structure in `beats.json` before
+assuming), so they wouldn't have tripped the new `ValueError`, but `--force` would
+still have thrown away their already-good Pollinations images and regenerated new
+(different, pointless) ones. Instead: surgically removed just the 17 target segments'
+entries from `manifest.json` (kept the 3 compliant ones cached), then ran `resolve.py`
+with no `--force` flag at all - the 17 missing-from-cache entries resolved fresh
+(found their new `visuals_gemini/` assets immediately, zero fallback to Pollinations
+needed), the 3 cached ones were left untouched. Confirmed via `Counter` over
+`manifest.json`: `{'gemini': 17, 'pollinations': 3}`, zero `wikimedia`/`nasa`/
+`pixabay`/`smithsonian` remaining anywhere as a primary source.
+
+**Re-rendered and verified**: `assemble.py --force` (20 segment clips + final mux,
+backgrounded, ~a few minutes given the Gemini images are 8-12MB full-res vs. the old
+stock photos' smaller sizes) → `output/final.mp4`, 1080x1920, **158.8s - exactly
+matching the known-good duration** (only the visuals changed, narration/captions/audio
+untouched), clean full-file ffmpeg decode. Spot-checked 4 frames spread across the
+whole runtime (not just the first one) by eye: the caliph/manuscript illustration at
+the hook, Demetrius proposing to Ptolemy I (photorealistic, SOLID-with-caveat
+treatment correctly applied), the ruined Serapeum interior (UNCERTAIN library link,
+correctly desaturated/moody), and the crumbling-papyrus payoff shot - all
+thematically on-point and dramatically better composed than the old mismatched stock
+photos (e.g. the previously-flagged "castle-alexandria-egypt-aliens" Pixabay mismatch
+is gone, replaced entirely).
+
+**This is the first real, non-synthetic test of the whole 2026-10-27 visual-sourcing
+redesign** - confirms the `visuals_gemini/` pre-placed-asset convention, the
+cache-preserving partial-re-resolve pattern, and the branded-frame compositing all
+work correctly against real Gemini output, not just the smoke test's stub PNGs.
+
+## Found and fixed: production video's captions were stale AND silently empty (2026-10-27, same day)
+
+User reported the production video's subtitles weren't centered. Investigated rather
+than guessing - this turned out to be two stacked bugs, not one:
+
+1. **`captions.ass` was stale**, dated Oct 26 01:45 - from *before* the 2026-10-26
+   word-pop caption redesign ever happened. It still had the old `Karaoke` style
+   (bottom-bar, alignment=2, 6-word lines), not the current `Word` style
+   (full-frame-centered, alignment=5, one word at a time). Root cause: today's
+   re-renders of this slug only touched `resolve.py` and `assemble.py` - `captions.py`
+   was never re-run for this slug today, so `assemble()` just kept muxing whatever
+   `captions.ass` was already sitting on disk from over a day ago. Fixed by actually
+   running `captions.py` again.
+2. **That re-run then exposed a second, worse bug**: the regenerated `captions.ass`
+   had exactly **one** `Dialogue` event - the title - and zero word captions. Checked
+   `narration_meta.json` directly rather than assuming: every beat's `words` field was
+   completely absent. This is the *exact* silent-failure bug already logged on
+   2026-10-26 ("Captions were silently missing entirely... `synthesize()` rebuilds
+   `narration_meta.json` from scratch, silently wiping the `words` field that only
+   `alignment.py` adds") - `captions.py`'s `if not words: continue` skipped every
+   single beat with no error. Confirmed `narration_meta.json`'s mtime (Oct 26 14:07)
+   matches a `narration.py` run that postdates whatever earlier `alignment.py` run had
+   populated `words` - the exact wipe sequence the 2026-10-26 entry describes, just
+   never re-aligned afterward for this slug specifically.
+
+Fixed by re-running `alignment.py --force` (403/408 words aligned), then `captions.py`
+again (399 Dialogue events this time, not 1), then a final `assemble.py --force`.
+**Verified properly this time** - the first attempt's visual check sampled two
+arbitrary timestamps that happened to land in the gaps between words (word-pop
+captions are only visible ~0.1-0.3s each) and showed nothing, which could have been
+misread as "still broken." Pulled the exact first word event's timing straight from
+`captions.ass` ("Before", 0.00-0.20s) and sampled a frame inside that exact window
+instead of guessing - confirmed the word renders dead-center of the full 1080x1920
+frame, matching the `Word` style's `alignment=5`.
+
+Final: 1080x1920, 158.8s (unchanged - only captions changed, not timing), clean
+full-file decode. **Lesson reinforced for future re-renders of any slug**: `--force`
+on `assemble.py` alone does NOT regenerate captions - if a slug's narration or
+alignment has been touched since its `captions.ass` was last built, `captions.py`
+needs its own explicit re-run, or the mux step silently keeps using a stale file with
+no warning.
+
+## Carried-forward open items (as of end of day, 2026-10-27)
+
+Resolved today, superseding items on the 2026-10-26 list: #0 (Veo re-visualization) -
+superseded by the "images only from Gemini" decision, not video clips; the
+`build/visuals_v2/` video-clip compositing path built on 2026-10-26 still exists and
+works (used by the gemini-test slug), just isn't the chosen path for the production
+slug going forward. #1 (Pixabay relevance-filter mismatch) - moot, the two affected
+segments are Gemini-sourced now, Pixabay isn't used as a primary source for anything
+anymore (see below for where it still matters). #3 (wire a voice preset into the
+pipeline) - done, superseded twice over by `af_bella` then `hf_alpha`, both actually
+wired via `voice.md`'s `[CONFIRMED]` line read by `config.get_voice_preset()`. The
+back half of #11 (word-by-word caption mode "vs. the current karaoke-highlight line
+groups") was already stale by the time it was written - the same-day 2026-10-26
+caption redesign (word-pop, one at a time) had already superseded the karaoke style
+it was comparing against.
+
+Still open, unchanged: #2 (confirm by ear whether Kokoro mispronounces Greek/
+Ptolemaic proper nouns - now a question about `hf_alpha`, not `am_michael`, never
+actually checked), #4 (character pose variety, single-pose only, character overlay
+currently off anyway), #6 (mobile push notifications), #7/#7b (Bollywood music
+library still zero tracks; old genre library's SFX listen-through still pending),
+#8 (actual YouTube channel still doesn't exist), #9/#10 (audio library CLI/LUFS
+notes, not blocking), #11's front half (Smithsonian rarely returns usable results -
+unchanged, now actually relevant again since Smithsonian is part of the *evidence*
+search chain, not retired).
+
+New from today:
+
+1. **`script.md` itself was never rewritten to the new cue grammar for
+   `library-of-alexandria-destruction`** - the render now uses real Gemini images
+   (via the `visuals_gemini/` pre-placed-asset path), but the script's `[ON SCREEN:
+   ...]` cues are still the old bare-search-term form. This works fine as long as
+   those Gemini assets stay on disk, but a future `--force` re-resolve of this slug
+   *without* the assets present (or without first rewriting the cues to
+   `AI-generate:` prompts) will hit the new `ValueError` - this is flagged in
+   `resolve.py`'s own docstring as intentional, but the script itself is still
+   technically inconsistent with what it actually renders. Worth rewriting
+   `script.md`'s cues to match, for long-term maintainability, next time this video
+   is touched.
+2. **`[EVIDENCE: ...]` has never been used in a real script** - built and verified
+   against a throwaway smoke-test slug only (stub Gemini/screenshot files, deleted
+   after). No actual video has a real evidence inset yet; the production
+   regeneration today had zero evidence cues in its (old-grammar) script.
+3. **Live Chrome screenshot evidence has never actually been captured** - same
+   status, smoke-tested with a stub file only.
+4. **3 of `library-of-alexandria-destruction`'s 20 segments are still Pollinations,
+   not Gemini** (`beat_06_seg02`/`beat_07_seg00`/`beat_07_seg03` - already compliant
+   with the new rules, just not upgraded to Gemini quality). Left as-is since the
+   user didn't ask for a full-Gemini pass, only a compliant one - could be revisited.
+5. **The planned "connect Chrome around 10 PM, work through the night" cadence
+   hasn't actually been exercised as its own cadence yet** - today's Gemini
+   generation happened ad hoc, mid-afternoon, once the user had Chrome/the Plus
+   account ready, not during a dedicated overnight session. The mechanism is now
+   proven (17 real images generated, resolved, and rendered correctly end to end),
+   just not yet under the specific nightly timing originally discussed.
+6. **Lesson to carry into every future re-render, not just this one**: `assemble.py
+   --force` does not regenerate captions - if narration or alignment changed since a
+   slug's `captions.ass` was last built, run `captions.py` explicitly too, or risk
+   silently muxing a stale or (per today's second bug) completely empty caption
+   file.
