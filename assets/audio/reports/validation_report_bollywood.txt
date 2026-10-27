@@ -1,0 +1,15 @@
+BOLLYWOOD-REFERENCED MUSIC LIBRARY VALIDATION REPORT
+======================================================
+
+
+DUPLICATE FILENAMES
+--------------------
+none
+
+EXACT-DUPLICATE AUDIO (identical hash)
+--------------------
+none
+
+NEAR-DUPLICATE AUDIO (spectral similarity >= 0.985, flagged for review, not rejected)
+--------------------
+none

@@ -1,0 +1,23 @@
+AUDIO LIBRARY GENERATION REPORT
+========================================
+
+Music tracks generated: 50, valid: 50
+SFX generated: 50, valid: 50
+Total audio duration (valid assets): 1279.1s (21.3 min)
+Total disk usage (valid assets): 351.3 MB
+Failed assets: 0
+Assets flagged for review (non-fatal): 0
+
+KNOWN LIMITATIONS
+--------------------
+- Not yet human-verified by ear - numeric validation only (no clipping, no NaN,
+  no silence, correct format). Listen before relying on this in a real upload.
+- 'Measured loudness' is pyloudnorm's ITU-R BS.1770 integrated loudness where the
+  package is installed; true peak is a 4x-oversampling estimate, not a certified
+  BS.1770-4 true-peak meter. Neither is a claim of compliance with a specific
+  broadcast/streaming loudness standard.
+- Near-duplicate detection is a cheap 32-band spectral fingerprint, not a
+  perceptual audio-matching algorithm - treat flags as 'worth a listen', not
+  as confirmed duplicates.
+- No limiter/compressor stage - if an edit stacks multiple beds/SFX together,
+  re-check the combined peak before export.

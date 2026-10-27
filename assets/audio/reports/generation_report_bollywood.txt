@@ -1,0 +1,19 @@
+BOLLYWOOD-REFERENCED MUSIC LIBRARY GENERATION REPORT
+======================================================
+
+Tracks generated: 0, valid: 0
+Total audio duration (valid assets): 0.0s (0.0 min)
+Total disk usage (valid assets): 0.0 MB
+Failed assets: 0
+Assets flagged for review (non-fatal): 0
+
+KNOWN LIMITATIONS
+--------------------
+- Not yet human-verified by ear - numeric validation only.
+- 'Measured loudness' is pyloudnorm's ITU-R BS.1770 integrated loudness where the
+  package is installed; true peak is a 4x-oversampling estimate, not a certified
+  BS.1770-4 true-peak meter.
+- Near-duplicate detection is a cheap 32-band spectral fingerprint, not a
+  perceptual audio-matching algorithm.
+- No limiter/compressor stage on an individual track - if an edit stacks
+  multiple beds/SFX together, re-check the combined peak before export.
