@@ -81,10 +81,18 @@ won't actually match the finished narration.
   `hf_alpha` here is specifically the English-with-Indian-tone pairing, not a Hindi
   voice pick.
 - **Pacing:** 150 wpm baseline, matching `yt-script`'s own runtime-estimate math.
-- **Visual style mix:** Wikimedia Commons / NASA / Pixabay / Smithsonian as primary
-  (free, license-checkable, already tested working); `AI-generate:` prompts only as
-  fallback for what those four don't cover (Pexels and free Gemini image generation
-  are currently unavailable - see `research-findings.md`).
+- **Visual style mix [CONFIRMED, flipped 2026-10-27]:** AI-generated is primary on
+  every segment now - Gemini (live, via the Chrome browser extension, in a session
+  manually started around 10 PM) first, Pollinations.ai (`AI-generate:` cues, free,
+  keyless, already automatable) as the always-available fallback for whatever Gemini
+  doesn't cover that session. Every `AI-generate:` prompt carries the confidence-based
+  visual treatment as a standing rule: SOLID = documentary-real, CONTESTED/UNCERTAIN =
+  same but visibly softened/grained/blurred, myths = illustrated retelling, never a
+  reenactment. Wikimedia Commons / NASA / Pixabay / Smithsonian, plus live-captured
+  Chrome screenshots, are demoted to evidence-only: a smaller bordered inset, labeled
+  SOURCE, over the primary visual, for exactly one segment at a time, never the full
+  content square again - see `idea.md`'s "Visual sourcing priority flipped" entry and
+  `pipeline/script_parser.py`'s `[EVIDENCE: ...]` cue.
 - **Content structure: Storytelling → Explanation → Questionary.** Open with the
   narrative hook (storytelling), move through the claims at their actual confidence
   level (explanation - this is just the existing SOLID/CONTESTED/UNCERTAIN beats

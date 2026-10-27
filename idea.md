@@ -265,6 +265,48 @@ single fixed "always centered zoom-in," which a pixel-diff check that same day f
 had been silently non-functional (clamped flat, no visible motion) since it was
 first built. Full detail and the bug fix in `memory.md`.
 
+**Visual sourcing priority flipped, global (2026-10-27):** AI-generated visuals
+(Pollinations.ai, code-automatable; Gemini, live via the Chrome browser extension
+during a session the user manually starts around 10 PM — not headless, not API, not
+scheduled) are now the primary full-square visual on every segment, carrying the
+confidence-based visual treatment (SOLID = documentary-real, CONTESTED/UNCERTAIN =
+same but visibly softened/grained/blurred, myths = illustrated retelling) as a
+standing rule. Wikimedia/NASA/Pixabay/Smithsonian and live Chrome screenshots are
+demoted to a smaller bordered evidence inset — randomized corner/center position,
+labeled SOURCE, one at a time, shown for exactly one segment — never the full square
+again. The render pipeline now rejects (`ValueError`) a bare search-term `ON SCREEN`
+cue outright rather than silently resolving it against those sources, so an old-style
+script must be rewritten, not reinterpreted. New `[EVIDENCE: "term"]` /
+`[EVIDENCE: screenshot: "<url>"]` cue in `script.md`; see `pipeline/script_parser.py`,
+`visuals/resolve.py`, `assemble.py`, and the new `pipeline/evidence.py`. Verified
+first against a throwaway smoke-test slug (stub assets, not committed), then for
+real: both already-rendered test videos were initially left untouched, but
+**`library-of-alexandria-destruction` was then actually regenerated the same day**
+(the "not retroactively applied" caveat above was about not being forced — once the
+user had Chrome connected and wanted to see the real result, it was) — 17 of its 20
+segments got real Gemini-generated images (the other 3 were already
+Pollinations-compliant), confirmed via the manifest (`{"gemini": 17, "pollinations":
+3}`, zero Wikimedia/NASA/Pixabay remaining as primary) and by eye across several
+frames spanning the full runtime. `library-of-alexandria-destruction-gemini-test`
+remains untouched (it was already 100% Gemini-sourced from its original 2026-10-26
+build, confirmed compliant without needing any change).
+
+**Two real bugs found and fixed while re-rendering `library-of-alexandria-destruction`
+with the new visuals (2026-10-27, same day)**: (1) its `captions.ass` was over a day
+stale, still using the pre-redesign bottom-bar karaoke style, because re-running
+`resolve.py`/`assemble.py` alone never re-triggers `captions.py` — the mux step just
+keeps muxing whatever caption file is already on disk, silently. (2) Regenerating
+captions then exposed that `narration_meta.json` had lost its `words` field entirely
+(the same silent-wipe failure mode logged on 2026-10-26: a `narration.py` run
+rebuilds that file from scratch and wipes alignment data unless `alignment.py` runs
+again afterward) — `captions.py`'s `if not words: continue` had been skipping every
+beat with no error, so the muxed captions.ass held only the title event. Fixed by
+re-running `alignment.py --force` then `captions.py` then a final `assemble.py
+--force`; verified by sampling a frame at the exact timestamp of a real word event
+pulled from the `.ass` file (not a guessed timestamp) and confirming it renders
+dead-center. Full narrative, exact commands, and every verification step in
+`memory.md`.
+
 **Host character decided**: a recurring silhouette figure — wide-brim fedora and
 long coat matching the channel's own logo (`branding/AstralParadoxDP.png`, "Astral
 Paradox") — appears over the background visuals, moving across the square between
@@ -280,9 +322,13 @@ support the epistemic-transparency differentiation angle below.
 
 ## Open questions / not yet decided
 
-- Free/cheap TTS alternatives to ElevenLabs worth evaluating.
-- Free image/video generators and footage sources to build the visual-sourcing
-  workflow around.
+Both prior items here are resolved: TTS was settled early (Kokoro, see Budget §2
+above) and the visual-sourcing workflow is now the Gemini+Pollinations-primary /
+real-sources-evidence-only setup described in "Visual sourcing priority flipped"
+above. Nothing currently open at the project-decision level — see `memory.md`'s
+latest "Carried-forward open items" for in-progress/pending work instead (e.g. the
+Bollywood music library still has zero composed tracks, character pose variety is
+still single-pose, and the actual YouTube channel doesn't exist yet).
 
 ## Kokoro voice preset (decided, 2026-10-26; reverted 2026-10-27; promoted to global default, same day)
 
