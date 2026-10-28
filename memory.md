@@ -1846,3 +1846,351 @@ or unaffected. New/updated:
    character pose variety still single-pose, actual YouTube channel still doesn't
    exist, mobile push notifications still disabled, Kokoro's Greek/Ptolemaic
    pronunciation still unconfirmed by ear) is unchanged by this session.
+
+# Progress log — 2026-10-28
+
+## Music/SFX dropped from production, for now
+
+User: "we are dropping the Musics and SFX, no need for that for now." Scoped this
+as a toggle, not a deletion - same pattern the project already uses for
+`config.SHOW_CHARACTER` and the old genre-based music library (left on disk,
+just no longer selected): narration-only mix is now the actual default, but
+nothing was deleted and the code paths that build a music bed/SFX accents still
+work if flipped back on.
+
+**Code changes:**
+- `pipeline/config.py` - new `ENABLE_MUSIC = False` / `ENABLE_SFX = False` flags,
+  right above the existing `MUSIC_BED_GAIN_DB`/`SFX_GAIN_DB` constants.
+- `pipeline/audio_mix.py` - `build_mix()` gained a `no_sfx` parameter (SFX cues
+  were previously always added regardless of the existing `no_music` flag - this
+  was the one actual gap, since SFX had never been given its own off-switch).
+  Both `no_music`/`no_sfx` now default from `config.ENABLE_MUSIC`/`ENABLE_SFX`
+  instead of defaulting on. CLI flipped from opt-out (`--no-music`) to opt-in
+  (`--music`/`--sfx`), matching the new default-off state.
+- `pipeline/render.py` - same CLI flip (`--music`/`--sfx` opt-in, replacing
+  `--no-music`), passed through to `audio_mix.build_mix()`. Updated the
+  end-of-run reminder print to only mention checking music/SFX by ear when one
+  of those flags was actually used.
+- Verified with `python -c "import ast; ast.parse(...)"` on all three edited
+  files (syntax only - no render re-run, since no existing video's render
+  changes as a result: every past render already used `--no-music` or had no
+  SFX cues to begin with, so this is a default-direction change going forward,
+  not a retroactive fix).
+
+**Docs:** `idea.md`'s Budget §4 rewritten - the drop stated as the current
+decision, with the full prior history (topic-based library -> Bollywood-emotion
+pivot) kept in a collapsed `<details>` block for context rather than deleted.
+Also updated the "Open questions" section's stale reference to the Bollywood
+library's zero-tracks status, since it's no longer a blocking open item now
+that music/SFX isn't part of production at all.
+
+**Left untouched on purpose:** `Assets_audio/` (genre library, Bollywood-emotion
+scaffolding, SFX catalog) and `assets/audio/`'s generator source/dev tree - all
+still on disk, still functional, just unused by default. `script_parser.py`'s
+`[MUSIC: ...]` cue parsing also left as-is (dead but harmless when absent) -
+checked first and confirmed no real script, including the production
+`library-of-alexandria-destruction/script.md`, has ever actually used a
+`[MUSIC: ...]` cue, so there was no script content to rewrite. Same check found
+no mention of MUSIC/SFX in `voice.md` or `yt-script/SKILL.md` needing an update.
+
+## `library-of-alexandria-destruction-gemini-test` fully re-rendered with real Gemini visuals (2026-10-28, same day)
+
+User asked to re-render this test slug and generate new images from Gemini
+"according to script and rules" - its `build/` visuals had been deliberately
+deleted in the 2026-10-27 "Test folder cleanup," leaving only narration/
+captions/script on disk.
+
+**Cut-rate math done before generating anything** - user caught that the
+script still only had 7 `[ON SCREEN: ...]` cues across 4 beats (16.96s/
+10.94s/18.22s/15.30s), which at 1-2 cues per beat would produce several
+segments holding 7-12s - several times over `visual-style-brief.md`'s ≤4s
+cap. Recalculated precisely against `narration.py`'s actual `_segment_timing()`
+formula (duration split by each segment's word count, not estimated) and
+re-split every beat's cue points at natural clause breaks - landed on 18
+segments total (6+3+5+4), each 2.08-3.93s, verified by a trial `narration.py`
+run producing zero `[cut-rate]` warnings before generating a single image.
+
+**Script rewritten to the current cue grammar first** - the slug's
+`[ON SCREEN: ...]` cues were still bare pre-2026-10-27 Wikimedia search terms
+(old grammar; `resolve.py` now raises `ValueError` on that form). Rewrote all
+18 to `AI-generate:` prompts per `visual-style-brief.md`, grounded in the
+shared `research.md`'s actual confidence levels (claim 4 = SOLID gradual
+decline, claim 2a = CONTESTED Demetrius's role, claim 3 = SOLID-with-caveat
+scroll count, HOOK = myth/legend caliph framing) rather than guessed.
+
+**All 18 images generated live via Gemini** (`gemini.google.com/app`, Flash,
+one new chat per segment - same stale-chat-avoidance discipline as every prior
+session). Real friction hit and handled:
+- **A download-verification bug caught itself twice** - checking Downloads
+  immediately after a click (2s/3s wait) sometimes grabbed a stale leftover
+  file instead of the real new one, once pulling in a byte-identical duplicate
+  of the previous segment's image, once pulling a file from two days earlier.
+  Both caught by cross-checking the grabbed file's `LastWriteTime` against the
+  last confirmed-good timestamp before trusting it, and fixed by waiting
+  6-8s and verifying the timestamp is genuinely newer every time after. Real
+  mis-files were deleted and re-grabbed correctly both times - nothing wrong
+  shipped.
+- **The "New chat" click once mis-fired into the previous image's edit/sketch
+  view** (Save/Sketch/Text toolbar) instead of starting a fresh chat - caught
+  immediately from the screenshot, backed out via browser history `back`
+  (not the in-app back arrow, which didn't register) without saving any edit,
+  confirmed back on a clean "Where should we start?" screen before retrying.
+- **The literal two-bar comparison chart concept for the 40,000-vs-700,000
+  segment didn't render reliably after 4 attempts** (2 retries in one chat per
+  `visual-style-brief.md`'s section 8 cap, a fresh chat, then a simplified
+  prompt - Gemini kept merging the two bars into one or dropping the label
+  text). Per the brief's own discipline, stopped forcing the failing concept
+  and pivoted to something achievable instead: a single absurdly tall,
+  precarious stack of scrolls conveys "is this number real" without needing
+  precise multi-element chart geometry - worked on the first try, and the two
+  follow-up segments (zoom on a worn source scroll, sketchy-dashed exaggerated
+  top) were redesigned to follow from the new scroll-stack concept instead of
+  the abandoned bar chart. `script.md`'s cues for these three segments were
+  rewritten to match what was actually generated, not left pointing at the
+  abandoned wording - same "script must match what it renders" discipline
+  already logged for the production slug's open items.
+
+**Resolved, captioned, mixed, assembled** - `resolve.py` (no `--force`,
+all 18 fresh entries, zero fallback) -> `Counter({'gemini': 18})`, zero
+Wikimedia/Pixabay/other sources. `audio_mix.py` run with no `--music`/`--sfx`
+flags (narration-only, per today's earlier drop decision above) -> 62.8s,
+unchanged from the known-good narration duration. `assemble.py --force`.
+
+**Hit the exact documented captions-wipe bug, caught it, fixed it properly
+this time** - first assemble pass produced a `captions.ass` with exactly one
+`Dialogue` event (the title), same root cause logged twice before
+(2026-10-26, 2026-10-27): re-running `narration.py` to get fresh per-segment
+timings for the cut-rate math had rebuilt `narration_meta.json` from scratch
+and silently wiped the `words` field only `alignment.py` adds, so
+`captions.py`'s `if not words: continue` skipped every beat. Caught by a real
+watch pass (global `video-reader` skill, not just ffprobe) - sampled frames
+showed the branded frame and visuals looking right but zero caption text
+anywhere, which was the tell. Fixed by `alignment.py --force` (158/157 words
+aligned) -> `captions.py` (156 Dialogue events, not 1) -> `assemble.py
+--force`. **Verified properly, not just re-sampled blindly**: pulled the
+real first few word events' exact timings straight from the regenerated
+`captions.ass` ("believe", 0.42-0.72s) and output-side-seeked a frame inside
+that exact window - confirmed the word renders correctly in the bottom bar,
+then re-ran the full `video-reader` pass (20 frames + transcript) and
+confirmed captions, visual treatment (myth/SOLID/CONTESTED all correctly
+differentiated), and narration all read correctly end to end. Whisper's
+transcript still mis-hears the same proper nouns as before (Caliph->"Caleb",
+Mouseion->"Mausian", Ptolemaic/Ptolemy->"Tolmeic"/"Tolmei", Demetrius of
+Phalerum->"the materials of phallarum") - confirmed pre-existing and
+unrelated, since the burned captions show the correct script text regardless.
+
+**Final output**: 1080x1920, 62.8s, clean full-file ffmpeg decode, zero
+Wikimedia/Pixabay fallback, narration-only audio (no music/SFX), all 18
+segments verified by eye against their intended confidence treatment and
+cut-rate target.
+
+## Ken Burns motion dropped: every still image now fixed, fully visible, centered (2026-10-28, same day)
+
+User: "Discard tthe moving image effect! All the images should be fixed and
+fully visible at center." Scoped as a toggle, not a deletion - same pattern
+as `SHOW_CHARACTER`/`ENABLE_MUSIC`/`ENABLE_SFX`: new `config.ENABLE_KEN_BURNS
+= False`, `assemble.py`'s `_build_segment_clip()` branches on it - the
+zoompan code path (`MOTIONS`/`motion_for_segment`/`_motion_exprs`) is
+untouched and still works if flipped back on, just unused by default.
+
+**New still-image chain**: `scale=SQUARE_WIDTH:SQUARE_HEIGHT:
+force_original_aspect_ratio=decrease` (fit *within* the rectangle, never
+crop - the video-clip branch above it still uses `increase`+`crop` on
+purpose, unaffected) then `pad` to center that fit inside the content
+rectangle (letterboxed/pillarboxed if the image's aspect doesn't exactly
+match), then the existing second `pad` onto the full canvas at its fixed
+position - same two-stage pad pattern the video-clip branch already used.
+
+**Real bug caught before trusting it**: first version added a redundant
+`fps=config.FPS` filter after the pad (copied from the old zoompan chain's
+`s=...:fps=FPS` parameter), but the looped still-image *input* is already
+locked to exactly `config.FPS` via the existing `-r` flag - the extra
+downstream fps filter introduced a consistent ~1-frame rounding loss on
+every one of the 18 re-rendered `library-of-alexandria-destruction-gemini-test`
+clips (measured: each clip landed 0.014-0.047s short, 0.6s total), which
+`assemble()`'s `-shortest` flag then silently used to trim the last ~0.6s of
+audio off the final mux - caught by comparing `video_silent.mp4`'s probed
+duration (62.23s) against `mix.wav`'s (62.82s) rather than trusting the
+final output's reported duration alone. Fixed by removing the redundant fps
+filter entirely; re-verified per-clip durations landed back within normal
+frame-quantization tolerance (±1 frame, not a systematic loss) and the full
+re-render matched the audio exactly (62.8s again).
+
+**Verified it's actually static and actually fully visible**, not just
+exit-code-clean: pixel-diffed two accurate (segment-boundary-checked, not
+guessed) timestamps inside the same segment - 0.43% of pixels differed by
+more than 10 (just the caption word changing in the bottom bar), vs. a first
+careless attempt that picked timestamps straddling a segment boundary and
+wrongly showed a 28% diff (two different images, not motion - caught and
+redone correctly before concluding anything). Read two actual frames by eye
+and confirmed both a wide-aspect image (fills the rectangle edge to edge, no
+visible letterboxing needed) and a different image render fully visible and
+centered with no cropping.
+
+**Not retroactively applied elsewhere**: scoped this re-render to the
+gemini-test slug only, since that's what was being worked on - the config
+flag itself is global (`assemble.py` has no per-slug motion setting), so it
+governs every future render by construction, but the existing production
+`library-of-alexandria-destruction` render still has whatever motion it was
+last built with until it's re-rendered.
+
+## Gemini watermark - inpainting tried and rejected, fixed with a crop-with-headroom rule instead (2026-10-28, same day)
+
+User: "now can you remove the Gemini watermark without croping the imagees???"
+- a small gray 4-point sparkle, consistently baked into the bottom-right
+corner of every image downloaded via Gemini's "Download full size" button
+(confirmed directly on-disk, not just a page overlay - measured precisely
+against a high-contrast image: a 95x95px mark sitting 65px from both the
+right and bottom edges, identical across all 18 checked exports since every
+one of them is the same 2752x1536 resolution).
+
+**Inpainting tried first, honestly evaluated, and rejected** - several
+approaches with OpenCV, each tested on real segment images before trusting
+it, not just assumed to work:
+- Plain `cv2.inpaint` (Telea) over a padded rectangle mask: left a visible
+  dark triangular/pyramid smudge on images where the mask touched one of
+  these illustrations' own baked-in soft bottom vignette/letterbox gradient
+  (common in the painted-scene style) - the fast-marching algorithm
+  converges toward a point when the mask boundary has a hard dark/light
+  transition on one side.
+- Splitting the mask into a flat-color fill (for the part overlapping a
+  detected solid band) + inpainting only the textured remainder: reduced but
+  did not eliminate the pyramid artifact - it's a property of the algorithm
+  meeting a boundary mismatch, not just the mask shape.
+- A tight diamond-shaped mask instead of a full rectangle: left visible
+  remnants of the actual star/sparkle silhouette poking out past the
+  diamond's edges on some images (the real mark's points extend further than
+  a simple rotated-square diamond covers).
+- A feathered/Gaussian-blurred blend of the inpainted patch into the
+  original: softened the edge but didn't remove the underlying problem - on
+  detailed/ornate images (gold-leaf manuscript border, colonnade with fine
+  linework) the patch was a visibly blurry, texture-less blob, arguably more
+  noticeable than the small watermark it replaced.
+
+Flagged this honestly rather than shipping a flawed result or quietly
+picking an approach: basic inpainting (Telea/NS - no `cv2.xphoto`/contrib
+module installed, no generative content-aware-fill tool available in this
+environment) just isn't strong enough for detailed illustrated content, and
+separately, this is Google's own AI-content watermark on Gemini output -
+removing it likely runs against Gemini's usage terms, worth weighing
+against this channel's own epistemic-transparency differentiation angle.
+Asked the user how to proceed (`AskUserQuestion`) rather than guessing.
+
+**User's actual answer resolved both problems at once**: generate images
+with extra vertical headroom, then remove the watermark by cropping off the
+bottom strip - not inpainting, not asking Gemini to omit the mark (can't),
+just composing around it. Implemented as a standing rule, not a one-off:
+- `config.GEMINI_WATERMARK_CROP_FRAC = 0.15` - crop the bottom 15%, keep the
+  top 85%, with the measurement and the "why not inpainting" reasoning
+  documented inline.
+- `assemble.py`'s `_build_segment_clip()` gained a `source` parameter
+  (threaded through from `manifest[seg_id]["source"]`, already distinguishing
+  `"gemini"`/`"pollinations"`/`"screenshot"`) and a `wm_crop` filter stage -
+  `crop=iw:ih*0.85:0:0` prepended to the still-image chain only when
+  `source == "gemini"`, so Pollinations and evidence images are untouched.
+  Applied uniformly to both the Ken-Burns branch (dormant but still
+  functional) and the default static-fit branch, so the rule holds either
+  way the motion flag is set.
+- `visual-style-brief.md`'s per-prompt checklist updated with a new bullet:
+  compose the real subject within the top ~85% of the frame, treat the
+  bottom ~15% as disposable margin, since that's what gets cropped off.
+- The abandoned `pipeline/visuals/dewatermark.py` inpainting module and every
+  scratch test image from that dead end were deleted, not left half-working
+  in the tree.
+
+**Verified on the exact two images that broke inpainting worst** (the
+stairs/steps image and the crumbling-library image, both with a baked-in
+dark bottom vignette) - full rebuild of all 18 clips + re-assemble, zero
+rounding regression (62.8s, matches audio exactly, same frame-rate lesson
+from the Ken Burns fix still holds). Sampled frames from both problem
+segments plus four more spread across the video - watermark gone everywhere
+checked, no visible crop artifact, no important content cut off (none of the
+sampled images had anything essential in their original bottom 15%), captions
+still correctly synced. Full-file ffmpeg decode clean, 1080x1920, 62.8s.
+
+## All 18 `visuals_gemini` source images deleted (2026-10-28, same day)
+
+User: "delete all 18 images from the c:\YouTube\videos\library-of-alexandria-
+destruction-gemini-test ... mention all the progress n docs." Deleted
+`build/visuals_gemini/*.png` (the folder is now empty, confirmed before and
+after) - exactly the 18 images, nothing else in the slug's `build/` touched.
+
+**Left deliberately unchanged, flagged rather than silently fixed**:
+`build/manifest.json` still has `path` entries pointing at those now-deleted
+files, `build/clips/*.mp4` (the 18 already-rendered per-segment clips) still
+exist and still physically contain the baked image content since they were
+rendered before the deletion, and `output/final.mp4` is a finished mux that
+doesn't read the source PNGs at all - so the slug's actual output is
+unaffected and still watchable as of this delete. What breaks is only a
+*future* `resolve.py`/`assemble.py --force` re-run on this slug, which would
+try to read the missing files - same staleness-bug class this project's own
+`memory.md` already logs real incidents for, so calling it out explicitly
+rather than letting it surprise a later session. Nothing was deleted to
+pre-empt this since the user's ask was scoped to the 18 images specifically.
+
+## Session summary - everything done today, 2026-10-28, for the doc record
+
+In order:
+
+1. **Music/SFX dropped from production, as a toggle** -
+   `config.ENABLE_MUSIC`/`ENABLE_SFX = False`, `audio_mix.py` gained its own
+   `no_sfx` off-switch (previously missing), `render.py`/`audio_mix.py`'s CLI
+   flipped from opt-out (`--no-music`) to opt-in (`--music`/`--sfx`).
+   `Assets_audio/` and the dev/source tree left untouched on disk, just
+   unselected. Logged in `idea.md` Budget §4 (prior history collapsed into a
+   `<details>` block, not deleted).
+2. **`library-of-alexandria-destruction-gemini-test` cut-rate rebuilt**: the
+   script's original 7 `[ON SCREEN: ...]` cues were recalculated against
+   `narration.py`'s real per-segment timing formula and split into 18 cues (2.08-
+   3.93s each, all under the 4s cap) at natural clause breaks, verified by a
+   zero-warning `narration.py` dry run before generating anything.
+3. **Script rewritten to current cue grammar**: old bare Wikimedia search-term
+   `[ON SCREEN: ...]` cues (which `resolve.py` now rejects) replaced with 18
+   `AI-generate:` prompts grounded in the shared `research.md`'s real
+   confidence levels (SOLID/CONTESTED/myth), per `visual-style-brief.md`.
+4. **All 18 images generated live via Gemini** (Flash, one new chat per
+   segment). Real friction handled: a download-verification race condition
+   (caught and fixed by cross-checking timestamps against the last known-good
+   download before trusting a grab, twice), a stray click into an image's
+   edit view recovered via browser-history back, and a literal two-bar-chart
+   concept abandoned after 4 failed attempts in favor of a precarious
+   scroll-stack visual that actually rendered correctly - `script.md`'s cues
+   rewritten to match what was actually generated.
+5. **Resolved/captioned/mixed/assembled** - hit and fixed the exact
+   captions-silently-empty bug this project has now logged three times
+   (`alignment.py`'s word data gets wiped by any bare `narration.py` re-run) -
+   caught via a real `video-reader` watch pass, not just ffprobe, fixed with
+   `alignment.py --force` -> `captions.py` -> `assemble.py --force`. Final:
+   1080x1920, 62.8s, narration-only audio, 18 segments verified by eye.
+6. **Ken Burns pan/zoom discarded, every still image now fixed/centered/fully
+   visible** - `config.ENABLE_KEN_BURNS = False` (toggle, zoompan code path
+   intact), new static-fit filter chain in `assemble.py`. Caught and fixed a
+   real ~1-frame-per-clip rounding loss (a redundant `fps=` filter) before it
+   shipped, by comparing the silent video track's duration against the audio
+   mix's rather than trusting the final output alone.
+7. **Gemini watermark removed via upstream crop, not inpainting** - four
+   different inpainting strategies tried and honestly rejected (all left a
+   visible patch, sometimes worse than the mark itself, on detailed images);
+   flagged the Gemini-ToS/AI-provenance angle and asked the user rather than
+   guessing; user's answer (generate with extra headroom, crop the bottom
+   strip) implemented as `config.GEMINI_WATERMARK_CROP_FRAC = 0.15` +
+   `visual-style-brief.md`'s new "compose within the top 85%" rule, gated on
+   `manifest[...]["source"] == "gemini"` so Pollinations/evidence assets are
+   untouched. Verified clean on the two worst-case images plus four more.
+8. **The 18 source images deleted** (this entry) - `build/clips/`,
+   `manifest.json`, and `output/final.mp4` still exist but now reference
+   content that no longer has a source file backing it; flagged above, not
+   silently fixed.
+
+**Carried-forward open items, end of day**: this slug's `manifest.json`/
+`build/clips/` need a full fresh `resolve.py` + `assemble.py --force` (not
+just the deleted images regenerated) before any further rebuild of this
+specific slug - the already-rendered `output/final.mp4` is fine to watch as-is
+in the meantime. The production `library-of-alexandria-destruction` slug was
+not touched today - it still has Ken Burns motion, the Gemini watermark
+(never cropped), and whatever its own `audio_mix.py` state was, unless/until
+it's explicitly re-rendered with today's new defaults. Everything else
+carried from the 2026-10-27 list (Bollywood music library zero tracks now
+moot per item 1, character pose variety single-pose, actual YouTube channel
+still doesn't exist, mobile push notifications still disabled, Kokoro's
+Greek/Ptolemaic pronunciation still unconfirmed by ear) is unchanged.

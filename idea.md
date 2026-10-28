@@ -166,7 +166,19 @@ evaluation of that source and the niche research behind this pivot.
      worth running now.
 3. **Visuals** — mostly free sources + free AI generators; paid stock/AI-image
    subscriptions are optional, not required.
-4. **Music/SFX** — self-produced before launch, not licensed/subscribed.
+4. **Music/SFX — dropped from production for now (2026-10-28).** Narration-only
+   mix is the current default: `pipeline/config.py`'s `ENABLE_MUSIC`/`ENABLE_SFX`
+   flags are `False`, and `audio_mix.py`/`render.py` only include the Bollywood-
+   emotion music bed or the SOLID/CONTESTED SFX accents if explicitly re-enabled
+   (`--music`/`--sfx`). Toggle, not delete — `Assets_audio/` (the genre library,
+   the Bollywood-emotion scaffolding, the SFX catalog) and `assets/audio/`'s
+   generator source stay on disk untouched, same pattern as `config.SHOW_CHARACTER`.
+   History below (self-produced library decisions) is kept for context but no
+   longer governs actual production until this is revisited.
+   <details>
+   <summary>Prior history (superseded)</summary>
+
+   Originally decided: self-produced before launch, not licensed/subscribed.
    **Superseded (2026-10-25, same day):** the original 5-bed/7-SFX library
    tied to the Storytelling → Explanation → Questionary structure (described
    in the previous version of this note) was replaced with a much larger
@@ -233,6 +245,7 @@ evaluation of that source and the niche research behind this pivot.
    material and a composition brief per emotion, the same way the original
    genre library waited for a full user-provided spec before any track was
    rendered. See `Assets_audio/music_bollywood/README.md`.
+   </details>
 5. **Thumbnails** — **Decided:** GIMP 3.2.6 installed and confirmed working
    (`C:\Users\shahb\AppData\Local\Programs\GIMP 3\bin\gimp-3.exe`) — free, local,
    no subscription. Canva Free stays as fallback only if GIMP genuinely can't cover
@@ -256,14 +269,32 @@ it. This is implemented once in `pipeline/config.py`'s shared layout constants
 (`SQUARE_SIZE`/`SQUARE_X`/`SQUARE_Y`/`WIDTH`/`HEIGHT`) and applied automatically by
 `assemble.py`/`captions.py` to any slug — there is no per-video opt-in.
 
-**Image motion, global (2026-10-27):** every still-image segment gets one of 10
-randomized Ken Burns motions (zoom in, zoom out, 4 straight pans, 4 diagonal pans —
-`assemble.py`'s `MOTIONS`), assigned per-segment via a seeded random pick so it's
-varied but reproducible across re-renders. Applies to every video's still images by
-construction (shared pipeline code, not a per-slug setting) — superseded the old
-single fixed "always centered zoom-in," which a pixel-diff check that same day found
-had been silently non-functional (clamped flat, no visible motion) since it was
-first built. Full detail and the bug fix in `memory.md`.
+**Image motion, global (2026-10-27, dropped 2026-10-28):** every still-image
+segment got one of 10 randomized Ken Burns motions (zoom in, zoom out, 4
+straight pans, 4 diagonal pans — `assemble.py`'s `MOTIONS`), assigned
+per-segment via a seeded random pick so it was varied but reproducible across
+re-renders — superseded the same day's earlier fix for a silently-non-functional
+fixed zoom-in. **Discarded the next day**: every still image now holds fixed,
+fully visible (no crop, letterboxed/pillarboxed if its aspect doesn't exactly
+match the content rectangle) and centered — `config.ENABLE_KEN_BURNS = False`,
+toggle not delete, same pattern as `SHOW_CHARACTER`/`ENABLE_MUSIC`/`ENABLE_SFX`.
+Applies to every video by construction. Full detail and a real duration bug
+caught while implementing it in `memory.md`.
+
+**Gemini watermark removed via crop, not inpainting (2026-10-28):** every
+image Gemini generates carries a small gray sparkle watermark baked into the
+bottom-right corner. Tried removing it with OpenCV inpainting first -
+rejected, since it left a visible blurry patch on anything but a flat
+background (worse than the watermark itself on detailed/ornate images - see
+`memory.md`). Fixed upstream instead, as a standing rule: `AI-generate:`
+prompts now compose the real subject within the top ~85% of the frame
+(`visual-style-brief.md`'s per-prompt checklist), and `assemble.py` crops off
+the bottom 15% of every Gemini-sourced still (`config.GEMINI_WATERMARK_
+CROP_FRAC`) before fitting it into the content rectangle - the crop removes
+the watermark along with that margin, and the existing scale-to-fit (not
+crop) logic handles landing back at the right final aspect. Applies to every
+Gemini-sourced image by construction; Pollinations/evidence images are
+untouched (manifest's `source` field gates it).
 
 **Visual sourcing priority flipped, global (2026-10-27):** AI-generated visuals
 (Pollinations.ai, code-automatable; Gemini, live via the Chrome browser extension
@@ -327,8 +358,9 @@ above) and the visual-sourcing workflow is now the Gemini+Pollinations-primary /
 real-sources-evidence-only setup described in "Visual sourcing priority flipped"
 above. Nothing currently open at the project-decision level — see `memory.md`'s
 latest "Carried-forward open items" for in-progress/pending work instead (e.g. the
-Bollywood music library still has zero composed tracks, character pose variety is
-still single-pose, and the actual YouTube channel doesn't exist yet).
+character pose variety is still single-pose, and the actual YouTube channel
+doesn't exist yet — the Bollywood music library's zero-composed-tracks status is
+no longer a blocking item since Budget §4 dropped music/SFX from production).
 
 ## Kokoro voice preset (decided, 2026-10-26; reverted 2026-10-27; promoted to global default, same day)
 
