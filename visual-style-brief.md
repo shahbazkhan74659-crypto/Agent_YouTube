@@ -128,17 +128,23 @@ labeled fields in the final prompt text, but as a checklist):
   (1080x608, full width, letterboxed - `pipeline/config.py`'s `SQUARE_WIDTH`/
   `SQUARE_HEIGHT`), not the old square. Compose for a wide, short frame, not a
   square one.
-- **Bottom headroom for the watermark crop** - Gemini bakes a small gray
-  sparkle watermark into the bottom-right corner of every image it generates.
-  `assemble.py` crops off the bottom 15% of every Gemini-sourced image before
-  fitting it into the content rectangle (`config.GEMINI_WATERMARK_CROP_FRAC`),
-  which removes the watermark along with that strip - so the prompt should
-  compose the actual subject within the top ~85% of the frame and treat the
-  bottom ~15% as disposable margin (ground, empty space, nothing essential),
-  not critical composition. An inpainting-based removal was tried first and
-  rejected - see `memory.md` - it left a visible patch on anything but a flat
-  background, so the crop-with-headroom approach is the standing rule now,
-  not a one-off fix.
+- **Watermark stays visible - no prompt wording changes it, don't ask**
+  (tested 2026-10-28). Gemini bakes a small gray sparkle watermark into the
+  bottom-right corner of every image it generates. The project tried cropping
+  it off (`config.GEMINI_WATERMARK_CROP_FRAC`, now disabled -
+  `config.ENABLE_GEMINI_WATERMARK_CROP = False`) and inpainting it out
+  (rejected - see `memory.md`), but the crop cost real composition (a diagram
+  label once landed in the cropped strip and had to be regenerated). Decided
+  to stop fighting it and just show it. **Tested asking Gemini directly to
+  keep it small and cornered - verdict: don't do this.** A test generation
+  ("keep any watermark or signature mark small and tucked in a corner") came
+  back with the usual sparkle at its usual size and position, unchanged, plus
+  a *second*, new small boxed monogram next to it that doesn't appear in any
+  baseline image - the model read "signature mark" as licence to paint an
+  actual artist's signature into the scene itself, not as a constraint on its
+  own export watermark. That's worse, not better: an extra mark now baked
+  into the artwork, not just an overlay. **Standing rule: leave the watermark
+  alone, don't mention it in the prompt at all.**
 
 ## 8. Workflow discipline for the live Gemini session
 

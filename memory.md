@@ -2339,3 +2339,34 @@ single-pose, no actual YouTube channel yet, mobile push notifications
 disabled) is unchanged. `idea.md`, `memory.md`, and `visual-style-brief.md`
 still have today's earlier uncommitted doc edits (music/SFX drop, Ken Burns
 removal, watermark crop, §8a-8c rules) pending a commit.
+
+## Gemini watermark crop disabled; prompt-based watermark-shrinking tested and rejected (2026-10-28, same day)
+
+User: stop cropping, show the watermark, but ask in the prompt that Gemini
+keep it small and cornered - and test it before trusting it. Added
+`config.ENABLE_GEMINI_WATERMARK_CROP = False` (toggle, not delete - same
+pattern as every other flag in this file) and gated `assemble.py`'s
+`wm_crop` filter stage on it, so Gemini-sourced stills now pass through
+unfit-cropped the same as Pollinations/evidence images. `visual-style-
+brief.md`'s "top 85%" headroom bullet was replaced with the new watermark
+instruction, pending the test.
+
+**Test generation** (`gemini.google.com/app`, Flash, a fresh painted-scene
+prompt with "Keep any watermark or signature mark small and tucked tightly
+into a single corner of the image" appended): downloaded and pixel-compared
+the bottom-right corner against an existing baseline image (`beat_01_
+seg00.png`, generated with no such instruction). **Result: don't do this.**
+The usual diamond sparkle came back at the same size and position as every
+other Gemini export - the instruction did nothing to it. Worse, a *second*,
+new small boxed monogram appeared right next to it, present in the test
+image but absent from the baseline - the model read "signature mark" as
+licence to paint an actual artist's signature into the scene content itself,
+not as a constraint on its own export-time watermark overlay. That's a net
+negative: an extra mark now baked into the artwork, not just left alone.
+
+**Fixed the standing rule to the honest result**: `visual-style-brief.md`'s
+watermark bullet and `config.py`'s comment both now say not to mention the
+watermark in prompts at all - the crop is off, the watermark shows, and
+nothing in the prompt text reliably controls it (and the one wording tried
+made things worse, not better). No code beyond the crop toggle was needed -
+this was a prompt-engineering question, not a pipeline bug.
