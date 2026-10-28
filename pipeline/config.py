@@ -106,21 +106,28 @@ BEAT_GAP_SEC = 0.35  # silence between beats
 KOKORO_SPEED = 1.0
 DEFAULT_VOICE_PRESET = "af_heart"  # used only if voice.md hasn't locked one in yet
 
-# Gemini watermark crop (2026-10-28) - Gemini's "Download full size" button bakes
-# a small gray sparkle watermark into the bottom-right corner of every generated
-# image (measured directly off real exports at 2752x1536: a ~95x95px mark sitting
-# roughly 88-96% of the way down, fixed position regardless of content/background).
-# Tried inpainting it out first - basic OpenCV inpainting (Telea/NS) leaves a
-# visible blurry patch on anything but a flat background, often more noticeable
-# than the mark itself on detailed/ornate images (see memory.md). Fixed upstream
-# instead: AI-generate: prompts now ask for extra vertical headroom (compose the
-# real subject within the top ~85%), and assemble.py crops off the bottom
-# GEMINI_WATERMARK_CROP_FRAC of any gemini-sourced still image before fitting it
-# into the content rectangle - the crop removes the watermark along with it, and
-# the existing scale-to-fit (not crop) logic handles the aspect change cleanly.
-# Only applies to manifest entries with source=="gemini" - Pollinations/evidence
-# images are untouched.
-GEMINI_WATERMARK_CROP_FRAC = 0.15  # crop the bottom 15%, keep the top 85%
+# Gemini watermark crop (2026-10-28, disabled 2026-10-28 same day) - Gemini's
+# "Download full size" button bakes a small gray sparkle watermark into the
+# bottom-right corner of every generated image (measured directly off real
+# exports at 2752x1536: a ~95x95px mark sitting roughly 88-96% of the way
+# down, fixed position regardless of content/background). Tried inpainting it
+# out first - basic OpenCV inpainting (Telea/NS) leaves a visible blurry patch
+# on anything but a flat background, often more noticeable than the mark
+# itself on detailed/ornate images (see memory.md). Fixed upstream with a
+# bottom-15% crop instead - worked, but cost real composition (the
+# beat_04_seg01 "700,000?" diagram label landed in the cropped strip and had
+# to be regenerated, see memory.md's 2026-10-28 entries). **Decided to stop
+# cropping and show the watermark instead** - toggle, not delete, same
+# pattern as SHOW_CHARACTER/ENABLE_MUSIC/ENABLE_SFX/ENABLE_KEN_BURNS.
+# assemble.py's wm_crop filter stage still exists and still works if this is
+# ever flipped back on. Tested asking Gemini to keep its own watermark small
+# and cornered (a prompt instruction, not post-processing) - didn't work:
+# the sparkle came back at its usual size/position, plus a new unwanted
+# second mark (the model painted an actual signature monogram into the scene
+# in response to the word "signature"). Standing rule per
+# visual-style-brief.md: don't mention the watermark in prompts at all.
+ENABLE_GEMINI_WATERMARK_CROP = False
+GEMINI_WATERMARK_CROP_FRAC = 0.15  # crop the bottom 15%, keep the top 85% - only used if the flag above is re-enabled
 
 # Ken Burns pan/zoom on still images - off by default as of 2026-10-28 (user asked
 # to discard the moving-image effect; every still now holds fixed and fully visible,

@@ -116,10 +116,11 @@ def _build_segment_clip(
     is_video = Path(visual_path).suffix.lower() in VIDEO_EXTS
     # Crops off the bottom strip (and Gemini's baked-in watermark with it) before
     # any scaling/fitting happens - see config.GEMINI_WATERMARK_CROP_FRAC. Only for
-    # gemini-sourced stills; Pollinations/evidence images pass through untouched.
+    # gemini-sourced stills, and only when config.ENABLE_GEMINI_WATERMARK_CROP is
+    # on (disabled 2026-10-28 - watermark is shown now; see config.py's comment).
     wm_crop = (
         f"crop=iw:ih*{1 - config.GEMINI_WATERMARK_CROP_FRAC:.4f}:0:0,"
-        if source == "gemini" and not is_video
+        if source == "gemini" and not is_video and config.ENABLE_GEMINI_WATERMARK_CROP
         else ""
     )
 
