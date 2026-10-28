@@ -198,9 +198,9 @@
         },
         {
           "on_screen": {
-            "raw": "AI-generate: \"Flat explainer mode, a simple bar-chart comparison diagram with one short bar and one disproportionately tall bar beside it, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading 40,000 VS 700,000, wide 16:9 letterboxed composition\"",
+            "raw": "AI-generate: \"Flat explainer mode, a single absurdly tall and precarious stack of ancient scrolls towering off the top of the frame, leaning slightly as if about to topple, a small flat cream-faced stick-limbed scholar character at the base looking up at it for scale, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label near the base reading 700,000?, wide 16:9 letterboxed composition\"",
             "search_terms": [],
-            "ai_generate_prompt": "Flat explainer mode, a simple bar-chart comparison diagram with one short bar and one disproportionately tall bar beside it, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading 40,000 VS 700,000, wide 16:9 letterboxed composition",
+            "ai_generate_prompt": "Flat explainer mode, a single absurdly tall and precarious stack of ancient scrolls towering off the top of the frame, leaning slightly as if about to topple, a small flat cream-faced stick-limbed scholar character at the base looking up at it for scale, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label near the base reading 700,000?, wide 16:9 letterboxed composition",
             "screenshot_url": null
           },
           "text": "Estimates range from 40,000 to as high as 700,000,",
@@ -208,9 +208,9 @@
         },
         {
           "on_screen": {
-            "raw": "AI-generate: \"Flat explainer mode, a closer view of the same tall bar from the bar-chart diagram, a small stylized ancient scribe-and-scroll icon beside it, a red hand-drawn annotation arrow pointing at the bar, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading ANCIENT SOURCE, wide 16:9 letterboxed composition\"",
+            "raw": "AI-generate: \"Flat explainer mode, a closer zoomed-in view on a single old worn scroll partway up a tall precarious stack of ancient scrolls, a small stylized ancient scribe-and-ink-pot icon beside it, a red hand-drawn annotation arrow pointing at the worn scroll, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading ANCIENT SOURCE, wide 16:9 letterboxed composition\"",
             "search_terms": [],
-            "ai_generate_prompt": "Flat explainer mode, a closer view of the same tall bar from the bar-chart diagram, a small stylized ancient scribe-and-scroll icon beside it, a red hand-drawn annotation arrow pointing at the bar, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading ANCIENT SOURCE, wide 16:9 letterboxed composition",
+            "ai_generate_prompt": "Flat explainer mode, a closer zoomed-in view on a single old worn scroll partway up a tall precarious stack of ancient scrolls, a small stylized ancient scribe-and-ink-pot icon beside it, a red hand-drawn annotation arrow pointing at the worn scroll, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading ANCIENT SOURCE, wide 16:9 letterboxed composition",
             "screenshot_url": null
           },
           "text": "but that top figure comes from ancient writers centuries",
@@ -218,9 +218,9 @@
         },
         {
           "on_screen": {
-            "raw": "AI-generate: \"Flat explainer mode, the same tall bar now redrawn with a sketchy dashed outline instead of a firm line, a red hand-drawn annotation arrow still pointing at it, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading EXAGGERATED?, wide 16:9 letterboxed composition\"",
+            "raw": "AI-generate: \"Flat explainer mode, the same tall precarious stack of ancient scrolls, but the top portion of the stack is now redrawn with a sketchy wobbly dashed outline instead of a firm line, suggesting it might not really be that tall, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label near the top reading EXAGGERATED?, wide 16:9 letterboxed composition\"",
             "search_terms": [],
-            "ai_generate_prompt": "Flat explainer mode, the same tall bar now redrawn with a sketchy dashed outline instead of a firm line, a red hand-drawn annotation arrow still pointing at it, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading EXAGGERATED?, wide 16:9 letterboxed composition",
+            "ai_generate_prompt": "Flat explainer mode, the same tall precarious stack of ancient scrolls, but the top portion of the stack is now redrawn with a sketchy wobbly dashed outline instead of a firm line, suggesting it might not really be that tall, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label near the top reading EXAGGERATED?, wide 16:9 letterboxed composition",
             "screenshot_url": null
           },
           "text": "later, and modern historians consider it almost certainly exaggerated.",
