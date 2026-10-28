@@ -1,9 +1,14 @@
-"""Per-segment Ken Burns (zoompan) clip from its resolved visual, padded onto the
-full black 1080x1920 canvas at the content square's fixed position, with the host
-character composited on top (character.py picks pose/position) - all three in one
-ffmpeg pass per segment, since each segment's clip is short and simple. The clips
-are then concatenated (stream-copy, cheap) and a final pass burns captions.ass
+"""Per-segment clip from its resolved visual, padded onto the full black
+1080x1920 canvas at the content square's fixed position, with the host character
+composited on top (character.py picks pose/position) - all three in one ffmpeg
+pass per segment, since each segment's clip is short and simple. The clips are
+then concatenated (stream-copy, cheap) and a final pass burns captions.ass
 (including the static title band) and muxes mix.wav -> output/final.mp4.
+
+Still images hold fixed - fully visible (no crop) and centered within the
+content rectangle - by default as of 2026-10-28 (config.ENABLE_KEN_BURNS=False).
+The Ken Burns pan/zoom code path (motion_for_segment/_motion_exprs/MOTIONS)
+still exists and works if that flag is flipped back on.
 
 One clip per visual *segment* (script_parser.py splits a beat at every inline
 cue; narration.py times each segment proportionally by word count), not one per
@@ -105,9 +110,18 @@ def _build_segment_clip(
     out_path: Path,
     evidence_path: Path | None = None,
     evidence_xy: tuple[int, int] | None = None,
+    source: str | None = None,
 ) -> None:
     n_frames = max(1, round(duration * config.FPS))
     is_video = Path(visual_path).suffix.lower() in VIDEO_EXTS
+    # Crops off the bottom strip (and Gemini's baked-in watermark with it) before
+    # any scaling/fitting happens - see config.GEMINI_WATERMARK_CROP_FRAC. Only for
+    # gemini-sourced stills; Pollinations/evidence images pass through untouched.
+    wm_crop = (
+        f"crop=iw:ih*{1 - config.GEMINI_WATERMARK_CROP_FRAC:.4f}:0:0,"
+        if source == "gemini" and not is_video
+        else ""
+    )
 
     if is_video:
         # Gemini/Veo-generated clip, not a still image - no Ken Burns zoom (it's
@@ -131,15 +145,35 @@ def _build_segment_clip(
         # against a 25fps-timed -t window silently shortens every clip by 25/30
         # (live-tested: a 17.86s clip came out 14.90s before this fix).
         visual_input = ["-loop", "1", "-r", str(config.FPS), "-t", f"{duration:.3f}", "-i", str(visual_path)]
-        z_expr, x_expr, y_expr = _motion_exprs(motion, n_frames)
-        bg_chain = (
-            "[0:v]scale=2000:-2,"  # oversample before zoompan - avoids zoompan's known jitter at low input res
-            f"zoompan=z='{z_expr}':d=1:"
-            f"x='{x_expr}':y='{y_expr}':"
-            f"s={config.SQUARE_WIDTH}x{config.SQUARE_HEIGHT}:fps={config.FPS},"
-            f"pad={config.WIDTH}:{config.HEIGHT}:{config.SQUARE_X}:{config.SQUARE_Y}:color=black,"
-            "format=yuv420p[bg];"
-        )
+        if config.ENABLE_KEN_BURNS:
+            z_expr, x_expr, y_expr = _motion_exprs(motion, n_frames)
+            bg_chain = (
+                f"[0:v]{wm_crop}scale=2000:-2,"  # oversample before zoompan - avoids zoompan's known jitter at low input res
+                f"zoompan=z='{z_expr}':d=1:"
+                f"x='{x_expr}':y='{y_expr}':"
+                f"s={config.SQUARE_WIDTH}x{config.SQUARE_HEIGHT}:fps={config.FPS},"
+                f"pad={config.WIDTH}:{config.HEIGHT}:{config.SQUARE_X}:{config.SQUARE_Y}:color=black,"
+                "format=yuv420p[bg];"
+            )
+        else:
+            # Fixed, no motion - 2026-10-28 default. "force_original_aspect_ratio=
+            # decrease" scales to fit *within* the content rectangle without
+            # cropping (unlike the video-clip branch above, which deliberately
+            # fills+crops); the first pad letterboxes/pillarboxes the image to
+            # exactly fill that rectangle so it's always fully visible and
+            # centered, the second places that rectangle on the full canvas at
+            # its fixed position - same two-stage pad already used elsewhere.
+            # No separate fps= filter here - the looped input is already locked to
+            # exactly config.FPS via -r above (live-tested: adding a redundant
+            # downstream fps filter introduced a consistent ~1-frame rounding loss
+            # per clip, 0.6s total over 18 segments, silently triggering assemble()'s
+            # -shortest to trim the last ~0.6s of audio).
+            bg_chain = (
+                f"[0:v]{wm_crop}scale={config.SQUARE_WIDTH}:{config.SQUARE_HEIGHT}:force_original_aspect_ratio=decrease,"
+                f"pad={config.SQUARE_WIDTH}:{config.SQUARE_HEIGHT}:(ow-iw)/2:(oh-ih)/2:color=black,"
+                f"pad={config.WIDTH}:{config.HEIGHT}:{config.SQUARE_X}:{config.SQUARE_Y}:color=black,"
+                "format=yuv420p[bg];"
+            )
 
     # Two independent optional overlay layers (character, evidence inset) chained
     # onto the background - each appends its own filter stage and its own extra
@@ -249,6 +283,7 @@ def build_video_track(slug: str, force: bool = False) -> str:
                 clip_path,
                 evidence_path=seg["evidence_path"],
                 evidence_xy=seg["evidence_xy"],
+                source=manifest[seg["id"]].get("source"),
             )
         clip_paths.append(clip_path)
 

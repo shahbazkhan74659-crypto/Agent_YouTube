@@ -128,6 +128,17 @@ labeled fields in the final prompt text, but as a checklist):
   (1080x608, full width, letterboxed - `pipeline/config.py`'s `SQUARE_WIDTH`/
   `SQUARE_HEIGHT`), not the old square. Compose for a wide, short frame, not a
   square one.
+- **Bottom headroom for the watermark crop** - Gemini bakes a small gray
+  sparkle watermark into the bottom-right corner of every image it generates.
+  `assemble.py` crops off the bottom 15% of every Gemini-sourced image before
+  fitting it into the content rectangle (`config.GEMINI_WATERMARK_CROP_FRAC`),
+  which removes the watermark along with that strip - so the prompt should
+  compose the actual subject within the top ~85% of the frame and treat the
+  bottom ~15% as disposable margin (ground, empty space, nothing essential),
+  not critical composition. An inpainting-based removal was tried first and
+  rejected - see `memory.md` - it left a visible patch on anything but a flat
+  background, so the crop-with-headroom approach is the standing rule now,
+  not a one-off fix.
 
 ## 8. Workflow discipline for the live Gemini session
 

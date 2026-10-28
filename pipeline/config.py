@@ -106,6 +106,29 @@ BEAT_GAP_SEC = 0.35  # silence between beats
 KOKORO_SPEED = 1.0
 DEFAULT_VOICE_PRESET = "af_heart"  # used only if voice.md hasn't locked one in yet
 
+# Gemini watermark crop (2026-10-28) - Gemini's "Download full size" button bakes
+# a small gray sparkle watermark into the bottom-right corner of every generated
+# image (measured directly off real exports at 2752x1536: a ~95x95px mark sitting
+# roughly 88-96% of the way down, fixed position regardless of content/background).
+# Tried inpainting it out first - basic OpenCV inpainting (Telea/NS) leaves a
+# visible blurry patch on anything but a flat background, often more noticeable
+# than the mark itself on detailed/ornate images (see memory.md). Fixed upstream
+# instead: AI-generate: prompts now ask for extra vertical headroom (compose the
+# real subject within the top ~85%), and assemble.py crops off the bottom
+# GEMINI_WATERMARK_CROP_FRAC of any gemini-sourced still image before fitting it
+# into the content rectangle - the crop removes the watermark along with it, and
+# the existing scale-to-fit (not crop) logic handles the aspect change cleanly.
+# Only applies to manifest entries with source=="gemini" - Pollinations/evidence
+# images are untouched.
+GEMINI_WATERMARK_CROP_FRAC = 0.15  # crop the bottom 15%, keep the top 85%
+
+# Ken Burns pan/zoom on still images - off by default as of 2026-10-28 (user asked
+# to discard the moving-image effect; every still now holds fixed and fully visible,
+# centered, no crop). Toggle, not delete - same pattern as SHOW_CHARACTER/
+# ENABLE_MUSIC/ENABLE_SFX: assemble.py's zoompan code path still works if flipped
+# back on, it's just unused by default.
+ENABLE_KEN_BURNS = False
+
 # Visual cut rate (2026-10-27) - no single resolved segment should display for
 # longer than this. Measured from a reference video's actual scene cuts (ffmpeg
 # scene-cut detection over its full runtime): median shot 3.03s, 78% of shots at
