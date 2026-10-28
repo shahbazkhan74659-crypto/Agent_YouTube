@@ -2194,3 +2194,66 @@ carried from the 2026-10-27 list (Bollywood music library zero tracks now
 moot per item 1, character pose variety single-pose, actual YouTube channel
 still doesn't exist, mobile push notifications still disabled, Kokoro's
 Greek/Ptolemaic pronunciation still unconfirmed by ear) is unchanged.
+
+## Regeneration resumed, hit a real stuck download, 8/18 placed, paused on purpose (2026-10-28, same day)
+
+User asked to regenerate the 18 deleted `visuals_gemini` images and re-render
+the test video - exactly the open item logged above. Delegated to a background
+agent (live Gemini/Chrome session, one new chat per segment, same discipline as
+every prior pass) rather than run it inline, since it's a long screenshot-heavy
+browser-automation task.
+
+**A real download got stuck on segment 9/18** (`beat_02_seg02`, the
+ghostly-caliph-fading segment) - the user was watching and caught it live
+("wait a sec, its not downloading") before the agent noticed on its own. The
+agent was told to stop and investigate rather than keep clicking blindly; before
+it reported back, **the user downloaded the file themselves manually**
+(`51eb5306-3e4b-433e-8b06-3a20b1a32fe5.jpg` in Downloads) and handed it over to
+be placed and continued from.
+
+**Progress when the agent paused: 8 of 18 placed** in `build/visuals_gemini/`:
+`beat_01_seg00`-`seg04` and `beat_02_seg00`-`seg01` full-size (2752x1536,
+clean); `beat_01_seg05` only at 1024x572 (a lower-res artifact of the earlier
+download-button glitch, flagged, not yet regenerated at full size);
+`beat_02_seg02` (the ghost-caliph segment) still **not done** - the first
+attempt rendered the reading hall correctly but omitted the ghost figure
+entirely, and the retry meant to fix that is what triggered Gemini's rate
+limit ("limit resets at 2:08pm", hit at 12:59pm). Remaining 9 segments
+(`beat_03_seg00`-`seg04`, `beat_04_seg00`-`seg03`) not yet started.
+
+Asked the user how to proceed rather than guessing (wait for the 2:08pm reset
+and auto-resume / stop for now / user generates the rest manually) -
+**user chose to stop for now.** Nothing was rendered/assembled on this partial
+set - the `--from-stage visuals --force` pipeline step was never run, so
+`build/manifest.json`, `build/clips/`, and `output/final.mp4` are all still in
+whatever state they were left in by the 2026-10-27/28 work logged above,
+untouched by this attempt.
+
+**New standing rules added as a direct result of the stuck-download incident**
+(user's explicit request, not inferred) - written into `visual-style-brief.md`
+§8a-8c (read by every future live-Gemini session) and logged as a decision in
+`idea.md`:
+- **§8a - download-failure recovery**: same-conversation retry once -> fresh
+  new-conversation retry once -> if that also fails, **stop retrying
+  downloads** for that segment and leave every remaining segment's image
+  generated-but-undownloaded in its own conversation for the user to grab
+  manually later (their own example: "I'll download the rest at 7am").
+- **§8b - render/assemble gate**: `render.py --from-stage visuals` (or later)
+  never runs until *every* segment of that video has an actual image file
+  resolved on disk - no partial/placeholder render while any segment is still
+  pending manual download under §8a.
+- **§8c - Gemini-quota fallback to Pollinations**: Gemini stays first-choice
+  for every segment by default; only a genuine late-night generation-quota wall
+  (not a download failure) is allowed to fall through to Pollinations.ai for
+  the remaining segments, so an overnight session doesn't stall completely -
+  `resolve.py` already does this automatically once no pre-placed Gemini asset
+  exists for a segment, this just names when relying on that fallback is
+  acceptable. A download-mechanics failure is never redirected to Pollinations
+  - that's always §8a (manual download) instead.
+
+**Open item, carried forward**: resume generation from `beat_01_seg05`
+(re-generate at full size) and `beat_02_seg02` (ghost-caliph retry) onward
+through `beat_04_seg03`, once Gemini's limit resets or the user supplies the
+rest manually - then run `render.py --from-stage visuals --force` and verify,
+per §8b, only once all 18 are actually on disk.
+

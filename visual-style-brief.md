@@ -164,6 +164,45 @@ confirmed blocked via the API). When a generated image doesn't match the prompt:
   same discipline to when a single prompt is failing repeatedly, not just to
   starting each new segment.
 
+### 8a. Download-failure recovery (decided 2026-10-28)
+
+This is a different failure from a wrong-looking image above - here the image is
+fine but clicking "Download full size" doesn't actually produce a new file in
+Downloads (confirmed by checking, not assumed). Don't loop on this indefinitely:
+
+1. Close the full Gemini tab, reopen Gemini back onto that **same** conversation
+   (not a new chat), and retry the download once.
+2. If that still fails, discard that image and generate a fresh one in a **new**
+   conversation, then try downloading that one.
+3. If the new conversation's download also fails, **stop retrying downloads for
+   that segment entirely.**
+4. From that point on, generate every remaining segment's image as normal (one
+   new conversation each), but don't attempt to download any of them - leave each
+   one sitting in its own conversation for the user to download manually later
+   (e.g. "I'll download the rest at 7am").
+
+### 8b. Render/assemble gate (decided 2026-10-28)
+
+`render.py --from-stage visuals` (or any later stage) must only run once **every**
+segment of that video has an actual image file resolved on disk - either a
+successfully downloaded Gemini asset in `build/visuals_gemini/`, or a
+Pollinations-generated file per 8c below. If even one segment was left pending
+manual download under 8a, don't resolve/caption/mix/assemble yet - wait until
+every image is actually on disk first.
+
+### 8c. Gemini-quota fallback to Pollinations (decided 2026-10-28)
+
+Gemini is always the first choice for every segment - never start a segment on
+Pollinations by default. But if Gemini's own generation limit is hit (an actual
+"come back later"/quota message, not a download-mechanics failure) during a
+late-night session where waiting for the reset isn't practical, switch the
+remaining ungenerated segments to Pollinations.ai (`ai_generate.py` - already
+wired into `resolve.py` as the automatic fallback whenever no pre-placed Gemini
+asset exists for a segment) and keep going rather than stopping the whole video.
+This path only applies to a genuine generation-quota wall; a download-mechanics
+failure always follows 8a instead (deferred to manual download, never silently
+switched to Pollinations).
+
 ## 9. Relationship to evidence insets
 
 This brief governs the **primary** `AI-generate:` visual only. The optional

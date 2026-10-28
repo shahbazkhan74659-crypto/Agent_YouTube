@@ -508,3 +508,31 @@ stays agnostic/rational across perspectives, open to challenge, treats incomplet
 knowledge as the normal state of a topic. Logged in `voice.md` under "My format" /
 "Differentiation angle", and built into `yt-script/SKILL.md`'s "The shape" section
 as of 2026-10-25 — see "Customization (done)" above.
+
+## Live-Gemini-session failure handling: download retries, a render gate, and a quota fallback (decided 2026-10-28)
+
+Prompted by a real stuck download mid-session on the `library-of-alexandria-
+destruction-gemini-test` re-render (segment 9/18 wouldn't download; the user
+caught it live and manually downloaded the file themselves). Three standing
+rules added to `visual-style-brief.md` §8a-8c, always in force for any live
+Gemini image-generation session, not just that one slug:
+
+- **Download-failure recovery (§8a)**: if "Download full size" doesn't produce a
+  file, close the tab and retry on the *same* conversation once; if that fails,
+  discard the image and retry fresh in a *new* conversation; if that also fails,
+  **stop retrying downloads** for that segment. From there, keep generating every
+  remaining segment's image (one new conversation each, as normal) but leave all
+  of them un-downloaded for the user to grab manually later.
+- **Render/assemble gate (§8b)**: `render.py --from-stage visuals` (or later)
+  never runs until every segment of that video has an actual image file resolved
+  on disk. If any segment was left pending manual download under §8a, the whole
+  render waits - no partial/placeholder assemble.
+- **Gemini-quota fallback to Pollinations (§8c)**: Gemini is always first for
+  every segment by default. But if Gemini's own generation limit (not a download
+  failure) is hit during a late-night session where waiting for the reset isn't
+  practical, switch the remaining segments to Pollinations.ai instead of stalling
+  the whole video - `resolve.py` already does this automatically (`ai_generate.py`
+  fires whenever no pre-placed Gemini asset exists for a segment), so this is
+  just naming when it's acceptable to let that fallback happen rather than wait
+  for Gemini's reset. A download-mechanics failure is never redirected to
+  Pollinations - that always follows §8a (manual download) instead.
