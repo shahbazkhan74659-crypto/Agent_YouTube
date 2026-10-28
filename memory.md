@@ -2257,3 +2257,85 @@ through `beat_04_seg03`, once Gemini's limit resets or the user supplies the
 rest manually - then run `render.py --from-stage visuals --force` and verify,
 per §8b, only once all 18 are actually on disk.
 
+## Regeneration finished: all 18/18 placed, re-rendered, two real bugs found and fixed (2026-10-28, same day)
+
+Resumed past the 2:08pm quota reset (it was 2:19pm). Delegated the remaining
+generation to a background agent (same discipline as the paused session above
+- a long screenshot-heavy browser task) with the exact 10 remaining prompts
+pulled directly from `script.md`: `beat_02_seg02` (the ghost-caliph retry)
+through `beat_04_seg03`. **All 10 generated and verified placed** - the only
+friction was `beat_04_seg03`'s generation hanging >80s with no chat ever
+registering; reload-and-retry-fresh fixed it immediately, no quota wall hit,
+no download-failure recovery needed. `build/visuals_gemini/` now holds all 18
+files.
+
+**Bug 1 - stale `beats.json`/`narration_meta.json` still held the abandoned
+two-bar-chart concept for `beat_04_seg01-03`, not the scroll-stack concept
+`script.md` actually has.** Root cause: `beats.json` was last built at 10:10am,
+but `script.md` was edited again at 10:35am (the bar-chart -> scroll-stack
+pivot already logged earlier today) - `script_parser.py` was never re-run
+after that edit, so `narration_meta.json` (built 10:40am from the stale
+10:10am `beats.json`) and the manifest `resolve.py` built from it both still
+described the old abandoned concept. The actual image files on disk were
+correct (generated against the live `script.md`'s real scroll-stack prompts),
+so the render itself would have come out right, but the manifest's `title`
+metadata was wrong - caught by actually reading `resolve.py`'s printed output
+line by line, not by assuming a clean run meant a correct one. Fixed with the
+full documented recovery sequence: `script_parser.py` (fresh `beats.json`) ->
+`narration.py --force` (confirmed identical 62.6s timeline - only the ON
+SCREEN cue text had changed, not the spoken narration, so duration/timing
+were unaffected) -> `alignment.py --force` (160/157 words) -> `captions.py`
+-> `resolve.py --force` (now correctly shows the scroll-stack prompts) ->
+`audio_mix.py --force` (62.9s) -> `assemble.py --force`.
+
+Also confirmed (again) that `build/clips/` cannot be trusted across a
+source-image swap even when every clip file already exists: the 18 clips on
+disk dated 12:08-12:10am predated essentially all of today's regenerated
+images (12:42pm-2:39pm) - built from a since-deleted prior image set that
+happened to share the same filenames. `assemble.py`'s resume logic only
+checks file existence, not staleness, so this needed an explicit `--force`,
+not a plain re-run - same lesson this file has logged multiple times now for
+different artifacts (`captions.ass`, `narration_meta.json`'s `words` field,
+now `build/clips/`).
+
+**Bug 2 - `beat_04_seg01`'s "700,000?" diagram label got cropped off by the
+Gemini-watermark crop.** Found by actually sampling an output-side-seeked
+frame at the segment's timestamp, not by trusting the render - the label was
+simply invisible. Traced to the source image: the label sat at ~87% down a
+2752x1536 image, inside `config.GEMINI_WATERMARK_CROP_FRAC`'s bottom-15%
+crop zone. Root cause was the prompt itself - it was copied verbatim from
+`script.md`, which predates `visual-style-brief.md`'s "compose within the top
+85%" checklist bullet (added 2026-10-28 earlier the same day, after the
+watermark-crop rule was adopted), so the prompt never told Gemini to leave
+that headroom. Asked the user how to handle it (regenerate vs. accept, since
+the number is also in the narration and the burned caption) - **user chose
+regenerate**. Rewrote the prompt with an explicit instruction ("the entire
+composition including the stack's base and the diagram label fully contained
+within the top 85% of the frame, leaving the bottom 15% strip as empty
+disposable background") and regenerated live via Chrome - the label now
+renders mid-frame with its arrow, well clear of the crop. Re-ran
+`resolve.py --force` + `assemble.py --force` and verified with a fresh
+frame sample at the same timestamp.
+
+**`script.md` itself was not edited** for either bug - the original
+scroll-stack prompt wording there is still accurate to the general concept;
+only the live-session prompt (for this one regeneration) added the explicit
+headroom instruction. Worth folding that headroom phrasing into `script.md`'s
+own cue text next time this slug is touched, so a future cold re-run from
+`script.md` alone reproduces the fixed composition rather than the original
+one.
+
+**Final state**: `library-of-alexandria-destruction-gemini-test/output/final.mp4`
+- 1080x1920, 62.9s, 18/18 segments Gemini-sourced, zero fallback, clean
+full-file decode. Spot-checked frames confirm the ghost-caliph retry
+(`beat_02_seg02`), the scroll-stack diagram sequence
+(`beat_04_seg00-03`, including the now-fixed label), and the branded frame
+all render correctly. Not yet watched end-to-end with audio by a human.
+
+**Carried-forward open items, updated**: the gemini-test slug's open item
+from earlier today is now fully resolved. Everything else (Kokoro's Greek/
+Ptolemaic pronunciation unconfirmed by ear, character pose variety
+single-pose, no actual YouTube channel yet, mobile push notifications
+disabled) is unchanged. `idea.md`, `memory.md`, and `visual-style-brief.md`
+still have today's earlier uncommitted doc edits (music/SFX drop, Ken Burns
+removal, watermark crop, §8a-8c rules) pending a commit.

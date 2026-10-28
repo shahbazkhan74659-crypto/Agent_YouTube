@@ -295,6 +295,43 @@ Smithsonian** — all license-checkable, all free, all tested working. Custom AI
 generated visuals (for gaps those four don't cover) remains unresolved — either find
 another free zero-shot image generator, or accept it as a small paid line item.
 
+## 4. ClaudeAnimationBase — code-rendered hand-painted cartoon host (parked, 2026-10-28)
+
+Found via a lead-magnet PDF (`DIRECTOR Guide.pdf`, from the same marketing-with-useful-content
+mold as the original `EARN-System` PDF in §1 — treat its pitch language the same way)
+listing 8 free repos for making MP4s entirely from code: Claude writes the film as a
+p5.js/three.js/Remotion web page, a headless Chrome photographs every frame, ffmpeg stitches
+frames + code-synthesized audio into an MP4. Of the 8, this project would only ever use the one
+matching "hand-painted cartoons" — **ClaudeAnimationBase**
+(`github.com/JohnHeibel/ClaudeAnimationBase`).
+
+**Verified directly, not just taken from the PDF**: real repo, 2,189 stars, MIT license,
+created 2026-09-23. `package.json` dependencies are clean and well-known (`p5`, `p5.brush`,
+`puppeteer-core`); `render.mjs` has no network calls, no `exec`/`eval`, nothing suspicious.
+Comes with a ready character ("Clawd," 31 acted emotions) and `ANIMATION_GUIDE.md`
+documenting the animation rules Claude follows.
+
+**Why it's worth revisiting**: Clawd is code-defined, not AI-image-generated, so it gets real
+pose/emotion variety with perfect cross-shot consistency — directly solves this project's own
+repeat pain point (the host-character overlay has been stuck at a single static pose twice now,
+`config.SHOW_CHARACTER`/`CHARACTER_POSES`, because Pollinations/Gemini can't hold a consistent
+character across generations — see `memory.md`'s 2026-10-26/10-27 entries).
+
+**Real caveat, from the author's own README, not the PDF's marketing copy**: *"Without a
+dedicated GPU, p5.brush's watercolour fills make render times fairly slow, measured in seconds
+per frame. If you're running on integrated graphics, I recommend avoiding those fills."* This
+machine (Ryzen 3 5425U, integrated graphics) is exactly that case — the same hardware
+constraint that already ruled out full from-scratch motion graphics once before (`idea.md`'s
+"Production pipeline" decision). Untested on this hardware — no benchmark run yet.
+
+**Scope note**: this only solves the *host-character* problem. It doesn't replace the current
+illustrated historical-figure scenes (Demetrius presenting to Ptolemy I, etc.) — adopting it
+would mean reframing the format around Clawd narrating/reacting in front of backdrops, a
+creative-format decision, not just a tooling swap. **Not decided, not scheduled** - parked here
+for whenever the host-character question is revisited. Next concrete step if picked back up:
+clone it and render the included demo to get a real seconds-per-frame number on this hardware
+before committing to anything.
+
 ## Sources
 
 - [YouTube RPM by niche 2026 — AIR Media-Tech](https://air.io/en/air-data-findings/which-youtube-niche-makes-the-most-money-in-2026-ranked-by-real-rpm-and-cpm)
