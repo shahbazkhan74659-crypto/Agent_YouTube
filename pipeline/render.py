@@ -35,7 +35,8 @@ def main():
     )
     parser.add_argument("--voice", default=None, help="Kokoro preset; defaults to voice.md's locked-in choice")
     parser.add_argument("--lang", default="en-us", help="espeak-ng language code for Kokoro, e.g. 'hi' for Hindi")
-    parser.add_argument("--no-music", action="store_true", help="Skip the music bed entirely (narration + SFX only)")
+    parser.add_argument("--music", action="store_true", help="Include the Bollywood-emotion music bed (dropped from production for now - off by default)")
+    parser.add_argument("--sfx", action="store_true", help="Include SOLID/CONTESTED claim-reveal SFX accents (dropped from production for now - off by default)")
     parser.add_argument("--from-stage", choices=STAGES, default=None)
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
@@ -70,7 +71,8 @@ def main():
 
     if start_idx <= STAGES.index("audio"):
         mix_path = audio_mix.build_mix(
-            args.slug, default_emotion=args.default_emotion, force=force, no_music=args.no_music
+            args.slug, default_emotion=args.default_emotion, force=force,
+            no_music=not args.music, no_sfx=not args.sfx,
         )
         print(f"[audio]      -> {mix_path}")
 
@@ -88,8 +90,8 @@ def main():
     print(f"  sources: {config.build_dir(args.slug) / 'manifest.json'}")
     print()
     print("Technical checks only - watch/listen to the actual file before calling it done:")
-    print("  Ken Burns pan looking right, captions legible, music sitting under narration,")
-    print("  the Kokoro voice actually sounding good.")
+    print("  Ken Burns pan looking right, captions legible, the Kokoro voice actually")
+    print("  sounding good" + (", music/SFX sitting well if --music/--sfx was used." if (args.music or args.sfx) else "."))
 
 
 if __name__ == "__main__":

@@ -1,15 +1,17 @@
-"""Concatenates per-beat narration into one track, builds the music bed from
+"""Concatenates per-beat narration into one track. Can also build a music bed from
 Assets_audio/music_bollywood by the active emotion at each beat (from a script's
 [MUSIC: ...] cues - see script_parser.py), crossfading between beds wherever the
-emotion changes partway through the video, and drops in SOLID/CONTESTED-CONFIDENCE
-claim-reveal SFX accents at the beats where a confidence tag appears - the exact
-assets README names for that role, still read from the old genre-based SFX catalog
-(Assets_audio/sfx/ + sfx_catalog.csv), which is unaffected by the 2026-10-26 switch
-to the Bollywood-referenced emotion music library. Mixed with ffmpeg (one
-filter_complex graph: concat narration -> build+crossfade music parts -> delay each
-sfx to its beat's start -> amix -> alimiter safety peak clamp, which is exactly the
-"no limiter stage, re-check combined peak" gap the audio library's README flags for
-this kind of multi-asset stacking).
+emotion changes partway through the video, and drop in SOLID/CONTESTED-CONFIDENCE
+claim-reveal SFX accents at the beats where a confidence tag appears (names read
+from the old genre-based SFX catalog, Assets_audio/sfx/ + sfx_catalog.csv) - but
+both are OFF by default as of the 2026-10-28 decision to drop music/SFX from
+production for now (narration-only mix). Toggle via config.ENABLE_MUSIC/ENABLE_SFX
+or the --music/--sfx flags; the code paths and assets are untouched, just unused by
+default. Mixed with ffmpeg (one filter_complex graph: concat narration ->
+[optional] build+crossfade music parts -> [optional] delay each sfx to its beat's
+start -> amix -> alimiter safety peak clamp, which is exactly the "no limiter
+stage, re-check combined peak" gap the audio library's README flags for this kind
+of multi-asset stacking).
 """
 
 import argparse
@@ -154,7 +156,13 @@ def _music_filter_graph(parts: list[dict], input_idx: int, xfade: float) -> tupl
     return inputs, filter_parts, input_idx
 
 
-def build_mix(slug: str, default_emotion: str | None = None, force: bool = False, no_music: bool = False) -> str:
+def build_mix(
+    slug: str,
+    default_emotion: str | None = None,
+    force: bool = False,
+    no_music: bool = not config.ENABLE_MUSIC,
+    no_sfx: bool = not config.ENABLE_SFX,
+) -> str:
     build = config.build_dir(slug)
     meta = json.loads((build / "narration_meta.json").read_text(encoding="utf-8"))["beats"]
     out_path = build / "mix.wav"
@@ -162,7 +170,7 @@ def build_mix(slug: str, default_emotion: str | None = None, force: bool = False
         return str(out_path)
 
     total_duration = meta[-1]["end"]
-    cues = _sfx_cue_points(meta)
+    cues = [] if no_sfx else _sfx_cue_points(meta)
 
     inputs: list[str] = []
     input_idx = 0
@@ -222,10 +230,14 @@ if __name__ == "__main__":
         "--default-emotion", default=None,
         help="Fallback emotion for any beat with no [MUSIC: ...] cue in scope, e.g. mysterious",
     )
-    parser.add_argument("--no-music", action="store_true", help="Skip the music bed entirely (narration + SFX only)")
+    parser.add_argument("--music", action="store_true", help="Include the Bollywood-emotion music bed (off by default)")
+    parser.add_argument("--sfx", action="store_true", help="Include SOLID/CONTESTED claim-reveal SFX accents (off by default)")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
-    out_path = build_mix(args.slug, default_emotion=args.default_emotion, force=args.force, no_music=args.no_music)
+    out_path = build_mix(
+        args.slug, default_emotion=args.default_emotion, force=args.force,
+        no_music=not args.music, no_sfx=not args.sfx,
+    )
     duration = ffmpeg_tool.probe_duration(out_path)
     print(f"Mixed -> {out_path} ({duration:.1f}s)")

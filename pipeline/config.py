@@ -137,6 +137,13 @@ ALLOWED_LICENSE_KEYWORDS = (
 )
 
 # Audio mix
+# Music + SFX dropped from production for now (2026-10-28 decision) - narration-only
+# mix is the default. Toggle, not delete: Assets_audio/ (music_bollywood, sfx,
+# metadata) and the genre-based music/ library stay on disk untouched, and
+# audio_mix.py's music/SFX code paths still work if flipped back on later - same
+# pattern as config.SHOW_CHARACTER.
+ENABLE_MUSIC = False
+ENABLE_SFX = False
 MUSIC_BED_GAIN_DB = -20.0  # README mixing notes: -18 to -24 dB under narration
 SFX_GAIN_DB = -6.0
 SOLID_SFX_CANDIDATES = ("SFX_PH04_Realization", "SFX_KN04_Discovery_Chime")
