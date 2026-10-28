@@ -7,30 +7,78 @@
       "label": "HOOK",
       "tag": "0:00-0:15",
       "confidence_tags": [],
-      "narration": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in. The real story isn't one fire — it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll.",
+      "narration": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in. The real story isn't one fire, it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll.",
       "segments": [
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"Library of Alexandria illustration\" — the tested public-domain O. Von Corven engraving, `alexandria_library.jpg`",
-            "search_terms": [
-              "Library of Alexandria illustration"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Painted scene mode, illuminated-manuscript style, a robed caliph figure approaching a grand pillared library building from a distance, aged parchment-textured background, ornate gilded border framing, flat cream-faced stick-limbed character with a single eyebrow line for expression, muted earth-tone palette with warm gold-leaf accents, storybook legend framing not a documentary reenactment, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, illuminated-manuscript style, a robed caliph figure approaching a grand pillared library building from a distance, aged parchment-textured background, ornate gilded border framing, flat cream-faced stick-limbed character with a single eyebrow line for expression, muted earth-tone palette with warm gold-leaf accents, storybook legend framing not a documentary reenactment, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
           },
-          "text": "Before you believe the caliph burned the Library of Alexandria, know the story has zero evidence from the century it happened in.",
+          "text": "Before you believe the caliph burned the Library of Alexandria,",
+          "evidence": null,
           "start": 0.0,
-          "end": 7.462
+          "end": 3.461
         },
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"ancient Alexandria fire illustration\"",
-            "search_terms": [
-              "ancient Alexandria fire illustration"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Painted scene mode, illuminated-manuscript style, a close view of a blank undecorated parchment page lying open on a wooden lectern, aged paper texture, ornate gilded border framing fading at the edges, muted earth-tone palette, storybook legend framing emphasizing absence rather than record, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, illuminated-manuscript style, a close view of a blank undecorated parchment page lying open on a wooden lectern, aged paper texture, ornate gilded border framing fading at the edges, muted earth-tone palette, storybook legend framing emphasizing absence rather than record, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
           },
-          "text": "The real story isn't one fire — it's a three-hundred-year death with at least three different suspects, and the most famous one probably never touched a single scroll.",
-          "start": 7.462,
+          "text": "know the story has zero evidence",
+          "evidence": null,
+          "start": 3.461,
+          "end": 5.538
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, illuminated-manuscript style, a flat cream-faced stick-limbed scribe character writing by candlelight in a dusty cobweb-draped study, visibly much later in time than the event being described, aged parchment-textured background, ornate gilded border framing, muted earth-tone palette with warm candle-gold accents, storybook legend framing, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, illuminated-manuscript style, a flat cream-faced stick-limbed scribe character writing by candlelight in a dusty cobweb-draped study, visibly much later in time than the event being described, aged parchment-textured background, ornate gilded border framing, muted earth-tone palette with warm candle-gold accents, storybook legend framing, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "from the century it happened in.",
+          "evidence": null,
+          "start": 5.538,
+          "end": 7.615
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, a single dramatic flame silhouette rising against the dark outline of the Alexandrian library building at night, flat cream-faced stick-limbed onlooker character in the foreground, clean confident linework, full muted earth-tone color (charcoal gray, dusty brown) with a saturated orange-red fire accent, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, a single dramatic flame silhouette rising against the dark outline of the Alexandrian library building at night, flat cream-faced stick-limbed onlooker character in the foreground, clean confident linework, full muted earth-tone color (charcoal gray, dusty brown) with a saturated orange-red fire accent, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "The real story isn't one fire,",
+          "evidence": null,
+          "start": 7.615,
+          "end": 9.691
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, the grand Alexandrian library building shown crumbling in three gradual stages across a dusty earth-tone landscape, three small suspect vignettes along the timeline, a soldier silhouette, a fire silhouette, and a creeping-neglect vine silhouette, flat cream-faced stick-limbed characters, clean confident linework, full muted brown/gray/dusty-teal color, soft painterly lighting, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, the grand Alexandrian library building shown crumbling in three gradual stages across a dusty earth-tone landscape, three small suspect vignettes along the timeline, a soldier silhouette, a fire silhouette, and a creeping-neglect vine silhouette, flat cream-faced stick-limbed characters, clean confident linework, full muted brown/gray/dusty-teal color, soft painterly lighting, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "it's a three-hundred-year death with at least three different suspects,",
+          "evidence": null,
+          "start": 9.691,
+          "end": 13.153
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, the robed caliph figure standing outside a locked scroll-room door, visibly apart from the scrolls inside, flat cream-faced stick-limbed character, clean confident linework, full muted earth-tone color with a dusty-teal door accent, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, the robed caliph figure standing outside a locked scroll-room door, visibly apart from the scrolls inside, flat cream-faced stick-limbed character, clean confident linework, full muted earth-tone color with a dusty-teal door accent, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "and the most famous one probably never touched a single scroll.",
+          "evidence": null,
+          "start": 13.153,
           "end": 16.96
         }
       ],
@@ -300,18 +348,42 @@
       "label": "THE TURN",
       "tag": "0:15-0:30",
       "confidence_tags": [],
-      "narration": "Today we're tracing what actually happened to the Library of Alexandria — what's solid, what historians still argue about, and the one popular version that's almost certainly a myth.",
+      "narration": "Today we're tracing what actually happened to the Library of Alexandria, what's solid, what historians still argue about, and the one popular version that's almost certainly a myth.",
       "segments": [
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"ancient Library of Alexandria depiction\"",
-            "search_terms": [
-              "ancient Library of Alexandria depiction"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Painted scene mode, a wide establishing exterior view of the ancient Library of Alexandria complex, columned facade and courtyard under a clear Mediterranean sky, flat cream-faced stick-limbed figures small in the distance for scale, clean confident linework, full muted earth-tone color (tan stone, dusty teal sky), wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, a wide establishing exterior view of the ancient Library of Alexandria complex, columned facade and courtyard under a clear Mediterranean sky, flat cream-faced stick-limbed figures small in the distance for scale, clean confident linework, full muted earth-tone color (tan stone, dusty teal sky), wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
           },
-          "text": "Today we're tracing what actually happened to the Library of Alexandria — what's solid, what historians still argue about, and the one popular version that's almost certainly a myth.",
+          "text": "Today we're tracing what actually happened to the Library",
+          "evidence": null,
           "start": 17.31,
+          "end": 20.828
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, the Library's columned reading hall interior, scrolls stacked on open shelves, half the hall in warm confident lamplight and half in cooler shadow, flat cream-faced stick-limbed scholar characters, clean linework, full muted earth-tone color with warm amber and dusty-teal contrast, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, the Library's columned reading hall interior, scrolls stacked on open shelves, half the hall in warm confident lamplight and half in cooler shadow, flat cream-faced stick-limbed scholar characters, clean linework, full muted earth-tone color with warm amber and dusty-teal contrast, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "of Alexandria, what's solid, what historians still argue about,",
+          "evidence": null,
+          "start": 20.828,
+          "end": 24.345
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, a faint translucent ghostly silhouette of the robed caliph figure fading at the edge of frame while the solid, clearly rendered Library of Alexandria reading hall occupies the rest of the composition, flat cream-faced stick-limbed characters, clean confident linework on the real scene, muted earth-tone palette, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, a faint translucent ghostly silhouette of the robed caliph figure fading at the edge of frame while the solid, clearly rendered Library of Alexandria reading hall occupies the rest of the composition, flat cream-faced stick-limbed characters, clean confident linework on the real scene, muted earth-tone palette, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "and the one popular version that's almost certainly a myth.",
+          "evidence": null,
+          "start": 24.345,
           "end": 28.254
         }
       ],
@@ -463,31 +535,66 @@
       "confidence_tags": [
         "SOLID"
       ],
-      "narration": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt. Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I — though some historians call his exact role debatable, so treat that detail as likely, not certain.",
+      "narration": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt. Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I, though some historians call his exact role debatable, so treat that detail as likely, not certain.",
       "segments": [
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"Ptolemy I Soter bust\" / \"ancient Alexandria map\"",
-            "search_terms": [
-              "Ptolemy I Soter bust",
-              "ancient Alexandria map"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Painted scene mode, a sunlit Ptolemaic-Egyptian courtyard with the Mouseion's columned facade in the background, flat cream-faced stick-limbed scholars walking toward the entrance in Hellenistic-Egyptian dress, clean confident linework, full muted earth-tone color (tan stone, dusty teal sky), wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, a sunlit Ptolemaic-Egyptian courtyard with the Mouseion's columned facade in the background, flat cream-faced stick-limbed scholars walking toward the entrance in Hellenistic-Egyptian dress, clean confident linework, full muted earth-tone color (tan stone, dusty teal sky), wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
           },
-          "text": "The Library was part of the Mouseion, a research institution founded in the early Ptolemaic dynasty, in Egypt.",
+          "text": "The Library was part of the Mouseion, a research",
+          "evidence": null,
           "start": 28.604,
-          "end": 35.733
+          "end": 32.248
         },
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"Demetrius of Phalerum\"",
-            "search_terms": [
-              "Demetrius of Phalerum"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Painted scene mode, the Mouseion's interior research hall, flat cream-faced stick-limbed scholars and scribes working at reading tables, Hellenistic columns fused with Egyptian architectural motifs, clean confident linework, full muted earth-tone color with warm amber light, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, the Mouseion's interior research hall, flat cream-faced stick-limbed scholars and scribes working at reading tables, Hellenistic columns fused with Egyptian architectural motifs, clean confident linework, full muted earth-tone color with warm amber light, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
           },
-          "text": "Tradition credits Demetrius of Phalerum with proposing it to Ptolemy I — though some historians call his exact role debatable, so treat that detail as likely, not certain.",
-          "start": 35.733,
+          "text": "institution founded in the early Ptolemaic dynasty, in Egypt.",
+          "evidence": null,
+          "start": 32.248,
+          "end": 35.891
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, Demetrius of Phalerum walking toward a sunlit Alexandrian royal courtroom carrying a scroll, flat cream-faced stick-limbed character, CONTESTED treatment: sketchier looser line weight, desaturated muted palette, a faint dashed-line border motif worked into the scene's framing, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, Demetrius of Phalerum walking toward a sunlit Alexandrian royal courtroom carrying a scroll, flat cream-faced stick-limbed character, CONTESTED treatment: sketchier looser line weight, desaturated muted palette, a faint dashed-line border motif worked into the scene's framing, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "Tradition credits Demetrius of Phalerum with proposing it to",
+          "evidence": null,
+          "start": 35.891,
+          "end": 39.535
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, Demetrius of Phalerum presenting a scroll to Ptolemy I seated on a modest throne in the same sunlit Alexandrian courtroom, flat cream-faced stick-limbed characters, CONTESTED treatment: sketchier looser line weight, desaturated muted palette, a faint dashed-line border motif worked into the scene's framing, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, Demetrius of Phalerum presenting a scroll to Ptolemy I seated on a modest throne in the same sunlit Alexandrian courtroom, flat cream-faced stick-limbed characters, CONTESTED treatment: sketchier looser line weight, desaturated muted palette, a faint dashed-line border motif worked into the scene's framing, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "Ptolemy I, though some historians call his exact role",
+          "evidence": null,
+          "start": 39.535,
+          "end": 43.179
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Painted scene mode, the same royal courtroom scene with Demetrius and Ptolemy I, now rendered with visibly looser sketchier linework fading into a dashed outline at the composition's edges, desaturated muted palette, flat cream-faced stick-limbed characters, signaling historical uncertainty, wide 16:9 letterboxed composition, no text\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Painted scene mode, the same royal courtroom scene with Demetrius and Ptolemy I, now rendered with visibly looser sketchier linework fading into a dashed outline at the composition's edges, desaturated muted palette, flat cream-faced stick-limbed characters, signaling historical uncertainty, wide 16:9 letterboxed composition, no text",
+            "screenshot_url": null
+          },
+          "text": "debatable, so treat that detail as likely, not certain.",
+          "evidence": null,
+          "start": 43.179,
           "end": 46.823
         }
       ],
@@ -734,30 +841,54 @@
       "confidence_tags": [
         "SOLID"
       ],
-      "narration": "Nobody knows exactly how many scrolls it held. Estimates range from 40,000 to as high as 700,000 — but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated.",
+      "narration": "Nobody knows exactly how many scrolls it held. Estimates range from 40,000 to as high as 700,000, but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated.",
       "segments": [
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"ancient papyrus scroll\"",
-            "search_terms": [
-              "ancient papyrus scroll"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Flat explainer mode, a stylized library-shelf diagram with rows of scroll cubbies fading into a soft hazy question-mark silhouette at the far end, clean confident line weight, muted dusty-teal neutral informational backdrop, small hand-drawn-caps diagram label reading SCROLL COUNT: UNKNOWN, wide 16:9 letterboxed composition\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Flat explainer mode, a stylized library-shelf diagram with rows of scroll cubbies fading into a soft hazy question-mark silhouette at the far end, clean confident line weight, muted dusty-teal neutral informational backdrop, small hand-drawn-caps diagram label reading SCROLL COUNT: UNKNOWN, wide 16:9 letterboxed composition",
+            "screenshot_url": null
           },
           "text": "Nobody knows exactly how many scrolls it held.",
+          "evidence": null,
           "start": 47.173,
-          "end": 50.572
+          "end": 50.669
         },
         {
           "on_screen": {
-            "raw": "Wikimedia Commons: \"ancient library scrolls shelves\"",
-            "search_terms": [
-              "ancient library scrolls shelves"
-            ],
-            "ai_generate_prompt": null
+            "raw": "AI-generate: \"Flat explainer mode, a simple bar-chart comparison diagram with one short bar and one disproportionately tall bar beside it, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading 40,000 VS 700,000, wide 16:9 letterboxed composition\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Flat explainer mode, a simple bar-chart comparison diagram with one short bar and one disproportionately tall bar beside it, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading 40,000 VS 700,000, wide 16:9 letterboxed composition",
+            "screenshot_url": null
           },
-          "text": "Estimates range from 40,000 to as high as 700,000 — but that top figure comes from ancient writers centuries later, and modern historians consider it almost certainly exaggerated.",
-          "start": 50.572,
+          "text": "Estimates range from 40,000 to as high as 700,000,",
+          "evidence": null,
+          "start": 50.669,
+          "end": 54.602
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Flat explainer mode, a closer view of the same tall bar from the bar-chart diagram, a small stylized ancient scribe-and-scroll icon beside it, a red hand-drawn annotation arrow pointing at the bar, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading ANCIENT SOURCE, wide 16:9 letterboxed composition\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Flat explainer mode, a closer view of the same tall bar from the bar-chart diagram, a small stylized ancient scribe-and-scroll icon beside it, a red hand-drawn annotation arrow pointing at the bar, clean confident line weight, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading ANCIENT SOURCE, wide 16:9 letterboxed composition",
+            "screenshot_url": null
+          },
+          "text": "but that top figure comes from ancient writers centuries",
+          "evidence": null,
+          "start": 54.602,
+          "end": 58.535
+        },
+        {
+          "on_screen": {
+            "raw": "AI-generate: \"Flat explainer mode, the same tall bar now redrawn with a sketchy dashed outline instead of a firm line, a red hand-drawn annotation arrow still pointing at it, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading EXAGGERATED?, wide 16:9 letterboxed composition\"",
+            "search_terms": [],
+            "ai_generate_prompt": "Flat explainer mode, the same tall bar now redrawn with a sketchy dashed outline instead of a firm line, a red hand-drawn annotation arrow still pointing at it, pale neutral background with muted dusty-teal accents, small hand-drawn-caps diagram label reading EXAGGERATED?, wide 16:9 letterboxed composition",
+            "screenshot_url": null
+          },
+          "text": "later, and modern historians consider it almost certainly exaggerated.",
+          "evidence": null,
+          "start": 58.535,
           "end": 62.469
         }
       ],

@@ -45,7 +45,7 @@ Dialogue: 0,0:00:07.70,0:00:07.92,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\
 Dialogue: 0,0:00:07.92,0:00:08.38,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}story
 Dialogue: 0,0:00:08.38,0:00:08.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}isn't
 Dialogue: 0,0:00:08.96,0:00:09.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}one
-Dialogue: 0,0:00:09.20,0:00:09.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}fire
+Dialogue: 0,0:00:09.20,0:00:09.60,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}fire,
 Dialogue: 0,0:00:10.02,0:00:10.20,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it's
 Dialogue: 0,0:00:10.20,0:00:10.28,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}a
 Dialogue: 0,0:00:10.28,0:00:11.16,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}300-year
@@ -77,9 +77,8 @@ Dialogue: 0,0:00:19.47,0:00:19.69,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\
 Dialogue: 0,0:00:19.69,0:00:19.81,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}the
 Dialogue: 0,0:00:19.81,0:00:20.19,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Library
 Dialogue: 0,0:00:20.19,0:00:20.59,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}of
-Dialogue: 0,0:00:20.59,0:00:21.23,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Alexandria
-Dialogue: 0,0:00:21.73,0:00:21.79,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}—
-Dialogue: 0,0:00:21.79,0:00:21.85,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}what's
+Dialogue: 0,0:00:20.59,0:00:21.23,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Alexandria,
+Dialogue: 0,0:00:21.73,0:00:21.85,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}what's
 Dialogue: 0,0:00:21.85,0:00:22.31,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}solid,
 Dialogue: 0,0:00:22.61,0:00:22.83,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}what
 Dialogue: 0,0:00:22.83,0:00:23.33,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}historians
@@ -121,9 +120,8 @@ Dialogue: 0,0:00:38.10,0:00:38.42,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\
 Dialogue: 0,0:00:38.42,0:00:38.96,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}proposing
 Dialogue: 0,0:00:38.96,0:00:39.22,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}it
 Dialogue: 0,0:00:39.22,0:00:39.30,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}to
-Dialogue: 0,0:00:39.30,0:00:39.56,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Ptolemy
-Dialogue: 0,0:00:39.56,0:00:39.81,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}I
-Dialogue: 0,0:00:39.81,0:00:40.06,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}—
+Dialogue: 0,0:00:39.30,0:00:39.68,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}Ptolemy
+Dialogue: 0,0:00:39.68,0:00:40.06,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}I,
 Dialogue: 0,0:00:40.34,0:00:40.52,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}though
 Dialogue: 0,0:00:40.52,0:00:40.86,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}some
 Dialogue: 0,0:00:40.86,0:00:41.42,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}historians
@@ -156,8 +154,7 @@ Dialogue: 0,0:00:52.19,0:00:52.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\
 Dialogue: 0,0:00:52.61,0:00:52.77,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}as
 Dialogue: 0,0:00:52.77,0:00:53.07,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}high
 Dialogue: 0,0:00:53.07,0:00:53.39,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}as
-Dialogue: 0,0:00:53.39,0:00:54.03,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}700,000
-Dialogue: 0,0:00:54.03,0:00:54.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}—
+Dialogue: 0,0:00:53.39,0:00:54.67,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}700,000,
 Dialogue: 0,0:00:54.67,0:00:55.15,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}but
 Dialogue: 0,0:00:55.15,0:00:55.35,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}that
 Dialogue: 0,0:00:55.35,0:00:55.61,Word,,0,0,0,,{\fscx60\fscy60\t(0,120,\fscx115\fscy115)\t(120,180,\fscx100\fscy100)}top
