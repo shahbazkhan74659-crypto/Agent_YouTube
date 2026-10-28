@@ -22,31 +22,31 @@
   {
     "word": "many",
     "start": 1.62,
-    "end": 1.86
+    "end": 1.88
   },
   {
     "word": "scrolls",
-    "start": 1.86,
-    "end": 2.4
+    "start": 1.88,
+    "end": 2.42
   },
   {
     "word": "it",
-    "start": 2.4,
-    "end": 2.5
+    "start": 2.42,
+    "end": 2.52
   },
   {
     "word": "held.",
-    "start": 2.5,
+    "start": 2.52,
     "end": 2.8
   },
   {
     "word": "Estimates",
     "start": 3.22,
-    "end": 3.62
+    "end": 3.64
   },
   {
     "word": "range",
-    "start": 3.62,
+    "start": 3.64,
     "end": 3.88
   },
   {
@@ -57,26 +57,26 @@
   {
     "word": "40",
     "start": 4.14,
-    "end": 4.6
+    "end": 4.62
   },
   {
     "word": ",000",
-    "start": 4.6,
-    "end": 5.02
+    "start": 4.62,
+    "end": 5.06
   },
   {
     "word": "to",
-    "start": 5.02,
+    "start": 5.06,
     "end": 5.44
   },
   {
     "word": "as",
     "start": 5.44,
-    "end": 5.6
+    "end": 5.58
   },
   {
     "word": "high",
-    "start": 5.6,
+    "start": 5.58,
     "end": 5.9
   },
   {
@@ -87,71 +87,71 @@
   {
     "word": "700",
     "start": 6.22,
-    "end": 6.86
+    "end": 6.88
   },
   {
-    "word": ",000",
-    "start": 6.86,
+    "word": ",000,",
+    "start": 6.88,
     "end": 7.5
   },
   {
     "word": "but",
-    "start": 7.5,
-    "end": 7.98
+    "start": 7.78,
+    "end": 7.96
   },
   {
     "word": "that",
-    "start": 7.98,
-    "end": 8.18
+    "start": 7.96,
+    "end": 8.14
   },
   {
     "word": "top",
-    "start": 8.18,
-    "end": 8.44
+    "start": 8.14,
+    "end": 8.42
   },
   {
     "word": "figure",
-    "start": 8.44,
-    "end": 8.8
+    "start": 8.42,
+    "end": 8.78
   },
   {
     "word": "comes",
-    "start": 8.8,
-    "end": 9.14
+    "start": 8.78,
+    "end": 9.12
   },
   {
     "word": "from",
-    "start": 9.14,
-    "end": 9.38
+    "start": 9.12,
+    "end": 9.36
   },
   {
     "word": "ancient",
-    "start": 9.38,
-    "end": 9.8
+    "start": 9.36,
+    "end": 9.82
   },
   {
     "word": "writers",
-    "start": 9.8,
-    "end": 10.2
+    "start": 9.82,
+    "end": 10.22
   },
   {
     "word": "centuries",
-    "start": 10.2,
+    "start": 10.22,
     "end": 10.64
   },
   {
-    "word": "later",
+    "word": "later,",
     "start": 10.64,
-    "end": 11.1
+    "end": 11.12
   },
   {
     "word": "and",
-    "start": 11.1,
-    "end": 11.58
+    "start": 11.5,
+    "end": 11.6
   },
   {
     "word": "modern",
-    "start": 11.58,
+    "start": 11.6,
     "end": 11.9
   },
   {
@@ -162,26 +162,26 @@
   {
     "word": "consider",
     "start": 12.5,
-    "end": 13.1
+    "end": 13.08
   },
   {
     "word": "it",
-    "start": 13.1,
-    "end": 13.3
+    "start": 13.08,
+    "end": 13.28
   },
   {
     "word": "almost",
-    "start": 13.3,
+    "start": 13.28,
     "end": 13.8
   },
   {
     "word": "certainly",
     "start": 13.8,
-    "end": 14.34
+    "end": 14.38
   },
   {
     "word": "exaggerated.",
-    "start": 14.34,
-    "end": 14.94
+    "start": 14.38,
+    "end": 14.98
   }
 ]

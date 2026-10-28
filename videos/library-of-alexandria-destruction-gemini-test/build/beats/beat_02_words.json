@@ -17,116 +17,126 @@
   {
     "word": "what",
     "start": 0.92,
-    "end": 1.28
+    "end": 1.36
   },
   {
     "word": "actually",
-    "start": 1.28,
-    "end": 1.74
+    "start": 1.36,
+    "end": 1.86
   },
   {
     "word": "happened",
-    "start": 1.74,
-    "end": 2.16
+    "start": 1.86,
+    "end": 2.24
   },
   {
     "word": "to",
-    "start": 2.16,
-    "end": 2.38
+    "start": 2.24,
+    "end": 2.46
   },
   {
     "word": "the",
-    "start": 2.38,
-    "end": 2.5
+    "start": 2.46,
+    "end": 2.56
   },
   {
     "word": "Library",
-    "start": 2.5,
-    "end": 2.88
+    "start": 2.56,
+    "end": 2.96
   },
   {
     "word": "of",
-    "start": 2.88,
-    "end": 3.28
+    "start": 2.96,
+    "end": 3.36
   },
   {
     "word": "Alexandria,",
-    "start": 3.28,
-    "end": 3.92
+    "start": 3.36,
+    "end": 3.98
   },
   {
     "word": "what",
-    "start": 4.42,
-    "end": 4.54
+    "start": 4.48,
+    "end": 4.58
   },
   {
     "word": "solid,",
-    "start": 4.54,
-    "end": 5.0
+    "start": 4.58,
+    "end": 5.02
   },
   {
     "word": "what",
-    "start": 5.3,
-    "end": 5.52
+    "start": 5.36,
+    "end": 5.54
   },
   {
     "word": "historians",
-    "start": 5.52,
-    "end": 6.02
+    "start": 5.54,
+    "end": 6.06
   },
   {
     "word": "still",
-    "start": 6.02,
-    "end": 6.4
+    "start": 6.06,
+    "end": 6.46
   },
   {
     "word": "argue",
-    "start": 6.4,
-    "end": 6.8
+    "start": 6.46,
+    "end": 6.88
   },
   {
     "word": "about,",
-    "start": 6.8,
-    "end": 7.14
+    "start": 6.88,
+    "end": 7.2
   },
   {
     "word": "and",
-    "start": 7.42,
-    "end": 7.62
+    "start": 7.56,
+    "end": 7.68
   },
   {
     "word": "the",
-    "start": 7.62,
-    "end": 7.74
+    "start": 7.68,
+    "end": 7.8
   },
   {
     "word": "one",
-    "start": 7.74,
-    "end": 7.96
+    "start": 7.8,
+    "end": 8.04
   },
   {
     "word": "popular",
-    "start": 7.96,
-    "end": 8.44
+    "start": 8.04,
+    "end": 8.52
   },
   {
     "word": "version",
-    "start": 8.44,
-    "end": 8.9
+    "start": 8.52,
+    "end": 8.96
   },
   {
     "word": "that's",
-    "start": 8.9,
-    "end": 9.46
+    "start": 8.96,
+    "end": 9.5
   },
   {
     "word": "almost",
-    "start": 9.46,
-    "end": 9.74
+    "start": 9.5,
+    "end": 9.78
   },
   {
     "word": "certainly",
-    "start": 9.74,
-    "end": 10.3
+    "start": 9.78,
+    "end": 10.34
+  },
+  {
+    "word": "a",
+    "start": 10.34,
+    "end": 10.64
+  },
+  {
+    "word": "myth.",
+    "start": 10.64,
+    "end": 10.82
   }
 ]
