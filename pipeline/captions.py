@@ -140,7 +140,8 @@ def _build_word_style() -> pysubs2.SSAStyle:
 
 def _build_title_style() -> pysubs2.SSAStyle:
     style = pysubs2.SSAStyle()
-    style.fontname = "Arial"
+    style.fontname = "Papyrus"  # fancy/historical display font
+    # word captions and the evidence label stay on Arial for legibility at small sizes
     style.fontsize = TITLE_FONT_SIZE
     style.bold = True
     style.primarycolor = pysubs2.Color(255, 255, 255)  # white only, per the branded frame spec

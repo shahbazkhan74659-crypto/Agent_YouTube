@@ -2370,3 +2370,214 @@ watermark in prompts at all - the crop is off, the watermark shows, and
 nothing in the prompt text reliably controls it (and the one wording tried
 made things worse, not better). No code beyond the crop toggle was needed -
 this was a prompt-engineering question, not a pipeline bug.
+
+# Progress log — 2026-10-29
+
+## First real video built end-to-end: Human Evolution Part 1
+
+New convention started today: `videos/Production Videos/<slug>/` for real
+(non-test) productions, separate from the old `videos/<slug>/` test-video
+pattern used by the Alexandria slugs - gitignored (`videos/Production Videos/`
+added to `.gitignore`) since these are real deliverables-in-progress, not meant
+to be tracked the way the committed Alexandria build artifacts are.
+
+Topic decided: a 3-part **Human Evolution** series. Part 1 = dinosaur
+extinction through the first hominin candidates (pre-*Homo*; Parts 2/3 not
+scoped). `research.md` + `script.md` built by hand following the
+`yt-factcheck`/`yt-script` skills' own process and format (not invoked as
+slash commands, but matched claim-by-claim): 10 claims, confidence-tagged,
+hook scored via `hookscore.py` (71/WORKABLE, "The Warning" formula, after a
+second round adding a hard number for SPECIFICITY). `transcript.md` added
+separately at user request (narration-only, no cues) - first written as
+`.txt`, corrected to `.md` per a follow-up request.
+
+**Real fact found and added mid-session**: at 66 Mya (Deccan Traps eruption
+window), India was still an isolated landmass, drifting fast toward Eurasia,
+not yet collided (hard collision ~43-55 Mya) - verified via `WebSearch`
+(Cande & Stegman 2011 plate-speed study, via NBC/LiveScience coverage;
+Wikipedia: Geology of India) before adding it as a new SOLID claim (`#2b`) to
+`research.md` and folding it into `script.md`'s Beat 1 narration plus a new
+AI-generate visual segment. Runtime grew from ~2:06 to ~2:10 as a result -
+recalculated and updated consistently across `script.md`, `transcript.md`,
+and all downstream timestamps.
+
+## `script_parser.py` bugs found and fixed while first parsing this script.md
+
+Two real parsing bugs, both self-inflicted by the script's own formatting,
+caught by actually running the parser before trusting it rather than assuming
+a hand-written script.md would just work:
+
+- `**Storytelling**` / `**Explanation**` / `**Questionary**` subheadings
+  (originally real `###` markdown headings, added for human readability)
+  silently truncated `extract_script_section()` to **zero beats** - it stops
+  at *any* heading level, so the whole `## Script` body was being discarded
+  the instant it hit the first subheading. Converting the headings to
+  `**bold**` labels fixed the truncation but then leaked the bare words
+  ("Storytelling", "Questionary") into the surrounding narration as stray
+  text, since they don't match any cue/label pattern either - removed the
+  markers entirely instead (not needed by the pipeline; the Alexandria
+  reference script doesn't have them).
+- Two beat labels (`**BEAT 1 — ...piled\non...:**`, `**BEAT 6 —
+  ...walk (UNCERTAIN...\nbipedalism):**`) had wrapped across two source lines
+  for readability, which broke `LABEL_LINE_RE` (single-line-only). Joined
+  each back onto one line. After both fixes: 11 beats, 25 segments parsed
+  cleanly, matching the 25 images already generated 1:1.
+
+## Visual generation: 25 Gemini prompts, one real bug, one real workflow fix
+
+Worked through all 25 segments' prompts one at a time (hook through
+sign-off), live, in the project's established session pattern: switched the
+diagram beats from sparse dark-background line art to full painted-scene
+illustrations after the user flagged the early diagrams as reading "too
+black and white"; added India as a visibly isolated drifting landmass (not
+attached to Asia) per the user's correction above; caught and removed one
+accidentally-redundant prompt (the "volcanoes erupting" shot was already
+baked into the previous "India drifting" image's own prompt).
+
+**Real bug**: the first generated image came back with a thin black bar baked
+across the top. Traced to the prompt's own wording ("wide **letterboxed**
+16:9-ish composition") - Gemini took it literally and painted real letterbox
+bars into the image content itself, not just framed the shot wide. Fixed by
+cropping the existing image (measured the bar's exact bottom edge at row
+145 of 1536) and rewording every later prompt to "wide cinematic
+composition, full-bleed image with no borders or black bars" - zero
+recurrence across the other 24.
+
+## Watermark removal: user's "jugaad" crop idea, refined with real measurements
+
+User's idea: since Gemini's sparkle watermark sits in the bottom-right
+corner, crop both left and right edges to remove it. First manual attempt
+(symmetric ~163px/side) removed the mark but hadn't been checked against the
+pipeline's own fitting math - worked out afterward that it would have cost
+~60px of black pillarbox on both sides once `assemble.py` fit it into the
+1080x608 content rectangle (scale-to-fit, pad with black, never crop), since
+the crop had dropped the aspect ratio from 1.792 (already close to the
+content rect's 1.776) down to 1.579.
+
+Measured the watermark's real pixel bounding box directly rather than guess
+a safer margin: two different Gemini export resolutions turned up across the
+batch (2752x1536 for 21 of 25 images, 1408x768 for the last 4) - mark
+bounding box x:2592-2732/y:1376-1471 on the larger one, roughly a 160px
+margin from the corner on both axes. Computed an exact symmetric crop (190px
+off each side horizontally, enough off top/bottom to land on the content
+rectangle's 1080:608 aspect - 2372x1335 for the large batch, 1028x579 for
+the small one) that clears the mark with a 30px safety buffer *and* matches
+the target aspect almost exactly (1.7768 vs. 1.7763 target). Applied via a
+one-off script to all 25 images in place; verified watermark-gone on 3
+samples, one per resolution batch.
+
+## Title font: Papyrus added, with a self-corrected font-resolution finding
+
+`captions.py`'s `_build_title_style()` changed from `Arial` to `Papyrus` for
+the title band only (word captions and the evidence "SOURCE" label stay
+Arial for small-size legibility). The first single-frame preview looked like
+a plain thin serif fallback rather than the expected chunky Papyrus look -
+initially (wrongly) reported to the user as a silent font-resolution
+failure.
+
+Investigated properly before letting that stand, rather than just trust the
+first guess: `ffmpeg -buildconf` confirmed `--enable-fontconfig`, but a
+verbose-logging render (normally suppressed by `ffmpeg_tool.py`'s
+`-loglevel error`) showed `Using font provider directwrite (with GDI)` and
+`fontselect: (Papyrus, 700, 0) -> Papyrus-Regular` - a genuine match.
+`fontsdir` (the fix attempted first) is a fontconfig-only option and had no
+effect, since this build's libass prefers Windows' native DirectWrite over
+fontconfig automatically regardless of the compile flag. The original
+preview was correct all along; the earlier wrong claim to the user was
+corrected rather than left standing.
+
+## Static per-segment template frames (review tool, not part of the real render)
+
+Built a one-off script reusing `config`'s real layout constants and
+`captions._build_title_style()` to composite each of the 25 images into the
+actual branded frame (title band + scale-to-fit content rect + empty caption
+bar) as a still PNG, named by real `beat_id`/`seg_id`, saved to
+`videos/Production Videos/Human_Evolution/frames/` - let the user review the
+full template framing before committing to a real render, the same
+"cheap preview before the real thing" pattern as the original title-tuning
+session back on 2026-10-25/26.
+
+## First real Kokoro narration + first full pipeline run for this video
+
+`am_adam` voice, per direct instruction scoped to this one video (see
+`idea.md`'s Kokoro section - the global `hf_alpha` default did not change).
+Real narration ran to 109.6s, shorter than the ~2:10 word-count estimate -
+`am_adam`'s actual pace runs faster than the 150wpm assumption used for
+drafting. 12 cut-rate warnings printed (several segments across beats 1, 3,
+5, 7, 8 holding 5-8s against the 4s cap) - flagged to the user, not yet
+fixed. `audio_mix.py` run narration-only (music/SFX still off per the
+standing 2026-10-28 decision); the single concatenated track also copied to
+a new `audio/narration_final.wav` per request, alongside the pipeline's own
+`build/mix.wav`.
+
+Full remaining pipeline then run end-to-end for the first time on a real
+(non-test) video: copied the 25 cropped images into
+`build/visuals_gemini/<seg_id>.png` (the pipeline's pre-placed-asset
+convention) and ran `resolve.py` -> `alignment.py` -> `captions.py` ->
+`assemble.py` in sequence. Both `[EVIDENCE: ...]` cues auto-resolved to real
+Wikimedia photos with no manual sourcing needed - a genuine Chicxulub
+gravity-anomaly map and a genuine Sahelanthropus/Toumaï skull-cast photo.
+`alignment.py` found 327 words against an expected 325 (normal Whisper
+tokenization variance, not an error). Output: `output/final.mp4`, 1080x1920,
+109.6s, clean full-file decode, confirmed by sampling 4 frames across the
+runtime (hook, both evidence insets, the sign-off) rather than trusting the
+exit code alone - copied to `video/human_evolution_part1.mp4` per request.
+
+**Still unverified**: no human watch/listen pass yet, the same standing
+caveat this file has logged for every render so far. The 12 cut-rate
+warnings are real and not yet addressed.
+
+## YouTube channel created: MindParadox
+
+Resolves the open item logged since 2026-10-26. Handle `@MindParadox-n1p`.
+
+Profile picture and banner designed in the channel's own illustrated house
+style (round cream head, dot eyes, single eyebrow line, thin black-outline
+limbs, muted earth tones) via Gemini prompts built from the *content* of the
+old photoreal `AstralParadoxDP.png` logo (fedora-and-coat silhouette, a
+galaxy cupped in one hand, orbiting science/history iconography - atom, DNA,
+Saturn, brain, books, Greek temple, philosopher bust, Earth) rather than
+referencing the image file itself, since these Gemini prompts are plain
+text, not image-edit requests, per explicit instruction not to mention the
+reference image at all.
+
+**Real bug caught from a live screenshot**: the first banner generation
+split the canvas into two visually mismatched zones - a dark starfield band
+carrying the character and channel-name text in the middle, flanked top and
+bottom by a separate plain tan background carrying most of the icons. Traced
+to the prompt's safe-zone instruction being read as "put a space-themed
+band *only* in the middle," not "the character and text must stay within the
+middle band of one continuous scene." Fixed by explicitly stating the entire
+canvas is one continuous starfield edge-to-edge *before* giving the
+safe-zone placement rule; regenerated and verified correct (single
+continuous dark background, icons correctly scattered into the TV-only
+margins) directly on the live channel page via Chrome. Banner sizing used
+verified-current real numbers, not assumed from memory: 2560x1440 upload
+canvas, 1546x423 all-devices-safe centered zone, confirmed via `WebSearch`
+before using them in the prompt's safe-zone math (centered 60% width / 29%
+height).
+
+Verified live on `youtube.com/@mindparadox-n1p` via Chrome: banner and DP
+both render correctly, text and character inside the safe zone, supporting
+icons correctly spilling into the wider-screen-only margins. **Channel has
+zero videos uploaded** - upload explicitly deferred to the next session, not
+done today. No YouTube upload automation exists anywhere in this project (no
+OAuth/API credentials, no upload script) - confirmed by actually checking
+rather than assuming, when first asked to "upload now."
+
+## Carried-forward open items (as of end of day, 2026-10-29)
+
+1. **Upload `human_evolution_part1.mp4` to MindParadox** - explicitly
+   deferred to tomorrow by the user.
+2. **12 cut-rate warnings** from the real narration timing (segments in
+   beats 1, 3, 5, 7, 8 holding 5-8s against the 4s cap) - not yet fixed;
+   would need either more `[ON SCREEN:]` cue splits in `script.md` or
+   accepting the longer holds.
+3. **No human watch/listen pass** on `human_evolution_part1.mp4` yet -
+   technically verified only (clean decode, 4 sampled frames).
+4. Packaging (title/description/tags/thumbnail) for the actual YouTube
+   upload not started yet.
+5. Everything else carried from 2026-10-28 (Kokoro Greek/Ptolemaic
+   pronunciation unconfirmed by ear on the *other*, Alexandria test video,
+   character pose variety still single-pose, mobile push notifications
+   disabled) is unchanged.

@@ -358,9 +358,17 @@ above) and the visual-sourcing workflow is now the Gemini+Pollinations-primary /
 real-sources-evidence-only setup described in "Visual sourcing priority flipped"
 above. Nothing currently open at the project-decision level — see `memory.md`'s
 latest "Carried-forward open items" for in-progress/pending work instead (e.g. the
-character pose variety is still single-pose, and the actual YouTube channel
-doesn't exist yet — the Bollywood music library's zero-composed-tracks status is
-no longer a blocking item since Budget §4 dropped music/SFX from production).
+character pose variety is still single-pose). The Bollywood music library's
+zero-composed-tracks status is no longer a blocking item since Budget §4 dropped
+music/SFX from production.
+
+**The YouTube channel now exists (2026-10-29)**: **MindParadox**
+(`@MindParadox-n1p`, youtube.com/@mindparadox-n1p) — resolves the long-standing
+"doesn't exist yet" item. Profile picture and banner designed fresh in the
+channel's own illustrated house style (not the old photoreal `AstralParadoxDP.png`
+logo) via Gemini prompts, verified live on the real channel page. Zero videos
+uploaded yet — see `memory.md`'s 2026-10-29 entry for the full build of the first
+video and the channel-art process; upload itself is planned for the next session.
 
 ## Kokoro voice preset (decided, 2026-10-26; reverted 2026-10-27; promoted to global default, same day)
 
@@ -381,6 +389,12 @@ If genuinely Hindi-language narration is ever produced, use `hm_omega` under
 entries. **Not retroactively applied**: the existing `library-of-alexandria-destruction`
 render still uses its original test voice — this decision governs videos made going
 forward, not a forced re-render of what already exists.
+
+**Exception, per-video (2026-10-29)**: `human-evolution` Part 1's narration was
+explicitly recorded with `am_adam` instead, per direct instruction for that video.
+This is a one-video choice, not a change to the global default above —
+`config.get_voice_preset()` / `voice.md` still say `hf_alpha` for anything that
+doesn't pass an explicit `--voice` override.
 
 ## Visual style and narration tone (decided 2026-10-27, supersedes the
 2026-10-27 photoreal-documentary default and the original cheerful-only tone)
