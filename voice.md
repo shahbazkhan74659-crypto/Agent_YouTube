@@ -67,22 +67,17 @@ won't actually match the finished narration.
 - **Opening:** no channel intro, no subscribe pitch before the hook - already
   enforced by `yt-script`'s "no channel intro... before we get started... those are
   the single most common cause of the 0:30 cliff" rule.
-- **Kokoro voice preset [CONFIRMED]: `hf_alpha`, with `--lang en-us`** - promoted
-  2026-10-27 to the channel-wide default for every video, superseding `af_bella`
-  (reverted-to earlier the same day, never used in any actual render). `hf_alpha` is
-  one of Kokoro's Hindi-trained voices (`h`-prefixed), not an English one - Kokoro has
-  no dedicated Indian-English preset, so this deliberately feeds English text through
-  a Hindi-trained voice under English phonemization (`lang="en-us"`, not `"hi"`) to get
-  an "Indian tone" on English narration. Chosen after listening to 4 candidates
-  (`hf_alpha`/`hf_beta`/`hm_omega`/`hm_psi`) generated to `C:\YouTube\voice-picker\`,
-  first confirmed on the `library-of-alexandria-destruction-gemini-test` validation
-  slug, now promoted to the global default read by `config.get_voice_preset()` for
-  every render that doesn't pass an explicit `--voice` override. `af_bella`/
-  `am_michael`/`af_heart` were all prior English-voice choices, now superseded. If
-  genuinely Hindi-language narration (`--lang hi`) is ever produced, use `hm_omega`
-  instead - it tested cleanest for actual Hindi (see `memory.md`'s 2026-10-26 entries) -
-  `hf_alpha` here is specifically the English-with-Indian-tone pairing, not a Hindi
-  voice pick.
+- **Kokoro voice preset [CONFIRMED]: `am_adam`, with `--lang en-us`** - promoted
+  2026-10-29 to the channel-wide default for every video, superseding `hf_alpha`
+  (2026-10-27's default, used on the Alexandria gemini-test slug but never
+  re-rendered into the production Alexandria slug). `am_adam` was first used as a
+  per-video exception on `Human Evolution Part 1` (2026-10-29) and is now promoted
+  to the project-wide default rather than staying scoped to that one video - read
+  by `config.get_voice_preset()` for every render that doesn't pass an explicit
+  `--voice` override. `hf_alpha`/`af_bella`/`am_michael`/`af_heart` were all prior
+  choices, now superseded. If genuinely Hindi-language narration (`--lang hi`) is
+  ever produced, use `hm_omega` instead - it tested cleanest for actual Hindi (see
+  `memory.md`'s 2026-10-26 entries).
 - **Pacing:** 150 wpm baseline, matching `yt-script`'s own runtime-estimate math.
   Punctuation is part of pacing too - see `yt-script/SKILL.md`'s Punctuation
   section for the allowed `. , ! : ?` set and how each maps onto this voice's

@@ -366,35 +366,39 @@ music/SFX from production.
 (`@MindParadox-n1p`, youtube.com/@mindparadox-n1p) — resolves the long-standing
 "doesn't exist yet" item. Profile picture and banner designed fresh in the
 channel's own illustrated house style (not the old photoreal `AstralParadoxDP.png`
-logo) via Gemini prompts, verified live on the real channel page. Zero videos
-uploaded yet — see `memory.md`'s 2026-10-29 entry for the full build of the first
-video and the channel-art process; upload itself is planned for the next session.
+logo) via Gemini prompts, verified live on the real channel page.
 
-## Kokoro voice preset (decided, 2026-10-26; reverted 2026-10-27; promoted to global default, same day)
+**First video published (2026-10-29)**: `Human Evolution Part 1`
+(`videos/Production Videos/Human_Evolution/`) is live — **"Could a 7-Million-Year-Old
+Fossil Even Walk?"**, `https://youtube.com/shorts/cGz7bPl295I`, public. Script,
+visuals (38 segments, 100% Gemini-sourced), narration (`am_adam`), captions,
+assembly, packaging (title/description/tags/thumbnail), and the actual YouTube
+upload are all done — see `memory.md`'s 2026-10-29 entries for the full build, the
+cut-rate fix, the packaging draft, and the publish session itself. Also cross-posted
+to Instagram (`instagram.com/mindparadoxx06`) the same day. **MindParadox has its
+first video up on two platforms — the channel is no longer just set up, it's
+actually live.** See `C:\YouTube\UploadHistory.md` for the one-line-per-upload index
+going forward (per-video detail stays in each video's own `packaging.md`).
 
-**`hf_alpha`, with `--lang en-us`** — promoted to the **channel-wide default for every
-video**, superseding the same-day `af_bella` revert (never used in any actual render)
-and `am_michael`/`af_heart` before it. `hf_alpha` is one of Kokoro's Hindi-trained
-voices, deliberately paired with English phonemization (`lang="en-us"`, not `"hi"`) to
-get an "Indian tone" on English narration — Kokoro has no dedicated Indian-English
-preset, so this combination is the actual mechanism, not a labeled voice choice. Chosen
-after listening to 4 candidates (`hf_alpha`/`hf_beta`/`hm_omega`/`hm_psi`) generated to
-`C:\YouTube\voice-picker\`; first confirmed on the `library-of-alexandria-destruction-
-gemini-test` validation slug, then promoted to global. Logged in `voice.md`'s "My
-format" section (both the master and the `~/.claude/youtube/voice.md` mirror, kept in
-sync) — that's what `config.get_voice_preset()` reads, so every future render that
-doesn't pass an explicit `--voice` override now uses `hf_alpha`/`en-us` automatically.
-If genuinely Hindi-language narration is ever produced, use `hm_omega` under
-`--lang hi` instead — tested cleanest for actual Hindi, see `memory.md`'s 2026-10-26
-entries. **Not retroactively applied**: the existing `library-of-alexandria-destruction`
-render still uses its original test voice — this decision governs videos made going
-forward, not a forced re-render of what already exists.
+## Kokoro voice preset (decided, 2026-10-26; reverted 2026-10-27; promoted to global default 2026-10-27; superseded by `am_adam` 2026-10-29)
 
-**Exception, per-video (2026-10-29)**: `human-evolution` Part 1's narration was
-explicitly recorded with `am_adam` instead, per direct instruction for that video.
-This is a one-video choice, not a change to the global default above —
-`config.get_voice_preset()` / `voice.md` still say `hf_alpha` for anything that
-doesn't pass an explicit `--voice` override.
+**`am_adam`, with `--lang en-us`** — now the **channel-wide default for every video**,
+superseding `hf_alpha` (2026-10-27's default — used on the Alexandria gemini-test slug,
+never actually re-rendered into the production Alexandria slug) and `af_bella`/
+`am_michael`/`af_heart` before that. `am_adam` was first used as a one-video exception
+on `Human Evolution Part 1` (2026-10-29, direct per-video instruction); the user then
+decided to promote it to the project-wide default instead of leaving it scoped to that
+video. Logged in `voice.md`'s "My format" section (both the master and the
+`~/.claude/youtube/voice.md` mirror, kept in sync) — that's what
+`config.get_voice_preset()` reads, so every future render that doesn't pass an explicit
+`--voice` override now uses `am_adam`/`en-us` automatically. If genuinely Hindi-language
+narration is ever produced, use `hm_omega` under `--lang hi` instead — tested cleanest
+for actual Hindi, see `memory.md`'s 2026-10-26 entries. **Not retroactively applied to
+the Alexandria slugs**: `library-of-alexandria-destruction` and
+`library-of-alexandria-destruction-gemini-test` still use whatever voice they were last
+rendered with — this decision governs videos made/re-rendered going forward, not a
+forced re-render of what already exists. `Human Evolution Part 1` already matches this
+default (it was the source of the decision).
 
 ## Visual style and narration tone (decided 2026-10-27, supersedes the
 2026-10-27 photoreal-documentary default and the original cheerful-only tone)

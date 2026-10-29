@@ -2565,19 +2565,248 @@ done today. No YouTube upload automation exists anywhere in this project (no
 OAuth/API credentials, no upload script) - confirmed by actually checking
 rather than assuming, when first asked to "upload now."
 
-## Carried-forward open items (as of end of day, 2026-10-29)
+## Carried-forward open items (as of end of day, 2026-10-29, updated after the human pass above)
 
-1. **Upload `human_evolution_part1.mp4` to MindParadox** - explicitly
-   deferred to tomorrow by the user.
-2. **12 cut-rate warnings** from the real narration timing (segments in
-   beats 1, 3, 5, 7, 8 holding 5-8s against the 4s cap) - not yet fixed;
-   would need either more `[ON SCREEN:]` cue splits in `script.md` or
-   accepting the longer holds.
-3. **No human watch/listen pass** on `human_evolution_part1.mp4` yet -
-   technically verified only (clean decode, 4 sampled frames).
-4. Packaging (title/description/tags/thumbnail) for the actual YouTube
-   upload not started yet.
-5. Everything else carried from 2026-10-28 (Kokoro Greek/Ptolemaic
+`Human Evolution Part 1` is **done - script, visuals, narration, captions,
+assembly, and the human watch/listen pass are all complete**. Only one real
+item remains on this video:
+
+1. **Upload `human_evolution_part1.mp4` to MindParadox** - the only step
+   left. Packaging (title/description/tags/thumbnail) is drafted, confirmed
+   final, and saved to `videos/Production Videos/Human_Evolution/
+   packaging.md` + `thumbnail.png` - ready to paste in at upload time.
+2. Everything else carried from 2026-10-28 (Kokoro Greek/Ptolemaic
    pronunciation unconfirmed by ear on the *other*, Alexandria test video,
    character pose variety still single-pose, mobile push notifications
    disabled) is unchanged.
+
+## `am_adam` promoted from per-video exception to global default voice (2026-10-29, same day, continued)
+
+User's `Human Evolution Part 1` `am_adam` choice (logged above as a one-video
+exception) was promoted to the **channel-wide default**, superseding `hf_alpha`
+(2026-10-27's default, which was itself never actually used in the production
+Alexandria render - only on the gemini-test slug). Updated `voice.md` (master +
+`~/.claude/youtube/voice.md` mirror, confirmed byte-identical after sync) and
+`idea.md`'s "Kokoro voice preset" section. Verified `config.get_voice_preset()`
+now resolves to `am_adam` directly from `voice.md`'s `[CONFIRMED]` line. Not
+retroactively applied to either Alexandria slug - this governs videos made or
+re-rendered going forward.
+
+## Item 2 fixed: the 12 cut-rate warnings resolved by splitting segments, not trimming them (2026-10-29, same day)
+
+User: keep the 4s cap, generate more images if needed, and assemble. Fixed by
+**subdividing** the 12 over-cap segments with additional `[ON SCREEN:
+AI-generate: ...]` cues at word-count-balanced split points (not by cutting
+narration or runtime) - total narration timeline unchanged (109.2-109.6s,
+same video, same words, just more cut points). `script_parser.py` re-run
+confirmed 11 beats / **38 visual segments** (was 25), evidence cues (Chicxulub
+on `beat_03_seg01`, Sahelanthropus skull on `beat_08_seg01` after the split)
+attached correctly to the right sub-segment. Re-ran `narration.py` (no
+`--force` - reused cached per-beat audio, just recomputed segment-level
+timing) and confirmed **zero `[cut-rate]` warnings** across all 38 segments.
+
+**Image handling**: of the 13 newly-needed images, **9 reused an existing
+image by rename** (the beat's already-generated art just shifted to a new
+segment-id filename, e.g. old `beat_02_seg01.png` -> `beat_02_seg02.png`,
+same pixels) and **13 were genuinely new generations** via live Gemini
+(`gemini.google.com/app`, Flash model, one new chat per segment, same
+discipline as every prior session) - new flat-explainer diagrams (zoomed tree
+markers, highlighted branches, a timeline-chain motif) and painted-scene
+continuations (mammals peeking out further, the host character closer-up/
+gesturing). **User also asked to archive each raw download into the
+slug's top-level `visuals/<N>.png` folder** (the flat sequential record of
+the original 25 generations, 1.png-25.png, separate from `build/
+visuals_gemini/<seg_id>.png` which the pipeline actually reads) - continued
+numbering 26-37 for the new batch (one image, the first `beat_02_seg01`
+generation, predates this instruction and was never archived under this
+convention).
+
+**Real friction hit and handled**: one Gemini image generation request
+outright failed ("I encountered an error doing what you asked") - retried
+once in the same chat per the `visual-style-brief.md` §8 discipline, second
+attempt succeeded. One "tree diagram" prompt for the ape/monkey branch split
+(`beat_06_seg01`) came back as a literal illustrated jungle scene with actual
+monkeys in trees instead of an abstract branching-line diagram matching the
+rest of that beat's style - caught by eye before downloading, fixed by
+re-prompting in the same chat with an explicit "not a literal tree or jungle
+scene... no animals, no foliage" constraint, which produced the correct
+abstract-diagram style on the second try.
+
+**Real bug caught before trusting the manifest**: 8 of the 13 new images
+landed at a segment-id filename that collided with an entry already cached in
+`build/manifest.json` from before the split (e.g. new `beat_02_seg01` reused
+the id of what used to be a different image) - `resolve.py`'s cache check
+only verifies the cached path still *exists* on disk, not that its content is
+current, so the first non-force `resolve.py` run silently kept the **stale
+prompt/title text** from the old cached entry for those 8 segments even
+though the actual image file at that path was the new, correct one (same
+path string, overwritten content) - the *rendered visual* was already
+correct, only the manifest's descriptive metadata was wrong. Fixed by running
+`resolve.py --force` once every segment's image was confirmed present on
+disk (zero Gemini/Pollinations calls needed since `--force` just re-reads
+cues against existing pre-placed files) - all 38 titles now match their
+actual current cue text. A flaky live Wikimedia search transiently dropped
+the Sahelanthropus evidence inset on the `--force` pass (the image had
+already downloaded to `build/evidence/beat_08_seg01.jpg` from an earlier
+successful search) - a second plain `resolve.py` run (no force) re-found it
+cleanly; confirmed both evidence insets (Chicxulub on `beat_03_seg01`,
+Sahelanthropus on `beat_08_seg01`) present in the final manifest.
+
+**Full rebuild and verification**: `alignment.py --force` (327/325 words,
+normal Whisper variance) -> `captions.py` (328 Dialogue events - 1 title +
+~325 word events + 2 EvidenceLabel SOURCE events, not the 1-event
+silently-empty bug this project has hit three times before) -> `assemble.py
+--force` (all 38 segment clips + final mux). Verified by measurement, not
+just a clean exit code: `final.mp4` 109.5s vs. `mix.wav` 109.60s (0.1s
+difference, normal frame-quantization rounding, not the systematic loss
+class of bug logged earlier in this file), full-file ffmpeg decode clean,
+and 4 frames sampled at the real midpoint timestamps of newly-split segments
+pulled directly from `narration_meta.json` (not guessed) - all four show the
+correct branded frame, the correct new artwork, and correctly synced
+captions (`beat_02_seg01`'s chain-link timeline, `beat_03_seg03`'s India
+volcano close-up captioned "erupting", `beat_05_seg04`'s pulled-back gap
+diagram captioned "explained", `beat_10_seg03`'s host-gesturing-at-tree shot
+captioned "even"). Refreshed the convenience copy at
+`video/human_evolution_part1.mp4` (was stale, pre-fix) from the new
+`output/final.mp4`.
+
+**Still not done**: no human watch/listen pass on the updated video (same
+standing caveat as every render in this project). Item 2 above is now
+resolved - removing it from the carried-forward list; items 1, 3, 4, 5 are
+unchanged, except that item 3's "technically verified only" now applies to
+*this* rebuilt version, not the one from earlier today.
+
+## Human watch/listen pass done - `Human Evolution Part 1` is final (2026-10-29, same day)
+
+User listened to/watched the rebuilt `human_evolution_part1.mp4` (the 38-segment,
+109.5s version from the cut-rate fix above) and confirmed it passes. This resolves
+item 3 above - the last remaining technical-only caveat on this video. **Status:
+`Human Evolution Part 1` is complete and final** - no further script, visual,
+narration, caption, or assembly work pending on it. Only step left is the actual
+YouTube upload to MindParadox (item 1, still open, still deferred).
+
+## Packaging drafted and confirmed - title, description, tags, thumbnail (2026-10-29, same day)
+
+User asked for a full packaging draft (title/description/tags/thumbnail), reviewed
+it, then confirmed it final. Built via the project's existing `yt-package`/`yt-seo`
+skills, not ad hoc:
+
+- **Title** - `yt-package/title.py` scored 10 candidates; winner **"Could a
+  7-Million-Year-Old Fossil Even Walk?"** (44 chars, 100/100, open question, concrete
+  number, clean mobile crop). Runner-ups logged in this session's transcript if
+  ever revisited.
+- **Thumbnail** - paired word choice **"NOT YOUR ANCESTOR"** (zero word-overlap
+  with the title, confirmed via `title.py --thumb`, 100/100 pairing score). Built
+  as `videos/Production Videos/Human_Evolution/thumbnail.png`, **1080x1920** (user
+  first asked for a 390x844 spec - flagged as an unusual, non-YouTube aspect ratio
+  closer to an iPhone screen size than a thumbnail spec - user then said to just use
+  the standard size). Generation method, confirmed explicitly to the user: **not**
+  AI-generated - a plain Python/Pillow one-off script (`make_thumbnail.py`, scratch
+  file, not part of `pipeline/`) compositing the real `build/evidence/
+  beat_08_seg01.jpg` Sahelanthropus skull-cast photo (already sourced via Wikimedia
+  for that segment's evidence inset, not newly generated) onto a 1080x1920 black
+  canvas (zoomed/center-cropped to fill the top ~74%), with "NOT YOUR ANCESTOR" in
+  `impact.ttf` at size 150, yellow (`#FFD228`, matches the caption color), manually
+  stroked black by stamping the text offset in every direction before the yellow
+  pass (Pillow has no native text-stroke).
+- **Description** - two-line search-snippet opener naming "human evolution,"
+  "dinosaur extinction," "first hominins," and "Sahelanthropus tchadensis" by name
+  (query-tested against 3 target searches per `yt-seo`'s own gate), 6 chapter
+  markers derived from the real beat-start timestamps in `narration_meta.json`
+  (re-grouped from the raw 11-beat list to clear YouTube's 10-second-minimum-
+  per-chapter rule), a longer claims-covered paragraph naming the epistemic-
+  transparency SOLID/CONTESTED/UNCERTAIN angle explicitly, the Part 1/3 note, and
+  3 hashtags.
+- **Tags** - 15, disambiguation-focused (`sahelanthropus`, `sahelanthropus
+  tchadensis`, `human evolution`, `dinosaur extinction`, `hominin`, `toumai`,
+  `chicxulub asteroid`, `k-pg extinction`, `mindparadox`, etc.) per `yt-seo`'s own
+  "use for disambiguation, fifteen is plenty" rule.
+
+**Status: packaging is final, nothing uploaded yet.** `thumbnail.png` and the full
+title/description/tags/query-test text both saved to `videos/Production
+Videos/Human_Evolution/packaging.md` - the copy-paste block for the actual upload.
+
+## First video published - MindParadox is live (2026-10-29, same day)
+
+User logged into the MindParadox Google account themselves (a separate account from
+the one this session's Chrome was first signed into - the first `studio.youtube.com`
+load showed a personal "Shahbaz Khan" account with no channel at all; switching to
+the right account was the user's own action, not something done from here). Uploaded
+and published `Human Evolution Part 1` end to end via YouTube Studio, driven live in
+Chrome with the user watching alongside - by agreement, every mechanical step (file
+upload, title/description/tags, thumbnail) was driven by Claude, but the actual
+**Publish** click and the Made-for-Kids legal designation were both left for the user
+to decide/confirm first, per this project's publishing-requires-explicit-permission
+rule.
+
+**Real friction hit and handled**: the video file and thumbnail were uploaded via
+the `mcp__claude-in-chrome__file_upload` tool (not the native OS file picker, which
+browser automation can't drive) - worked cleanly for both `output/final.mp4` (7.2MB)
+and `thumbnail.png` (1.8MB). Custom thumbnails were blocked behind a phone-number-
+verification gate ("Unlock more on YouTube") - the user verified their phone
+themselves in a separate tab (never something this session touched - phone/OTP entry
+stays off-limits). **A real duplicate-draft bug happened mid-session**: after the
+thumbnail-gate block, a `navigate(force: true)` to reload the Studio page was meant
+to just refresh state, but it silently discarded the in-progress draft's unsaved
+title/description edits (a "Leave site?" browser dialog had warned about this,
+force-navigated past instead of heeded) - restarting the upload from scratch then
+left **two** separate draft Shorts sitting in Content > Shorts (one titled "final"
+with no description, from the lost draft's auto-saved state; one correctly titled).
+Caught by actually checking Content > Shorts before continuing, not assumed clean -
+the stray "final" draft was deleted (user explicitly confirmed first; the delete
+action itself was blocked by an auto-mode permission classifier until confirmed,
+correctly treating channel-content deletion as needing explicit go-ahead same as
+publishing does).
+
+**Final state**: `Could a 7-Million-Year-Old Fossil Even Walk?` is live, public, at
+`https://youtube.com/shorts/cGz7bPl295I` - title, description (chapters +
+epistemic-transparency framing), tags, and the custom `thumbnail.png` all attached
+exactly as drafted in `packaging.md`. Copyright check passed with no issues. Marked
+not Made for Kids (user's explicit confirmation). **MindParadox now has its first
+published video - the channel is no longer just set up, it's actually live.**
+
+## Cross-posted to Instagram - MindParadox has a second platform now (2026-10-29, same day)
+
+User asked whether posting the same video to Instagram would hurt YouTube
+monetization. Researched rather than assumed (`WebSearch`, since this directly
+affects real money/channel risk): YouTube's "reused content" policy judges the
+*content itself* - original effort, real value added - not where else it's also
+posted; nothing in the policy penalizes cross-posting a creator's own original
+video to another platform. Cited to the user with sources (vidIQ, ppc.land,
+YouTube's own Partner Program help page) rather than stated as a flat assertion.
+
+User then gave the channel's actual Instagram handle
+(`instagram.com/mindparadoxx06`, "Mr. Dex" - first time this account has been used
+in this project; no prior packaging/posting history on this platform) and asked for
+Instagram packaging plus the actual post.
+
+**Packaging adapted, not copy-pasted**: shorter hook-first caption (no chapter
+timestamps - Reels doesn't support clickable ones the way YouTube description
+timestamps do), "follow" instead of "subscribe," and a 15-tag hashtag set tuned for
+Instagram's relevance-over-volume algorithm instead of YouTube's "15 tags for
+disambiguation only" logic. Saved to `packaging.md`'s new Instagram section before
+posting.
+
+**Posted live via Chrome**, same `file_upload`-tool pattern as the YouTube upload
+(native OS file pickers can't be driven by browser automation): `final.mp4`
+uploaded through Instagram's "Create new post" flow, cover photo set to the same
+`thumbnail.png` used on YouTube (consistent branding across platforms), caption +
+hashtags typed in. One real near-miss: pressing Escape to dismiss a hashtag
+autocomplete dropdown instead triggered Instagram's "Discard post?" confirmation
+(Escape is bound to the whole post-creation modal, not just the dropdown) - caught
+before clicking anything, **Cancel** pressed instead of Discard, post recovered
+intact. Verified the caption survived correctly end to end by scrolling to both its
+start and middle rather than trusting the char-count alone.
+
+**One genuine compliance judgment call surfaced and deferred to the user**,
+same pattern as YouTube's Made-for-Kids gate: Instagram's "Add AI label" toggle,
+stated as "required for realistic photos and videos made with AI." This project's
+visuals are AI-generated but deliberately stylized/illustrated
+(`visual-style-brief.md`'s flat-explainer/painted-scene system), not photorealistic
+- a genuine gray area against the trigger wording, not a clear yes/no. Flagged
+explicitly rather than guessed; user turned the toggle on themselves.
+
+**Result**: reel live at `instagram.com/mindparadoxx06` (1 post, confirmed on the
+profile page after posting, not just trusted from the "shared" confirmation toast).
+**MindParadox is now a two-platform channel** - YouTube Shorts and Instagram Reels,
+same first video on both.
