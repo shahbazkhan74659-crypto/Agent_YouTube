@@ -457,12 +457,106 @@ needed a real human ear rather than trusting Whisper's own output. **User listen
 to all 5 and confirmed: all good.** Test script and `.wav` files left on disk for
 reuse if a future voice change needs the same check redone.
 
+[same day, continued] — **`Human Evolution Part 2` built end-to-end and published —
+confirmed as the series finale, no Part 3**
+
+Built via plan-mode: research.md (15 claims, 7 SOLID/6 CONTESTED/2 UNCERTAIN, Wikipedia-sourced)
+and script.md drafted and reviewed before any file was written, following the afarensis →
+Ledi-Geraru split → habilis → erectus → heidelbergensis → sapiens chain the user specified, with
+a present-time hook ("you're the only human species left") answered by walking backward into the
+fossil record. Hook scored via `hookscore.py` against the 21 formulas as usual. Title went through
+two rounds: first draft "Why Are You The Last Human Species Alive?" scored only 70/100 (no number,
+filler opening words); reworded to "You're The Last Of At Least 8 Human Species" (98/100,
+front-loaded subject + concrete figure) — required a full title-band re-render since it's burned
+into captions.ass, not just metadata.
+
+**Visuals built fully by user-guided live Gemini generation, one prompt per line** (49 images for
+49 narration lines, far more granular than Part 1's 38) — each prompt hand-specified per segment
+(painted-scene vs flat-explainer mode, white-bg vs real-scene, character vs no-character, SOLID
+vs CONTESTED treatment) rather than pre-written into script.md cues up front. Confirmed via Part 1's
+actual rendered `visuals/16.png`/`20.png` that the real flat-explainer convention is a **dark
+charcoal background with glowing hand-drawn lines**, not a plain white vector card as first assumed
+— corrected the in-flight prompt style to match. Distinguished two character designs that must
+never be mixed: the plain **ancestor/hominin character** (round cream head, scribble hair,
+fur/hide-covered body, no hat) used for afarensis/habilis/erectus/etc., versus the **channel's own
+host character** (same head design but wide-brim fedora + long dark coat, matching the
+`MindParadox` logo exactly) used for narrator-voice beats — saved the host-character prompt
+fragment to `branding/host-character-prompt.md` (gitignored) for reuse.
+
+**Assembly required a custom script, not `assemble.py`**, since the pipeline's segment model
+(1 cue = 1 beat, 11 total) didn't match the 49 hand-picked images. Built a one-off assembler that
+splits each beat's real measured duration proportionally by word-count across its sub-lines (the
+same convention `narration.py` itself uses), builds one `ffmpeg filter_complex` concat pass (not
+the demuxer, which left ~2 frames of drift per clip), and burns `captions.ass` after. **Real bug
+caught and fixed**: the first assembly only covered each beat's own spoken span, leaving the
+0.35s inter-beat silence gaps completely uncovered by any image — `-shortest` then silently
+truncated the last ~4s of audio at mux time, including part of the final CTA line. Fixed by
+extending each beat's *last* image to hold through the gap into the next beat's start, so total
+video-covered duration exactly equals total audio duration.
+
+**Trim discipline, word-level, done twice**: real measured runtime came in at 192.6s initially
+(over both the 3-minute target and the 180s Shorts cap); cut ~68 wordy-clause words across most
+beats (tightening phrasing, never deleting a line/image) to land at exactly 180.000s per the
+user's "exactly 3 min" request, verified via real frame-count (not just the ffmpeg duration
+header, which rounds to centiseconds and hid a later problem - see below). Later in the same
+session, user asked to also target exactly 2:55 — cut ~20 more words the same way, reconfirmed
+frame-accurate (5250 frames @ 30fps = 175.000s).
+
+**Real bug: a compressed re-encode (for the browser upload tool's 10MB cap) drifted to 180.01s**
+— one hundredth of a second over the Shorts ceiling — which was enough for YouTube to classify
+the first manual upload as a **regular video, not a Short**; user had to delete it. Root cause:
+re-encoding without an explicit `-t` cap lets frame count drift by re-encode (the ffmpeg
+`Duration:` header only shows centisecond precision and reported "180.0" when the real file was
+actually `180.01`). **Fix/lesson: always verify exact duration via real frame count
+(`frames / fps`, counted through `-f null -`) before trusting any re-encoded Shorts-length file,
+never the header display** — added to `pipeline_gotchas`. Re-encoded with explicit `-t` headroom
+(179.9s / 174.9s) afterward and it published correctly as a Short the second time.
+
+**Thumbnail**: user explicitly rejected reusing any of the 49 video frames — wanted either a
+real external photo or a freshly generated one. Sourced the real Jebel Irhoud 1 skull photo via
+`visuals/sources.py`'s Wikimedia search (CC BY-SA 2.0, Ryan Somma), matching Part 1's own
+real-photo-thumbnail convention. Had to crop out the museum's placard, which stated "about
+160,000 years old" — directly conflicting with the script's SOLID ~300,000-year claim (Hublin
+et al. 2017 redating) — cropped it out entirely rather than ship a thumbnail contradicting the
+video's own claim. Also had to correct a heavy amber lighting-cast in the source photo: a full
+gray-world white-balance correction overshot into a muddy olive cast (the flat dominant-color
+wall breaks the gray-world assumption); fixed by applying the correction at ~45% strength plus a
+mild contrast boost.
+
+**Upload mechanics**: the browser `file_upload` tool has a hard 10MB-per-call limit, well under
+the original 11.68MB render — worked around with a lower-bitrate re-encode (libx264 ~190-300kbps
++ AAC 64-96kbps mono) purely to get through the tool, not a real YouTube limit (the full-quality
+file uploads fine when the user does it manually). The final **Publish** click itself is blocked
+for the agent by Claude Code's auto-mode safety classifier ("Create Public Surface") even with
+explicit user go-ahead in chat — confirmed this is a hard stop, not a prompt-ask; the user always
+does that literal click. Same for the required **Made for Kids** and **AI-content-disclosure**
+toggles on upload — both left for the user to answer; AI disclosure was answered "Yes" (all 49
+visuals are AI-generated) matching the precedent set by Part 1's Instagram AI-label choice.
+
+**Replied to Part 1's 2 live comments** (both from one commenter, praise-only, via `yt-comment`
+skill's triage) — user asked for emojis in the replies; the `computer` tool's synthetic `type`
+action silently drops emoji characters (confirmed: text landed with zero emoji, no error), fixed
+by switching to `document.execCommand('insertText', ...)` via `javascript_tool` on the focused
+field, which does trigger the framework's real input handlers.
+
+**Series closed out**: retroactively edited Part 1's own live YouTube description ("Part 1 of 3"
+→ "Part 1 of 2") now that Part 2 is confirmed final — did this as a precise find-and-replace
+directly in YouTube Studio's description field (triple-click the line, retype it exactly,
+re-verified character count matched before saving) rather than a blind in-place character edit,
+after an earlier attempt at the latter inserted a stray character instead of replacing one.
+
 ---
 
 # Current state (as of 2026-10-30)
 
-- **Channel**: MindParadox, live on YouTube Shorts + Instagram Reels, 1 video
-  published on both (`Human Evolution Part 1`).
+- **Channel**: MindParadox, live on YouTube Shorts (+ Instagram Reels for Part 1 only).
+  **`Human Evolution` series complete and confirmed closed at 2 parts** — Part 1
+  (`youtube.com/shorts/cGz7bPl295I`, 1:50, description retroactively corrected to
+  "Part 1 of 2") and Part 2 (`youtube.com/shorts/2AYBylkWtHU`, "You're The Last Of
+  At Least 8 Human Species," exactly 2:55). Part 2's Instagram packaging not yet
+  drafted — next ask if wanted. Next topic under discussion, not yet decided: leaning
+  non-biology (Fermi Paradox or a true-mystery story like Dyatlov Pass were the two
+  live candidates when the conversation paused).
 - **Voice**: `am_adam`, `--lang en-us` — channel-wide default
   (history: `af_heart`→`am_michael`→`af_bella`→`hf_alpha`→**`am_adam`**). Greek/
   Ptolemaic pronunciation confirmed good by ear (10-30). `hm_omega`/`--lang hi` is
@@ -485,7 +579,14 @@ reuse if a future voice change needs the same check redone.
   file existence, not staleness, for both clips and `final.mp4`; `--force` on
   `assemble.py` alone never regenerates captions; `--from-stage visuals` skips
   re-parsing `script.md`; force only the stage that actually changed, never a
-  blanket `--force`.
+  blanket `--force`. **New (10-30): never trust ffmpeg's `Duration:` header for a
+  Shorts-length file close to the 180s cap** — it only shows centisecond precision
+  and can read "180.0" on a file that's actually 180.01s, which is enough for
+  YouTube to reject it as a Short. Always verify via real frame count
+  (`frames / fps` from `-f null -`) before calling a re-encoded file done. Also:
+  a custom multi-image assembly must explicitly cover every inter-beat silence gap
+  (not just each beat's own spoken span), or `-shortest` at mux time silently
+  truncates trailing audio.
 - **Open / not yet done**: character pose variety still single-pose (dormant, not
   blocking since the overlay is off); mobile push notifications still disabled in
   `/config`; `ClaudeAnimationBase` (code-rendered consistent host character) parked
