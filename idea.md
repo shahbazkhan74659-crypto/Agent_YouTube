@@ -380,6 +380,18 @@ first video up on two platforms — the channel is no longer just set up, it's
 actually live.** See `C:\YouTube\UploadHistory.md` for the one-line-per-upload index
 going forward (per-video detail stays in each video's own `packaging.md`).
 
+**`Human Evolution` series published and confirmed closed at 2 parts (2026-10-30)**:
+Part 2, `https://youtube.com/shorts/2AYBylkWtHU` ("You're The Last Of At Least 8
+Human Species," exactly 2:55), is live and public — no Part 3. Part 1's own live
+description retroactively corrected from "Part 1 of 3" to "Part 1 of 2." Full build
+detail (visuals, trim discipline, thumbnail, upload mechanics) in `memory.md`'s
+2026-10-30 entries.
+
+**Next topic decided (2026-10-30): "You Are Literally Made of Stardust"**
+(stellar nucleosynthesis) — `research.md` (13 claims, independently verified) and
+`script.md` (one pass, no parts, ~3:04 nominal) both done under `videos/Production
+Videos/Stardust/`. Not yet rendered.
+
 ## Kokoro voice preset (decided, 2026-10-26; reverted 2026-10-27; promoted to global default 2026-10-27; superseded by `am_adam` 2026-10-29)
 
 **`am_adam`, with `--lang en-us`** — now the **channel-wide default for every video**,

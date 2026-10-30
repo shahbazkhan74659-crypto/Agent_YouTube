@@ -545,6 +545,41 @@ directly in YouTube Studio's description field (triple-click the line, retype it
 re-verified character count matched before saving) rather than a blind in-place character edit,
 after an earlier attempt at the latter inserted a stray character instead of replacing one.
 
+[same day, continued] — **Next topic decided: "You Are Literally Made of Stardust"** (stellar
+nucleosynthesis), picked over the other live candidate (Fermi Paradox) for staying in the
+science-explainer niche with mostly SOLID claims rather than wall-to-wall speculation, and for
+picking up Part 2's own closing thread ("you're the only human species left" → "are you even made
+of what you think you're made of").
+
+**`yt-factcheck` research.md built** (`videos/Production Videos/Stardust/research.md`, 13
+claims): gathered via `sources.py` + `WebSearch`, then independently re-checked by a fresh
+general-purpose agent with no memory of the draft — this caught two real corrections rather than
+just rubber-stamping the draft. (1) The triple-alpha carbon prediction was mis-dated 1946; the
+actual prediction is 1953 (confirmed same year by Whaling's group), full theory 1954, with the
+1957 B2FH paper correctly dated separately. (2) A genuine content gap: the original brief framed
+*all* trans-iron elements as r-process (supernova/merger) products, which would have been wrong
+on screen — roughly half are actually s-process, made quietly inside ordinary aging giant stars
+with no explosion, which became a second myth-correction beat. The independent pass also
+upgraded a weak lead into a real citation: a 2025 peer-reviewed finding (Patel, Metzger et al.,
+*ApJL*) that a magnetar giant flare also produces r-process elements, framed as an emerging
+single-datapoint contributor, not a settled one. One source hit during research (a Wikipedia
+mirror, cavac.at) carried an embedded prompt-injection attempt in its page text — correctly
+ignored as untrusted data, flagged for the record only.
+
+**`yt-script` script.md written** (`videos/Production Videos/Stardust/script.md`, one pass, no
+parts, ~460 words / ~3:04 nominal): opens on the user's own dictated hook — a generic
+channel-style character (not the fedora/coat host, a plain hand was also rejected) holding up a
+named prop, "Hammer," revealing it's iron the body can't synthesize. The user's literal dictated
+line scored WEAK (45, no stakes language) on `hookscore.py`; a stakes-reordered version scoring
+WORKABLE (55) was offered alongside it and the user picked the reordered one — same facts, same
+"Hammer" device, consistent with this project's standing discipline of showing both scores rather
+than silently picking one. The hook's own claim ("blood iron doesn't rust") was a new factual
+claim not yet in the research brief — resolved via a quick supplementary WebSearch (hemoglobin
+holds iron in a controlled ferrous state, doesn't bulk-rust, but does slip into methemoglobin and
+get enzymatically corrected — "never rusts" was corrected to that before it shipped) and appended
+to research.md as claim 13 before being used, keeping the yt-script gate intact rather than
+drafting the line from memory. **Not yet rendered** — script only, user pausing for the day.
+
 ---
 
 # Current state (as of 2026-10-30)
@@ -554,9 +589,11 @@ after an earlier attempt at the latter inserted a stray character instead of rep
   (`youtube.com/shorts/cGz7bPl295I`, 1:50, description retroactively corrected to
   "Part 1 of 2") and Part 2 (`youtube.com/shorts/2AYBylkWtHU`, "You're The Last Of
   At Least 8 Human Species," exactly 2:55). Part 2's Instagram packaging not yet
-  drafted — next ask if wanted. Next topic under discussion, not yet decided: leaning
-  non-biology (Fermi Paradox or a true-mystery story like Dyatlov Pass were the two
-  live candidates when the conversation paused).
+  drafted — next ask if wanted. **Next topic decided: "You Are Literally Made of
+  Stardust"** (stellar nucleosynthesis) — `research.md` (13 claims, independently
+  verified) and `script.md` (~460 words, ~3:04 nominal, one pass/no parts) both done
+  under `videos/Production Videos/Stardust/`. Not yet rendered — visuals, narration,
+  and production haven't started; picking up here next session.
 - **Voice**: `am_adam`, `--lang en-us` — channel-wide default
   (history: `af_heart`→`am_michael`→`af_bella`→`hf_alpha`→**`am_adam`**). Greek/
   Ptolemaic pronunciation confirmed good by ear (10-30). `hm_omega`/`--lang hi` is
